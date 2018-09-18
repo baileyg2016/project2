@@ -20,7 +20,7 @@ public class HashTest extends TestCase {
      */
     public void testh() {
 
-        Hash myHash = new Hash();
+        Hash myHash = new Hash(10);
         assertEquals(myHash.h("aaaabbbb", 101), 75);
         assertEquals(myHash.h("aaaabbb", 101), 1640219587 % 101);
     }
