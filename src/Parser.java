@@ -30,8 +30,6 @@ public class Parser {
 
                 // The fields following each command
                 String[] fields;
-                // The name of the movie or reviewer
-                String name;
 
                 switch (cmd) {
                     case ("add"):
@@ -44,8 +42,13 @@ public class Parser {
                         delete(fields[0], fields[1]);
                         break;
                     case ("print"):
-// fields = split(lineWithoutCmd);
-// print(fields[0], fields[1]);
+                        if (lineWithoutCmd.equals("ratings")) {
+                            printRatings();
+                            break;
+                        }
+                        fields = split(lineWithoutCmd);
+
+                        print(fields[0], fields[1]);
 
                         break;
                     case ("list"):
@@ -103,7 +106,7 @@ public class Parser {
 
 
     /**
-     * This chooses which table or the matrix to print
+     * This chooses which table to print
      * 
      * @param tableName
      *            Either the reviewer hashTable or the movie hashTable
@@ -111,15 +114,20 @@ public class Parser {
      *            The name of the movie or the reviewer
      */
     public void print(String tableName, String name) {
-        if (tableName.equals("ratings")) {
-
-        }
-        else if (tableName.equals("reviewer")) {
+        if (tableName.equals("reviewer")) {
 
         }
         else {// then it is the movie
 
         }
+    }
+
+
+    /**
+     * Prints the ratings that are in the sparse matrix
+     */
+    public void printRatings() {
+        // print the ratings
     }
 
 
@@ -170,7 +178,9 @@ public class Parser {
         String name = lineWithoutCmd.substring(pos, lineWithoutCmd.length());
 
         fields[0] = tableName;
+
         fields[1] = name;
+
         return fields;
     }
 }
