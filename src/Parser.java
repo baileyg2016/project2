@@ -23,9 +23,29 @@ public class Parser {
                 if (line.isEmpty()) {
                     continue;
                 }
-                //System.out.println(line);
+                // System.out.println(line);
                 String cmd = line.split(" ")[0];
-                //System.out.println("Command: " + cmd);
+
+                switch (cmd) {
+                    case ("add"):
+                        add();
+                        break;
+                    case ("delete"):
+                        // need to check if its a movie or a reviewer
+                        break;
+                    case ("print"):
+                        // need to check wish hashTable to print or the ratings
+                        break;
+                    case ("list"):
+                        // need to check if it is the movie or reviewer
+                        break;
+                    case ("similar"):
+                        // need to check if it is the movie or reviewer
+                        break;
+                    default:
+                        System.out.println("--------You fucked up--------");
+                }
+
             }
 
         }
