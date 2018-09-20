@@ -1,6 +1,29 @@
-
+/**
+ * 
+ * @author BaileySpell and Adam Tapp
+ * @version Milesstone 1
+ * 
+ *          The movie node for the listing of the sparse matrix
+ *
+ * @param <T>
+ *            The generic types
+ */
 public class Reviewer<T> extends Node<T> {
-
+    /**
+     * The constructor
+     * 
+     * @param value
+     *            The rating being stored
+     * @param nextReviewer
+     *            The pointer to the next reviewer
+     * @param prevReviewer
+     *            The pointer to the previous reviewer
+     * @param nextMovie
+     *            the pointer to the next movie
+     * @param prevMovie
+     *            The pointer to the previous movie
+     * 
+     */
     public Reviewer(
         T value,
         Node<T> nextReviewer,

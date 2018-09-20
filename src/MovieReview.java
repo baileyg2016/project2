@@ -5,8 +5,8 @@
 /**
  * The class containing the main method.
  *
- * @author {Your Name Here}
- * @version {Put Something Here}
+ * @author Bailey Spell and Adam Tapp
+ * @version Milestone 1
  */
 
 // On my honor:
@@ -37,7 +37,12 @@ public class MovieReview {
     public static void main(String[] args) {
         // This is the main file for the program.
         if (args != null) {
-            Parser parser = new Parser(args[2]);
+            Hash<String> movies = new Hash<String>(Integer.parseInt(args[0]));
+
+            Hash<String> reviewers = new Hash<String>(Integer.parseInt(
+                args[0]));
+
+            Parser parser = new Parser(args[1], movies, reviewers);
             parser.parseFile();
         }
     }

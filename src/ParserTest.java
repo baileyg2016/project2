@@ -1,16 +1,25 @@
 import student.TestCase;
+
 /**
  * 
  */
 
 /**
- * @author BaileySpell
+ * @author Bailey Spell and Adam Tapp
+ * @version Milestone 1
  *
  */
 public class ParserTest extends TestCase {
+
+    /**
+     * Testing the parser
+     */
     public void testParser() {
-        Parser parser = new Parser("P2SampleInput.txt");
+        Hash<String> movies = new Hash<String>(10);
+        Hash<String> reviewers = new Hash<String>(10);
+        Parser parser = new Parser("P2SampleInput.txt", movies, reviewers);
         parser.parseFile();
-        System.out.println("working");
+        assertEquals(2, movies.getCount());
+        assertEquals(2, reviewers.getCount());
     }
 }

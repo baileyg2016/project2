@@ -11,7 +11,7 @@
    delete movie John Doe
    delete reviewer  John Doe
    delete movie Spirited Away
-   add Christopher Nolan<SEP>Batman v Superman<SEP>0
+   add Christopher Nolan          <SEP>Batman v Superman        <SEP>0
     add Darth Vader<SEP>Death Note<SEP>1
    delete reviewer Darth Vader
    print ratings

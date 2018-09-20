@@ -2,15 +2,53 @@ import java.util.Scanner;
 import java.io.File;
 import java.io.FileNotFoundException;
 
+/**
+ * The class that parses the command file and stores the information in the
+ * appropriate data structure
+ * 
+ * @author Bailey Spell and Adam Tapp
+ * @version Milestone 1
+ *
+ */
 public class Parser {
+    /**
+     * The input file for the commands
+     */
     private String inputFile;
+    /**
+     * The hashTable for the movies
+     */
+    private Hash<String> movieTable;
+    /**
+     * The hashTable for the reviewers
+     */
+    private Hash<String> reviewerTable;
 
 
-    public Parser(String fileName) {
+    /**
+     * Constructor for the class
+     * 
+     * @param fileName
+     *            Sets the file name to import commands from
+     * @param movieTable
+     *            Sets global hash table object for the movies
+     * @param reviewerTable
+     *            Sets global hash table object for the reviewers
+     */
+    public Parser(
+        String fileName,
+        Hash<String> movieTable,
+        Hash<String> reviewerTable) {
         this.inputFile = fileName;
+        this.movieTable = movieTable;
+        this.reviewerTable = reviewerTable;
     }
 
 
+    /**
+     * parses the file and decides which method to call to store the information
+     * in the hash tables and/or sparse matrix
+     */
     public void parseFile() {
         File file = new File(inputFile);
         try {
@@ -34,6 +72,9 @@ public class Parser {
                 switch (cmd) {
                     case ("add"):
                         fields = lineWithoutCmd.split("<SEP>");
+                        fields[0] = fields[0].trim();
+                        fields[1] = fields[1].trim();
+                        fields[2] = fields[2].trim();
                         add(fields);
                         break;
                     case ("delete"):
@@ -62,14 +103,13 @@ public class Parser {
                         similar(fields[0], fields[1]);
                         break;
                     default:
-                        System.out.println("--------You fucked up--------");
+                        break;
                 }
 
             }
 
         }
         catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
@@ -84,6 +124,19 @@ public class Parser {
     public void add(String[] fields) {
         // 0->reviewer, 1->Movie, 2->rating
 
+        if (Integer.parseInt(fields[2]) < 1 || Integer.parseInt(
+            fields[2]) > 10) {
+            System.out.println("Bad score |" + fields[2]
+                + "|. Scores must be between 1 and 10.");
+            return;
+        }
+
+        reviewerTable.insert(fields[0], "Reviwer");
+        movieTable.insert(fields[1], "Movie");
+
+        System.out.println("Rating added: |" + fields[0] + "|, |" + fields[1]
+            + "|, " + fields[2]);
+
     }
 
 
@@ -97,10 +150,14 @@ public class Parser {
      */
     public void delete(String tableName, String name) {
         if (tableName.equals("reviewer")) {
-
+            tableName = tableName.substring(0, 1).toUpperCase() + tableName
+                .substring(1);
+            reviewerTable.delete(name, tableName);
         }
-        else {// then it is the movie
-
+        else { // then it is the movie
+            tableName = tableName.substring(0, 1).toUpperCase() + tableName
+                .substring(1);
+            movieTable.delete(name, tableName);
         }
     }
 
@@ -114,11 +171,13 @@ public class Parser {
      *            The name of the movie or the reviewer
      */
     public void print(String tableName, String name) {
-        if (tableName.equals("reviewer")) {
-
+        if (name.equals("reviewer")) {
+            System.out.println("Reviewers:");
+            reviewerTable.printTable();
         }
-        else {// then it is the movie
-
+        else { // then it is the movie
+            System.out.println("Movies:");
+            movieTable.printTable();
         }
     }
 
@@ -140,12 +199,12 @@ public class Parser {
      *            The name of the movie or the reviewer
      */
     public void list(String tableName, String name) {
-        if (tableName.equals("reviewer")) {
-
-        }
-        else {// then it is the movie
-
-        }
+// if (tableName.equals("reviewer")) {
+//
+// }
+// else {// then it is the movie
+//
+// }
     }
 
 
@@ -158,15 +217,23 @@ public class Parser {
      *            The name of the movie or the reviewer
      */
     public void similar(String tableName, String name) {
-        if (tableName.equals("reviewer")) {
-
-        }
-        else {// then it is the movie
-
-        }
+// if (tableName.equals("reviewer")) {
+//
+// }
+// else {// then it is the movie
+//
+// }
     }
 
 
+    /**
+     * Splits the string without the command into a String Array
+     * 
+     * @param lineWithoutCmd
+     *            The line in the input file without the preceeding command
+     * @return
+     *         The new line split into fields
+     */
     public String[] split(String lineWithoutCmd) {
         String[] fields = new String[2];
         // position of the first space
@@ -177,9 +244,9 @@ public class Parser {
         // The name of the movie or reviewer
         String name = lineWithoutCmd.substring(pos, lineWithoutCmd.length());
 
-        fields[0] = tableName;
+        fields[0] = tableName.trim();
 
-        fields[1] = name;
+        fields[1] = name.trim();
 
         return fields;
     }
