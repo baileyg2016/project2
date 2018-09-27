@@ -24,18 +24,6 @@ public class MDLList<T> {
      * @author Adam Tapp
      * @version 9.18.18
      */
-// private static class /*Movie<T> extends*/ Node<T> {
-//
-// public Movie(
-// T value,
-// Node<T> nextReviewer,
-// Node<T> prevReviewer,
-// Node<T> nextMovie,
-// Node<T> prevMovie) {
-// super(value, nextReviewer, prevReviewer, nextMovie, prevMovie);
-// }
-//
-// }
 
     /**
      * How many nodes are in the list
@@ -54,11 +42,6 @@ public class MDLList<T> {
      */
     private Node<Integer> tail;
 
-
-    /**
-     * Reference to the Reviewer list
-     */
-    // private MDLList<Node<Integer>> list;
 
     /**
      * Create a new DLList object.
