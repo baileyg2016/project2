@@ -60,7 +60,7 @@ public class RDLList<E> {
     /**
      * Reference to the Reviewer list
      */
-    private DLList<Node<E>> list;
+    private RDLList<Node<E>> list;
 
     /**
      * Create a new DLList object.
@@ -107,14 +107,14 @@ public class RDLList<E> {
     /**
      * Gets the complimentary list to this one
      */
-    public void setReviewerList(DLList<Node<E>> list) {
+    public void setReviewerList(RDLList<Node<E>> list) {
         this.list = list;
     }
     
     /**
      * Gets the complimentary list to this one
      */
-    public DLList<Node<E>> getReviewerList() {
+    public RDLList<Node<E>> getReviewerList() {
         return list;
     }
 
