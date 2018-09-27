@@ -23,18 +23,6 @@ public class RDLList<T> {
      * @author Adam Tapp
      * @version 9.18.18
      */
-// private static class Review<T> extends Node<T> {
-//
-// public Review(
-// T value,
-// Node<T> nextMovie,
-// Node<T> prevMovie,
-// Node<T> nextMovie,
-// Node<T> prevMovie) {
-// super(value, nextMovie, prevMovie, nextMovie, prevMovie);
-// }
-//
-// }
 
     /**
      * How many nodes are in the list
@@ -62,29 +50,13 @@ public class RDLList<T> {
     /**
      * Create a new DLList object.
      * 
-     * @param val
-     *            the score for the first review
      */
-    public RDLList(/* int val */) {
-        // init(val);
+    public RDLList() {
         head = new Node<Integer>(-1, null, null, tail, null);
         tail = new Node<Integer>(-1, null, null, null, head);
-        // head.setNext(tail);
-        // tail.setPrevious(head);
         size = 0;
     }
 
-
-    /**
-     * Initializes the object to have the head and tail nodes
-     */
-// private void init(int val) {
-// head = new RDLList.Node<E>(0, null, null, tail, null);
-// tail = new RDLList.Node<E>(0, null, null, null, head);
-// // head.setNext(tail);
-// // tail.setPrevious(head);
-// size = 0;
-// }
 
     /**
      * Checks if the array is empty
@@ -141,7 +113,6 @@ public class RDLList<T> {
         pNode.setNextMovie(node);
         tail.setPrevMovie(node);
         size++;
-
     }
 
 
