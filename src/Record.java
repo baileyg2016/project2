@@ -14,30 +14,27 @@ public class Record<T> {
      * The Name that corresponds to the container
      * either movie or reviewer
      */
-    private String name;
+    private T name;
+
+
     /**
      * Whether or not the record has been deleted from the table
      */
     private boolean tombstone;
 
-    /**
-     * Holds the list for this movie
-     */
-    private T list;
-
+    private Object head;
 
     /**
      * The constructor for the record objects
      * 
      * @param key
      *            The key to insert this into the hashTable
-     * @param list
-     *            The list stored in this record
+     *            
      */
-    public Record(String name, T list) {
+    public Record(T name) {
         this.name = name;
         this.tombstone = false;
-        this.list = list;
+        this.head = null;
     }
 
 
@@ -47,7 +44,7 @@ public class Record<T> {
      * @param key
      *            The key for the record to be stored into the hashTable
      */
-    public void setKey(String name) {
+    public void setKey(T name) {
         this.name = name;
     }
 
@@ -57,7 +54,7 @@ public class Record<T> {
      * @return
      *         The key of the record
      */
-    public String getKey() {
+    public T getKey() {
         return name;
     }
 
@@ -78,39 +75,25 @@ public class Record<T> {
     public boolean getTombstone() {
         return tombstone;
     }
-
-
+    
     /**
-     * Adds a review score to this records list
+     * Sets the key for the record
      * 
-     * @param n
-     *            The node containing the score
+     * @param key
+     *            The key for the record to be stored into the hashTable
      */
-    public void add(Node<Integer> n) {
-        list.add(n);
+    public void setHead(Node<T> node) {
+        this.head = node;
     }
 
 
     /**
-     * Remove a review from this list
      * 
-     * @return Node<Integer>
-     *         the node that was removed
+     * @return
+     *         The key of the record
      */
-    public Node<Integer> remove() {
-        return list.remove();
-    }
-
-
-    /**
-     * Remove a review from this list
-     * 
-     * @param name
-     *            the name of the item to be removed
-     * @return Node<T>
-     *         the node that was removed
-     */
-    public Node<Integer> remove(String name) {
-        return list.remove(name);
+    public Object getHead() {
+        return head;
     }
 }
+

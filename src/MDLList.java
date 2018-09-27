@@ -21,8 +21,8 @@ public class MDLList<T> {
      *
      * @param <T>
      *            This is the type of object that this class will store
-     * @author Adam Tapp
-     * @version 9.18.18
+     * @author Adam Tapp and Bailey Spell
+     * @version Milestone 2
      */
 
     /**
@@ -71,32 +71,20 @@ public class MDLList<T> {
     public int size() {
         return size;
     }
-
+    
     /**
-     * Gets the complimentary list to this one
-     * //
+     * Gets the head 
      */
-// public void setReviewerList(MDLList<Node<Integer>> list) {
-// this.list = list;
-// }
-//
-// /**
-// * Gets the complimentary list to this one
-// */
-// public MDLList<Node<Integer>> getReviewerList() {
-// return list;
-// }
-
+    public Node<Integer> getHead() {
+        return head;
+    }
+    
 
     /**
      * Adds the object to the end of the list
      * 
-     * @param val
-     *            the score to add
-     * @throws IndexOutOfBoundsException
-     *             if index is less than zero or greater than size
-     * @throws IllegalArgumentException
-     *             if obj is null
+     * @param node
+     *          the node being added to this list
      */
     public void add(Node<Integer> node) {
         // pNode is the the last node inserted
