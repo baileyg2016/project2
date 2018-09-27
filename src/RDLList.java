@@ -92,6 +92,13 @@ public class RDLList<T> {
     public MDLList<T> getMovieList() {
         return list;
     }
+    
+    /**
+     * Gets the head 
+     */
+    public Node<Integer> getHead() {
+        return head;
+    }
 
 
     /**

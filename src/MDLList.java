@@ -72,6 +72,13 @@ public class MDLList<T> {
         return size;
     }
     
+    /**
+     * Gets the head 
+     */
+    public Node<Integer> getHead() {
+        return head;
+    }
+    
 
     /**
      * Adds the object to the end of the list
