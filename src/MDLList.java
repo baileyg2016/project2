@@ -5,16 +5,14 @@
 /**
  * This provides implementation for some of the LList methods.
  *
- * @author Mark Wiggans (mmw125)
- * @version 3/29/15
- * @author Eric Williamson
- * @version 10/30/15
- * @author maellis1
- * @version 11/1/15
- * @param <E>
+ * 
+ * @author Bailey Spell and Adam Tapp
+ * @version Milestone 2
+ * 
+ * @param <Integer>
  *            The type of object the class will store
  */
-public class DLList<E> {
+public class MDLList<T> {
 
     /**
      * This represents a node in a doubly linked list. This node stores data, a
@@ -26,18 +24,18 @@ public class DLList<E> {
      * @author Adam Tapp
      * @version 9.18.18
      */
-    private static class Movie<T> extends Node<T> {
-
-        public Movie(
-            T value,
-            Node<T> nextReviewer,
-            Node<T> prevReviewer,
-            Node<T> nextMovie,
-            Node<T> prevMovie) {
-            super(value, nextReviewer, prevReviewer, nextMovie, prevMovie);
-        }
-
-    }
+// private static class /*Movie<T> extends*/ Node<T> {
+//
+// public Movie(
+// T value,
+// Node<T> nextReviewer,
+// Node<T> prevReviewer,
+// Node<T> nextMovie,
+// Node<T> prevMovie) {
+// super(value, nextReviewer, prevReviewer, nextMovie, prevMovie);
+// }
+//
+// }
 
     /**
      * How many nodes are in the list
@@ -48,39 +46,26 @@ public class DLList<E> {
      * The first node in the list. THIS IS A SENTINEL NODE AND AS SUCH DOES NOT
      * HOLD ANY DATA. REFER TO init()
      */
-    private Movie<Integer> head;
+    private Node<Integer> head;
 
     /**
      * The last node in the list. THIS IS A SENTINEL NODE AND AS SUCH DOES NOT
      * HOLD ANY DATA. REFER TO init()
      */
-    private Movie<Integer> tail;
+    private Node<Integer> tail;
 
-    
+
     /**
      * Reference to the Reviewer list
      */
-    private DLList<Node<E>> list;
+    // private MDLList<Node<Integer>> list;
 
     /**
      * Create a new DLList object.
-     * 
-     * @param val
-     *            the score for the first review
      */
-    public DLList(int val) {
-        init(val);
-    }
-
-
-    /**
-     * Initializes the object to have the head and tail nodes
-     */
-    private void init(int val) {
-        head = new DLList.Movie<Integer>(0, tail, null, null, null);
-        tail = new DLList.Movie<Integer>(0, null, head, null, null);
-        // head.setNext(tail);
-        // tail.setPrevious(head);
+    public MDLList() {
+        head = new Node<Integer>(-1, tail, null, null, null);
+        tail = new Node<Integer>(-1, null, head, null, null);
         size = 0;
     }
 
@@ -103,20 +88,21 @@ public class DLList<E> {
     public int size() {
         return size;
     }
-    
+
     /**
      * Gets the complimentary list to this one
+     * //
      */
-    public void setReviewerList(DLList<Node<E>> list) {
-        this.list = list;
-    }
-    
-    /**
-     * Gets the complimentary list to this one
-     */
-    public DLList<Node<E>> getReviewerList() {
-        return list;
-    }
+// public void setReviewerList(MDLList<Node<Integer>> list) {
+// this.list = list;
+// }
+//
+// /**
+// * Gets the complimentary list to this one
+// */
+// public MDLList<Node<Integer>> getReviewerList() {
+// return list;
+// }
 
 
     /**
@@ -130,19 +116,52 @@ public class DLList<E> {
      *             if obj is null
      */
     public void add(Node<Integer> node) {
-//        if (val < 1) {
-//            throw new IllegalArgumentException("Scores must be between 1-10");
-//        }
-        
-        Movie<Integer> pNode = (Movie<Integer>)tail.getPrevReviewer();
-        //Movie<Integer> addition = new Movie<Integer>(val, tail, pNode, null,
-        //    null);
-        //for ()
+        // pNode is the the last node inserted
+        // the head node if size == 0
+        Node<Integer> pNode = tail.getPrevReviewer();
         node.setPrevReviewer(pNode);
         node.setNextReviewer(tail);
         pNode.setNextReviewer(node);
+        tail.setPrevReviewer(node);
         size++;
 
+    }
+
+
+    /**
+     * Removes the value at the end of the list
+     * 
+     * @return Movie<Integer>
+     *         the node that is removed
+     */
+    public Node<Integer> remove() {
+        Node<Integer> pNode = tail.getPrevReviewer();
+        pNode.getPrevReviewer().setNextReviewer(tail);
+        tail.setPrevReviewer(pNode.getPrevReviewer());
+        pNode.setNextReviewer(null);
+        pNode.setPrevReviewer(null);
+        size--;
+        return pNode;
+    }
+
+
+    /**
+     * Removes the value at the given index
+     * 
+     * @param val
+     *            the position of the record in the list
+     */
+    public Node<Integer> remove(int val) {
+        Node<Integer> pNode = head;
+        while (!(pNode.getValue() == val)) {
+            pNode = pNode.getNextReviewer();
+        }
+        pNode.getPrevReviewer().setNextReviewer(pNode.getNextReviewer());
+        pNode.getNextReviewer().setPrevReviewer(pNode.getPrevReviewer());
+        pNode.setNextReviewer(null);
+        pNode.setPrevReviewer(null);
+        size--;
+        return pNode;
     }
 
 
@@ -151,17 +170,17 @@ public class DLList<E> {
      */
     public void nuke() {
 
-        Movie<Integer> currNode = (Movie<Integer>)head.getNextMovie();
-        while (currNode != tail) {
-
-            currNode.getPrevReviewer().setNextReviewer(currNode.getNextReviewer());
-            currNode.getNextReviewer().setPrevReviewer(currNode.getPrevReviewer());
-
-            currNode.setNextReviewer(null);
-            currNode.setPrevReviewer(null);
-            currNode = (Movie<Integer>)currNode.getNextReviewer();
+        Node<Integer> currNode = head.getNextReviewer();
+        while (!(currNode.equals(tail))) {
+            if (currNode.getNextMovie() != null) {
+                currNode.getPrevMovie().setNextMovie(currNode.getNextMovie());
+                currNode.getNextMovie().setPrevMovie(currNode.getPrevMovie());
+            }
+            currNode.setNextMovie(null);
+            currNode.setPrevMovie(null);
+            currNode = currNode.getNextReviewer();
         }
-
+        size = 0;
     }
 
 
@@ -170,10 +189,10 @@ public class DLList<E> {
      * Used for the similar call
      */
     public void trav() {
-        Movie<Integer> currNode = (Movie<Integer>)head.getNextReviewer();
+        Node<Integer> currNode = head.getNextReviewer();
         while (currNode != tail) {
             // Maybe add all the scores in the nodes?
-            currNode = (Movie<Integer>)currNode.getNextReviewer();
+            currNode = currNode.getNextReviewer();
         }
 
         // Return the scores added and then divided by the number of nodes?
@@ -188,17 +207,17 @@ public class DLList<E> {
      */
     @Override
     public String toString() {
-        Movie<Integer> currNode = null;
+        Node<Integer> currNode = null;
         StringBuilder builder = new StringBuilder("{");
         if (!isEmpty()) {
-            currNode = (Movie<Integer>)head.getNextReviewer();
+            currNode = head.getNextReviewer();
             while (currNode != tail) {
-                int element = currNode.getValue();
+                int element = (Integer)currNode.getValue();
                 builder.append(element + " ");
                 if (currNode.getNextReviewer() != tail) {
                     builder.append(", ");
                 }
-                currNode = (Movie<Integer>)currNode.getNextReviewer();
+                currNode = currNode.getNextReviewer();
             }
         }
 

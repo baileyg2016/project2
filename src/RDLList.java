@@ -4,17 +4,14 @@
 
 /**
  * This provides implementation for some of the LList methods.
- *
- * @author Mark Wiggans (mmw125)
- * @version 3/29/15
- * @author Eric Williamson
- * @version 10/30/15
- * @author maellis1
- * @version 11/1/15
- * @param <E>
+ * 
+ * @author Bailey Spell and Adam Tapp
+ * @version Milestone 2
+ * 
+ * @param <T>
  *            The type of object the class will store
  */
-public class RDLList<E> {
+public class RDLList<T> {
 
     /**
      * This represents a node in a doubly linked list. This node stores data, a
@@ -26,18 +23,18 @@ public class RDLList<E> {
      * @author Adam Tapp
      * @version 9.18.18
      */
-    private static class Review<T> extends Node<T> {
-
-        public Review(
-            T value,
-            Node<T> nextReviewer,
-            Node<T> prevReviewer,
-            Node<T> nextMovie,
-            Node<T> prevMovie) {
-            super(value, nextReviewer, prevReviewer, nextMovie, prevMovie);
-        }
-
-    }
+// private static class Review<T> extends Node<T> {
+//
+// public Review(
+// T value,
+// Node<T> nextMovie,
+// Node<T> prevMovie,
+// Node<T> nextMovie,
+// Node<T> prevMovie) {
+// super(value, nextMovie, prevMovie, nextMovie, prevMovie);
+// }
+//
+// }
 
     /**
      * How many nodes are in the list
@@ -48,19 +45,19 @@ public class RDLList<E> {
      * The first node in the list. THIS IS A SENTINEL NODE AND AS SUCH DOES NOT
      * HOLD ANY DATA. REFER TO init()
      */
-    private Review<Integer> head;
+    private Node<Integer> head;
 
     /**
      * The last node in the list. THIS IS A SENTINEL NODE AND AS SUCH DOES NOT
      * HOLD ANY DATA. REFER TO init()
      */
-    private Review<Integer> tail;
+    private Node<Integer> tail;
 
-    
     /**
-     * Reference to the Reviewer list
+     * Reference to the Movie list
      */
-    private DLList<Node<E>> list;
+    private MDLList<T> list;
+
 
     /**
      * Create a new DLList object.
@@ -68,22 +65,26 @@ public class RDLList<E> {
      * @param val
      *            the score for the first review
      */
-    public RDLList(int val) {
-        init(val);
+    public RDLList(/* int val */) {
+        // init(val);
+        head = new Node<Integer>(-1, null, null, tail, null);
+        tail = new Node<Integer>(-1, null, null, null, head);
+        // head.setNext(tail);
+        // tail.setPrevious(head);
+        size = 0;
     }
 
 
     /**
      * Initializes the object to have the head and tail nodes
      */
-    private void init(int val) {
-        head = new RDLList.Review<Integer>(0, null, null, tail, null);
-        tail = new RDLList.Review<Integer>(0, null, null, null, head);
-        // head.setNext(tail);
-        // tail.setPrevious(head);
-        size = 0;
-    }
-
+// private void init(int val) {
+// head = new RDLList.Node<E>(0, null, null, tail, null);
+// tail = new RDLList.Node<E>(0, null, null, null, head);
+// // head.setNext(tail);
+// // tail.setPrevious(head);
+// size = 0;
+// }
 
     /**
      * Checks if the array is empty
@@ -103,24 +104,28 @@ public class RDLList<E> {
     public int size() {
         return size;
     }
-    
+
+
     /**
      * Gets the complimentary list to this one
      */
-    public void setReviewerList(DLList<Node<E>> list) {
+    public void setMovieList(MDLList<T> list) {
         this.list = list;
     }
-    
+
+
     /**
      * Gets the complimentary list to this one
      */
-    public DLList<Node<E>> getReviewerList() {
+    public MDLList<T> getMovieList() {
         return list;
     }
 
 
     /**
      * Adds the object to the end of the list
+     * 
+     * @param <T>
      * 
      * @param val
      *            the score to add
@@ -130,19 +135,50 @@ public class RDLList<E> {
      *             if obj is null
      */
     public void add(Node<Integer> node) {
-//        if (val < 1) {
-//            throw new IllegalArgumentException("Scores must be between 1-10");
-//        }
-        
-        Movie<Integer> pNode = (Movie<Integer>)tail.getPrevReviewer();
-        //Movie<Integer> addition = new Movie<Integer>(val, tail, pNode, null,
-        //    null);
-        //for ()
+        Node<Integer> pNode = tail.getPrevMovie();
         node.setPrevMovie(pNode);
         node.setNextMovie(tail);
         pNode.setNextMovie(node);
+        tail.setPrevMovie(node);
         size++;
 
+    }
+
+
+    /**
+     * Removes the value at the end of the list
+     * 
+     * @return Movie<E>
+     *         the node that is removed
+     */
+    public Node<Integer> remove() {
+        Node<Integer> pNode = tail.getPrevMovie();
+        pNode.getPrevMovie().setNextMovie(tail);
+        tail.setPrevMovie(pNode.getPrevMovie());
+        pNode.setNextMovie(null);
+        pNode.setPrevMovie(null);
+        size--;
+        return pNode;
+    }
+
+
+    /**
+     * Removes the value at the given index
+     * 
+     * @param val
+     *            the position of the record in the list
+     */
+    public Node<Integer> remove(int val) {
+        Node<Integer> pNode = head;
+        while (!(pNode.getValue() == val)) {
+            pNode = pNode.getNextMovie();
+        }
+        pNode.getPrevMovie().setNextMovie(pNode.getNextMovie());
+        pNode.getNextMovie().setPrevMovie(pNode.getPrevMovie());
+        pNode.setNextMovie(null);
+        pNode.setPrevMovie(null);
+        size--;
+        return pNode;
     }
 
 
@@ -151,17 +187,19 @@ public class RDLList<E> {
      */
     public void nuke() {
 
-        Review<Integer> currNode = (Review<Integer>)head.getNextMovie();
-        while (currNode != tail) {
-
-            currNode.getPrevMovie().setNextMovie(currNode.getNextMovie());
-            currNode.getNextMovie().setPrevMovie(currNode.getPrevMovie());
-
-            currNode.setNextMovie(null);
-            currNode.setPrevMovie(null);
-            currNode = (Review<Integer>)currNode.getNextMovie();
+        Node<Integer> currNode = head.getNextMovie();
+        while (!(currNode.equals(tail))) {
+            if (currNode.getNextReviewer() != null) {
+                currNode.getPrevReviewer().setNextReviewer(currNode
+                    .getNextReviewer());
+                currNode.getNextReviewer().setPrevReviewer(currNode
+                    .getPrevReviewer());
+            }
+            currNode.setNextReviewer(null);
+            currNode.setPrevReviewer(null);
+            currNode = currNode.getNextMovie();
         }
-
+        size = 0;
     }
 
 
@@ -170,10 +208,10 @@ public class RDLList<E> {
      * Used for the similar call
      */
     public void trav() {
-        Review<Integer> currNode = (Review<Integer>)head.getNextReviewer();
+        Node<Integer> currNode = head.getNextMovie();
         while (currNode != tail) {
             // Maybe add all the scores in the nodes?
-            currNode = (Review<Integer>)currNode.getNextReviewer();
+            currNode = currNode.getNextMovie();
         }
 
         // Return the scores added and then divided by the number of nodes?
@@ -188,17 +226,17 @@ public class RDLList<E> {
      */
     @Override
     public String toString() {
-        Review<Integer> currNode = null;
+        Node<Integer> currNode = null;
         StringBuilder builder = new StringBuilder("{");
         if (!isEmpty()) {
-            currNode = (Review<Integer>)head.getNextReviewer();
+            currNode = head.getNextMovie();
             while (currNode != tail) {
-                int element = currNode.getValue();
+                int element = (Integer)currNode.getValue();
                 builder.append(element + " ");
-                if (currNode.getNextReviewer() != tail) {
+                if (currNode.getNextMovie() != tail) {
                     builder.append(", ");
                 }
-                currNode = (Review<Integer>)currNode.getNextReviewer();
+                currNode = currNode.getNextMovie();
             }
         }
 
@@ -207,4 +245,3 @@ public class RDLList<E> {
     }
 
 }
-

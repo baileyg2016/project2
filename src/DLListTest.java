@@ -17,7 +17,7 @@ public class DLListTest extends TestCase {
     /**
      * the list we will use
      */
-    private DLList<String> list;
+    private MDLList<String> list;
 
     /**
      * The iterator for the list
@@ -34,7 +34,7 @@ public class DLListTest extends TestCase {
      */
     @Override
     public void setUp() {
-        list = new DLList<String>();
+        list = new MDLList<String>();
         iter = list.iterator();
         rIter = list.reverseIterator();
     }
@@ -292,7 +292,7 @@ public class DLListTest extends TestCase {
         }
         assertTrue(exception instanceof IndexOutOfBoundsException);
 
-        DLList<String> emptyList = new DLList<String>();
+        MDLList<String> emptyList = new MDLList<String>();
         exception = null;
         try {
             emptyList.remove(0);
