@@ -14,12 +14,8 @@ public class Record<T> {
      * The Name that corresponds to the container
      * either movie or reviewer
      */
-    private String name;
+    private T name;
 
-    /**
-     * The key for the hashTable that corresponds to the record
-     */
-    private T key;
 
     /**
      * Whether or not the record has been deleted from the table
@@ -35,7 +31,7 @@ public class Record<T> {
      *            The key to insert this into the hashTable
      *            
      */
-    public Record(String name) {
+    public Record(T name) {
         this.name = name;
         this.tombstone = false;
         this.head = null;
@@ -48,7 +44,7 @@ public class Record<T> {
      * @param key
      *            The key for the record to be stored into the hashTable
      */
-    public void setKey(String name) {
+    public void setKey(T name) {
         this.name = name;
     }
 
@@ -58,7 +54,7 @@ public class Record<T> {
      * @return
      *         The key of the record
      */
-    public String getKey() {
+    public T getKey() {
         return name;
     }
 
