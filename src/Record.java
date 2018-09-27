@@ -15,6 +15,12 @@ public class Record<T> {
      * either movie or reviewer
      */
     private String name;
+
+    /**
+     * The key for the hashTable that corresponds to the record
+     */
+    private T key;
+
     /**
      * Whether or not the record has been deleted from the table
      */
@@ -22,16 +28,14 @@ public class Record<T> {
 
     private Object head;
 
-
     /**
      * The constructor for the record objects
      * 
      * @param key
      *            The key to insert this into the hashTable
-     * @param list
-     *            The list stored in this record
+     *            
      */
-    public Record(String name, T list) {
+    public Record(String name) {
         this.name = name;
         this.tombstone = false;
         this.head = null;
@@ -96,3 +100,4 @@ public class Record<T> {
         return head;
     }
 }
+
