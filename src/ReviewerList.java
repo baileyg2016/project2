@@ -1,84 +1,160 @@
+/**
+ * 
+ * @author BaileySpell and Adam Tapp
+ *
+ * @param <T>
+ *            Generic type
+ */
+public class ReviewerList<T> {
+    /**
+     * Node class for this reviewer list
+     * 
+     * @author BaileySpell & Adam Tapp
+     *
+     * @param <E>
+     *            The generic type for the class
+     */
+    static class Node<E> {
+        /**
+         * Next node in the list
+         */
+        Node<E> next;
+        /**
+         * list object for the ratings
+         */
+        public RDLList<E> list;
+        /**
+         * Name of the reviewer
+         */
+        String name;
 
-public class ReviewerList {
-	private Node head;
-	private Node tail;
-	private int numNodes;
-	private int count;
 
-	static class Node {
-		Node next;
+        /**
+         * Constructor for the node
+         * 
+         * @param name
+         *            name of the reviewer
+         */
+        Node(String name) {
+            next = null;
+            this.name = name;
+        }
 
-		int pos;
 
-		Node(int pos) {
-			next = null;
-			this.pos = pos;
-		}
+        /**
+         * Sets the next node in the list
+         * 
+         * @param name
+         *            The name of the reviewer for the next node
+         */
+        void setNext(String name) {
+            this.next = new Node<E>(name);
+        }
+    }
 
-		void setNext(int count) {
-			this.next = new Node(count);
-		}
-	}
+    /**
+     * head of list
+     */
+    private Node<T> head;
+    /**
+     * tail of the list
+     */
+    private Node<T> tail;
+    /**
+     * Total number of nodes in the list
+     */
+    private int numNodes;
 
-	public ReviewerList() {
-		head = null;
-		tail = head;
-		count = 0;
-	}
 
-	public ReviewerList(int pos) {
-		head = new Node(pos);
-		tail = head;
-		count = 0;
-	}
+    /**
+     * The default constructor for the list
+     */
+    public ReviewerList() {
+        head = null;
+        tail = head;
+    }
 
-	public int insert() {
-		count++;
-		if (head == null) {
-			head = new Node(count);
-			tail = head;
-			numNodes++;
-			return count;
-		}
 
-		tail.setNext(count);
-		tail = tail.next;
-		numNodes++;
-		return count;
-	}
+    /**
+     * The constructor that takes in a name
+     * 
+     * @param name
+     *            Name of the reviewer
+     */
+    public ReviewerList(String name) {
+        head = new Node<T>(name);
+        tail = head;
+    }
 
-	public void delete(int pos) {
-		if (numNodes == 1) {
-			tail = null;
-			head = null;
-			numNodes--;
-			return;
-		}
 
-		Node curr = head;
-		Node prev = null;
+    /**
+     * Inserting at the tail of the list
+     * 
+     * @param name
+     *            name of the reviewer to add
+     */
+    public void insert(String name) {
+        if (head == null) {
+            head = new Node<T>(name);
+            tail = head;
+            numNodes++;
+            return;
+        }
 
-		while (curr != null && curr.pos != pos) {
-			prev = curr;
-			curr = curr.next;
+        tail.setNext(name);
+        tail = tail.next;
+        numNodes++;
+    }
 
-		}
-		if (curr == null) {
-			return;
-		}
-		prev.next = curr.next;
-		numNodes--;
-	}
 
-	public void printList() {
-		Node curr = head;
-		while (curr != null) {
-			System.out.println(curr.pos);
-			curr = curr.next;
-		}
-	}
-	
-	public int getCount() {
-		return numNodes;
-	}
+    /**
+     * deleting the name from the list
+     * 
+     * @param name
+     *            the name to delete
+     */
+    public void delete(String name) {
+        if (numNodes == 1) {
+            tail = null;
+            head = null;
+            numNodes--;
+            return;
+        }
+
+        Node<T> curr = head;
+        Node<T> prev = null;
+
+        while (curr != null && !curr.name.equals(name)) {
+            prev = curr;
+            curr = curr.next;
+
+        }
+        if (curr == null) {
+            return;
+        }
+        prev.next = curr.next;
+        numNodes--;
+    }
+
+
+    /**
+     * Print all the contents in the list
+     */
+    public void printList() {
+        Node<T> curr = head;
+        while (curr != null) {
+            System.out.println(curr.name);
+            curr = curr.next;
+        }
+    }
+
+
+    /**
+     * 
+     * @return
+     *         The count of the nodes in the list
+     */
+    public int getCount() {
+        return numNodes;
+    }
 }
