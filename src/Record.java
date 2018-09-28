@@ -11,30 +11,28 @@
  */
 public class Record<T> {
     /**
-     * The Name that corresponds to the container
-     * either movie or reviewer
+     * The key for the hashTable that corresponds to the record
      */
-    private T name;
-
-
+    private T key;
     /**
      * Whether or not the record has been deleted from the table
      */
     private boolean tombstone;
 
-    private Object head;
-
+    /**
+     * Points to the head of the list
+     */
+    private Object h;
+    
     /**
      * The constructor for the record objects
      * 
      * @param key
      *            The key to insert this into the hashTable
-     *            
      */
-    public Record(T name) {
-        this.name = name;
+    public Record(T key) {
+        this.key = key;
         this.tombstone = false;
-        this.head = null;
     }
 
 
@@ -44,8 +42,8 @@ public class Record<T> {
      * @param key
      *            The key for the record to be stored into the hashTable
      */
-    public void setKey(T name) {
-        this.name = name;
+    public void setKey(T key) {
+        this.key = key;
     }
 
 
@@ -55,8 +53,15 @@ public class Record<T> {
      *         The key of the record
      */
     public T getKey() {
-        return name;
+        return key;
     }
+    
+    /**
+     * sets the reference to the head node of the list
+     */
+   public void setH(Node<Integer> head) {
+       h = head;
+   }
 
 
     /**
@@ -75,25 +80,4 @@ public class Record<T> {
     public boolean getTombstone() {
         return tombstone;
     }
-    
-    /**
-     * Sets the key for the record
-     * 
-     * @param key
-     *            The key for the record to be stored into the hashTable
-     */
-    public void setHead(Node<T> node) {
-        this.head = node;
-    }
-
-
-    /**
-     * 
-     * @return
-     *         The key of the record
-     */
-    public Object getHead() {
-        return head;
-    }
 }
-

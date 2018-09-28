@@ -133,6 +133,8 @@ public class Parser {
 
         reviewerTable.insert(fields[0], "Reviwer");
         movieTable.insert(fields[1], "Movie");
+        
+   
 
         System.out.println("Rating added: |" + fields[0] + "|, |" + fields[1]
             + "|, " + fields[2]);
