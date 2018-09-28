@@ -1,13 +1,16 @@
 
-public class ReviewerList {
-	private Node head;
-	private Node tail;
+public class ReviewerList<T> {
+	private Node<T> head;
+	private Node<T> tail;
+    
+	
+	
 	private int numNodes;
 	private int count;
 
-	static class Node {
-		Node next;
-
+	static class Node<E> {
+		Node<E> next;
+		public RDLList<E> list;
 		int pos;
 
 		Node(int pos) {
@@ -16,7 +19,7 @@ public class ReviewerList {
 		}
 
 		void setNext(int count) {
-			this.next = new Node(count);
+			this.next = new Node<E>(count);
 		}
 	}
 
@@ -27,7 +30,7 @@ public class ReviewerList {
 	}
 
 	public ReviewerList(int pos) {
-		head = new Node(pos);
+		head = new Node<T>(pos);
 		tail = head;
 		count = 0;
 	}
@@ -35,7 +38,7 @@ public class ReviewerList {
 	public int insert() {
 		count++;
 		if (head == null) {
-			head = new Node(count);
+			head = new Node<T>(count);
 			tail = head;
 			numNodes++;
 			return count;
@@ -55,8 +58,8 @@ public class ReviewerList {
 			return;
 		}
 
-		Node curr = head;
-		Node prev = null;
+		Node<T> curr = head;
+		Node<T> prev = null;
 
 		while (curr != null && curr.pos != pos) {
 			prev = curr;
@@ -71,7 +74,7 @@ public class ReviewerList {
 	}
 
 	public void printList() {
-		Node curr = head;
+		Node<T> curr = head;
 		while (curr != null) {
 			System.out.println(curr.pos);
 			curr = curr.next;
