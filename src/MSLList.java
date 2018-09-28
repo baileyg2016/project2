@@ -144,7 +144,7 @@ public class MSLList {
 
 
     /**
-     * Removing a node from a given nameition
+     * Removing a node from a given name
      */
     public Node remove(String name) {
         Node n = head;
@@ -152,6 +152,7 @@ public class MSLList {
             if (n.getNext().getName().equals(name)) {
                 Node temp = n.getNext();
                 n.setNext(temp.getNext());
+                temp.getList().nuke();
                 temp.setNext(null);
                 size--;
                 return temp;
@@ -174,6 +175,7 @@ public class MSLList {
             if (n.getName().equals(name)) {
                 return n;
             }
+            n = n.getNext();
         }
         return null;
 
@@ -200,7 +202,7 @@ public class MSLList {
      */
     public String toString() {
         Node n = head.getNext();
-        String s = "{";
+        String s = "{ ";
         while (!(n.equals(tail))) {
             s += n.getName() + " ";
             if (n.getNext() != tail) {

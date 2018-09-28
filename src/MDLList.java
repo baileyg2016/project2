@@ -71,20 +71,21 @@ public class MDLList<T> {
     public int size() {
         return size;
     }
-    
+
+
     /**
-     * Gets the head 
+     * Gets the head
      */
     public Node<Integer> getHead() {
         return head;
     }
-    
+
 
     /**
      * Adds the object to the end of the list
      * 
      * @param node
-     *          the node being added to this list
+     *            the node being added to this list
      */
     public void add(Node<Integer> node) {
         // pNode is the the last node inserted
@@ -142,16 +143,20 @@ public class MDLList<T> {
     public void nuke() {
 
         Node<Integer> currNode = head.getNextReviewer();
-        while (!(currNode.equals(tail))) {
-            if (currNode.getNextMovie() != null) {
-                currNode.getPrevMovie().setNextMovie(currNode.getNextMovie());
-                currNode.getNextMovie().setPrevMovie(currNode.getPrevMovie());
+        if (currNode != null) {
+            while (!(currNode.equals(tail))) {
+                if (currNode.getNextMovie() != null) {
+                    currNode.getPrevMovie().setNextMovie(currNode
+                        .getNextMovie());
+                    currNode.getNextMovie().setPrevMovie(currNode
+                        .getPrevMovie());
+                }
+                currNode.setNextMovie(null);
+                currNode.setPrevMovie(null);
+                currNode = currNode.getNextReviewer();
             }
-            currNode.setNextMovie(null);
-            currNode.setPrevMovie(null);
-            currNode = currNode.getNextReviewer();
+            size = 0;
         }
-        size = 0;
     }
 
 
