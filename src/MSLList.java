@@ -2,71 +2,71 @@
  * 
  * @author Adam Tapp and Bailey Spell
  * @version Milestone 2
- * @param <T>
+ * @param <Integer>
  */
-public class MSLList<T> {
+public class MSLList {
 
     /**
      * Represents the list that will serve as the Movie list
      * and Reviewer list that is in the sparse matrix
      */
 
-    public class Node<E> {
+    public class Node {
         /**
-         * 1. Next position
+         * 1. Name of this node
          * 2. Contains a MDLList
          * 3. Maybe a number
          */
         /**
-         * Position of this node
+         * nameition of this node
          */
-        public int pos;
+        public String name;
         /**
          * list of movies
          */
-        public MDLList<E> list;
+        public MDLList<Integer> list;
 
         /**
          * the next node in the list
          */
-        public Node<E> next;
+        public Node next;
 
 
         /**
          * Node constructor
          * 
-         * @param pos
-         *            position of the node
+         * @param name
+         *            nameition of the node
          * @param list
          *            list stored in the node
          * @param next
          *            the next node in the list
          */
-        public Node(int pos, MDLList<E> list, Node<E> next) {
-            this.pos = pos;
+        public Node(String name, MDLList<Integer> list, Node next) {
+            this.name = name;
             this.list = list;
             this.next = next;
         }
 
 
         /**
-         * gets the position
+         * gets the nameition
          * 
-         * @return int
-         *         the position of this node
+         * @return String
+         *         the nameition of this node
          */
-        public int getPos() {
-            return pos;
+        public String getName() {
+            return name;
         }
 
 
         /**
          * Sets the list contained in this
          * 
-         * @return MDLList<T>
+         * @return MDLList<Integer>
          *         list contained in this node
          */
-        public MDLList<E> getList() {
+        public MDLList<Integer> getList() {
             return list;
         }
 
@@ -77,7 +77,7 @@ public class MSLList<T> {
          * @param node
          *            the new next node
          */
-        public void setNext(Node<E> node) {
+        public void setNext(Node node) {
             this.next = node;
         }
 
@@ -85,10 +85,10 @@ public class MSLList<T> {
         /**
          * Gets the next node
          * 
-         * @return Node<T>
+         * @return Node
          *         returns the next node
          */
-        public Node<E> getNext() {
+        public Node getNext() {
             return next;
         }
 
@@ -97,47 +97,60 @@ public class MSLList<T> {
     /**
      * Head of the list
      */
-    public Node<T> head;
+    public Node head;
 
     /**
      * Tail of the list
      */
-    public Node<T> tail;
+    public Node tail;
 
     /**
      * Size of the list
      */
     public int size;
 
+    /**
+     * Count of nodes added
+     */
+    public int count;
+
 
     // Rows
     public MSLList() {
-        head = new Node<T>(-1, null, tail);
-        tail = new Node<T>(-1, null, head);
+        head = new Node("", null, tail);
+        tail = new Node("", null, head);
         size = 0;
+        count = 0;
     }
 
 
     /**
      * Adding a node to the list
+     * This is done when the name does not already exist
+     * in the movie list
+     * @param name
+     *          the name of the movie
      */
-    public void add(Node<T> node) {
-        Node<T> aNode = tail.getNext();
+    public void add(String name) {
+        MDLList<Integer> mList = new MDLList<>();
+        Node node = new Node(name, mList, tail);
+        Node aNode = tail.getNext();
         aNode.setNext(node);
-        node.setNext(tail);
         tail.setNext(node);
+
+        count++;
         size++;
     }
 
 
     /**
-     * Removing a node from a given position
+     * Removing a node from a given nameition
      */
-    public Node<T> remove(int pos) {
-        Node<T> n = head;
+    public Node remove(String name) {
+        Node n = head;
         while (!(n.getNext().equals(tail))) {
-            if (n.getNext().getPos() == pos) {
-                Node<T> temp = n.getNext();
+            if (n.getNext().getName().equals(name)) {
+                Node temp = n.getNext();
                 n.setNext(temp.getNext());
                 temp.setNext(null);
                 size--;
@@ -146,6 +159,24 @@ public class MSLList<T> {
             n = n.getNext();
         }
         return null;
+    }
+
+
+    /**
+     * Contains method
+     * 
+     * @return the node
+     *         return true if the name is in the list
+     */
+    public Node contains(String name) {
+        Node n = head.getNext();
+        while (!(n.equals(tail))) {
+            if (n.getName().equals(name)) {
+                return n;
+            }
+        }
+        return null;
+
     }
 
 
@@ -162,15 +193,16 @@ public class MSLList<T> {
 
     /**
      * A string representation of the nodes in the list
+     * 
      * @return String
-     *         a string representation of the nodes and their positions in the
+     *         a string representation of the nodes and their nameitions in the
      *         list
      */
     public String toString() {
-        Node<T> n = head.getNext();
+        Node n = head.getNext();
         String s = "{";
         while (!(n.equals(tail))) {
-            s += n.getPos() + " ";
+            s += n.getName() + " ";
             if (n.getNext() != tail) {
                 s += ", ";
             }
