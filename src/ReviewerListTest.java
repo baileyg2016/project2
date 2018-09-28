@@ -9,21 +9,21 @@ public class ReviewerListTest extends TestCase {
      * Sets up the tests that follow. In general, used for initialization
      */
     public void setUp() {
-        //nothing here
+        // nothing here
     }
+
 
     /**
      * Testing the insert
      */
     public void testInsert() {
-    	ReviewerList list = new ReviewerList();
-    	list.insert();
-    	list.insert();
-    	list.insert();
-    	list.insert();
-    	list.insert();
-    	list.printList();
-    	assertEquals(5, list.getCount());
+        ReviewerList<String> list = new ReviewerList<String>();
+        list.insert("Billy");
+        list.insert("bobby");
+        list.insert("sup");
+        list.insert("dog");
+        list.insert("hey");
+        list.printList();
+        assertEquals(5, list.getCount());
     }
 }
-
