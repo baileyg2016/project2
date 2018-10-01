@@ -17,10 +17,16 @@ public class Parser {
     private String inputFile;
     /**
      * The hashTable for the movies
+     * 
+     * @param String
+     *            the names held in the hash table
      */
     private Hash<String> movieTable;
     /**
      * The hashTable for the reviewers
+     * 
+     * @param String
+     *            the names held in the hash table
      */
     private Hash<String> reviewerTable;
 
@@ -133,8 +139,6 @@ public class Parser {
 
         reviewerTable.insert(fields[0], "Reviwer");
         movieTable.insert(fields[1], "Movie");
-        
-   
 
         System.out.println("Rating added: |" + fields[0] + "|, |" + fields[1]
             + "|, " + fields[2]);
@@ -189,6 +193,14 @@ public class Parser {
      */
     public void printRatings() {
         // print the ratings
+        // get the sparse matrix class
+        // get the movie singly linked list
+        // to string on each entry of the lists
+        // Print out the reviewers and their count first
+        // ReviewerList rL = SparseMatrix.ReviewerList();
+        // System.out.println(rL.printListAndCount());
+        // MSLList mL = SparseMatrix.MSLList();
+        // System.out.println(mL.printListAndReviews())
     }
 
 
@@ -201,11 +213,58 @@ public class Parser {
      *            The name of the movie or the reviewer
      */
     public void list(String tableName, String name) {
-// if (tableName.equals("reviewer")) {
-//
+        if (tableName.equals("reviewer")) {
+            // make sure the name exists in the table
+            // if the return is null or a tombstone then it does not exist
+            int val = reviewerTable.search(name);
+            if (reviewerTable.getHashTable()[val] == null || reviewerTable
+                .getHashTable()[val].getTombstone()) {
+                System.out.println("Cannot list, reviewer |" + name
+                    + "| not found in the database.");
+            }
+            else {
+                // We will use the sparse matrix object for this
+                // RDLList rL = (sparseMatrix.ReviewerList().getList(name);
+                // Node<T> n = rL.getHead().getNextMovie();
+                // Node<T> tail = rL.getTail();
+                // String s = "Ratings for reviewer |" + name + "|:";
+                // while (!(n.equals(tail)) {
+                // s += " " + n.getValue()
+                // if (!(n.getNextMovie().equals(tail))) {
+                        //s += ",";
+                // }
+                // n == n.getNextMovie();
+                // }
+                //System.out.println(s);
+            }
+        
+        }
+
 // }
 // else {// then it is the movie
-//
+        // make sure the name exists in the table
+        // if the return is null or a tombstone then it does not exist
+        int val = movieTable.search(name);
+        if (movieTable.getHashTable()[val] == null || movieTable
+            .getHashTable()[val].getTombstone()) {
+            System.out.println("Cannot list, movie |" + name
+                + "| not found in the database.");
+        }
+        else {
+            // We will use the sparse matrix object for this
+            // MDLList mL = (sparseMatrix.MSLList().getList(name);
+            // Node<T> n = mL.getHead().getNextReview();
+            // Node<T> tail = mL.getTail();
+            // String s = "Ratings for movie |" + name + "|:";
+            // while (!(n.equals(tail)) {
+            // s += " " + n.getValue()
+            // if (!(n.getNextReview().equals(tail))) {
+                    //s += ",";
+            // }
+            // n == n.getNextReview();
+            // }
+            //System.out.println(s);
+        }
 // }
     }
 

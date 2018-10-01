@@ -16,11 +16,12 @@ public class MDLListTest extends TestCase {
         // testing that the list is empty
         MDLList<Integer> list = new MDLList<>();
         assertTrue(list.isEmpty());
+        System.out.println(list.getCountAndScore());
         assertEquals(list.size(), 0);
 
-        Node<Integer> n = new Node<>(1, null, null, null, null);
-        Node<Integer> n1 = new Node<>(2, null, null, null, null);
-        Node<Integer> n2 = new Node<>(3, null, null, null, null);
+        Node<Integer> n = new Node<>(1, null, null, null, null, -1, -1);
+        Node<Integer> n1 = new Node<>(2, null, null, null, null, -1, -1);
+        Node<Integer> n2 = new Node<>(3, null, null, null, null, -1, -1);
         list.add(n);
         assertFalse(list.isEmpty());
         assertFuzzyEquals(list.toString(), "{1}");
@@ -31,7 +32,7 @@ public class MDLListTest extends TestCase {
         list.add(n1);
         list.add(n2);
         assertFuzzyEquals(list.toString(), "{1, 2, 3}");
-
+        System.out.println(list.getCountAndScore());
         assertEquals((int)list.remove(2).getValue(), 2);
 
         assertFuzzyEquals(list.toString(), "{1, 3}");
@@ -40,5 +41,10 @@ public class MDLListTest extends TestCase {
         list.trav();
         assertFuzzyEquals(list.toString(), "{}");
         assertTrue(list.isEmpty());
+        
+        list.add(n);
+        list.add(n1);
+        list.add(n2);
+        list.nuke();
     }
 }

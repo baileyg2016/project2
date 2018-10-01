@@ -7,11 +7,17 @@ import student.TestCase;
  */
 public class MSLListTest extends TestCase {
 
+    /**
+     * Set up
+     */
     public void setUp() {
-
+        // nothing here
     }
 
 
+    /**
+     * The test for MSLList
+     */
     public void testMSLList() {
         MSLList list = new MSLList();
 
@@ -22,7 +28,7 @@ public class MSLListTest extends TestCase {
 
         assertEquals(list.contains("bobby").getName(), "bobby");
         assertNull(list.contains("a"));
-        Node<Integer> node = new Node<>(1, null, null, null, null);
+        Node<Integer> node = new Node<>(1, null, null, null, null, -1, -1);
         list.contains("bobby").getList().add(node);
 
         assertEquals(list.contains("bobby").getList().size(), 1);
@@ -37,17 +43,23 @@ public class MSLListTest extends TestCase {
         list.add("bobby");
         list.add("Jill");
         list.add("Adam");
-
+        
+        System.out.println(list.printListAndReviews());
+        
+        assertEquals(list.getList("Adam").getClass(), (new MDLList<Integer>())
+            .getClass());
+        assertNull(list.getList("Jimmy"));
+        
         assertFuzzyEquals(list.toString(), "{ Ronnie, bobby, Jill, Adam }");
         list.remove("Adam");
         assertFuzzyEquals(list.toString(), "{ Ronnie, bobby, Jill }");
         assertNull(list.remove("bob"));
-        
-        
-        
+
         list.remove("Ronnie");
         list.remove("bobby");
         list.remove("Jill");
+        
+        System.out.println(list.printListAndReviews());
     }
 
 }

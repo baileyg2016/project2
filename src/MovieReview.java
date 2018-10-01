@@ -31,6 +31,8 @@
 
 public class MovieReview {
     /**
+     * reads in a text file and issues the commands listed in the file
+     * 
      * @param args
      *            Command line parameters
      */

@@ -1,8 +1,8 @@
+
 /**
  * 
  * @author Adam Tapp and Bailey Spell
  * @version Milestone 2
- * @param <Integer>
  */
 public class MSLList {
 
@@ -10,19 +10,16 @@ public class MSLList {
      * Represents the list that will serve as the Movie list
      * and Reviewer list that is in the sparse matrix
      */
-
     public class Node {
         /**
-         * 1. Name of this node
-         * 2. Contains a MDLList
-         * 3. Maybe a number
-         */
-        /**
-         * nameition of this node
+         * Name of this node
          */
         public String name;
         /**
          * list of movies
+         * 
+         * @param Integer
+         *            holds an integer value
          */
         public MDLList<Integer> list;
 
@@ -31,29 +28,37 @@ public class MSLList {
          */
         public Node next;
 
+        /**
+         * The number of entries added thus far
+         */
+        public int count;
+
 
         /**
          * Node constructor
          * 
          * @param name
-         *            nameition of the node
+         *            name of the node
          * @param list
          *            list stored in the node
          * @param next
          *            the next node in the list
+         * @param count
+         *            the number of entries added thus far
          */
-        public Node(String name, MDLList<Integer> list, Node next) {
+        public Node(String name, MDLList<Integer> list, Node next, int count) {
             this.name = name;
             this.list = list;
             this.next = next;
+            this.count = count;
         }
 
 
         /**
-         * gets the nameition
+         * gets the name
          * 
          * @return String
-         *         the nameition of this node
+         *         the name of this node
          */
         public String getName() {
             return name;
@@ -92,6 +97,28 @@ public class MSLList {
             return next;
         }
 
+
+        /**
+         * Gets count
+         * 
+         * @return int
+         *         count
+         */
+        public int getCount() {
+            return count;
+        }
+
+
+        /**
+         * Sets count
+         * 
+         * @param count
+         *            the count
+         */
+        public void setCount(int count) {
+            this.count = count;
+        }
+
     }
 
     /**
@@ -115,10 +142,12 @@ public class MSLList {
     public int count;
 
 
-    // Rows
+    /**
+     * Rows of the singly linked list
+     */
     public MSLList() {
-        head = new Node("", null, tail);
-        tail = new Node("", null, head);
+        head = new Node("head", null, tail, -1);
+        tail = new Node("tail", null, head, -1);
         size = 0;
         count = 0;
     }
@@ -128,16 +157,17 @@ public class MSLList {
      * Adding a node to the list
      * This is done when the name does not already exist
      * in the movie list
+     * 
      * @param name
-     *          the name of the movie
+     *            the name of the movie
      */
     public void add(String name) {
         MDLList<Integer> mList = new MDLList<>();
-        Node node = new Node(name, mList, tail);
+        Node node = new Node(name, mList, tail, count);
         Node aNode = tail.getNext();
+
         aNode.setNext(node);
         tail.setNext(node);
-
         count++;
         size++;
     }
@@ -145,6 +175,11 @@ public class MSLList {
 
     /**
      * Removing a node from a given name
+     * 
+     * @param name
+     *            name of the node that needs to be removed
+     * @return Node
+     *         the node that was removed
      */
     public Node remove(String name) {
         Node n = head;
@@ -166,7 +201,9 @@ public class MSLList {
     /**
      * Contains method
      * 
-     * @return the node
+     * @param name
+     *            the name of the node that we are searching for
+     * @return Node
      *         return true if the name is in the list
      */
     public Node contains(String name) {
@@ -178,7 +215,20 @@ public class MSLList {
             n = n.getNext();
         }
         return null;
+    }
 
+
+    /**
+     * Finds a list in a node
+     * 
+     * @param name
+     *            the name of the list we need
+     * @return MDLList<Integer>
+     *         the list we need
+     */
+    public MDLList<Integer> getList(String name) {
+        Node n = contains(name);
+        return (n == null) ? null : n.getList();
     }
 
 
@@ -197,7 +247,7 @@ public class MSLList {
      * A string representation of the nodes in the list
      * 
      * @return String
-     *         a string representation of the nodes and their nameitions in the
+     *         a string representation of the nodes and their name in the
      *         list
      */
     public String toString() {
@@ -211,6 +261,28 @@ public class MSLList {
             n = n.getNext();
         }
         s += "}";
+        return s;
+    }
+
+    /**
+     * Printing the name of the movie and the reviewer and score for each review
+     * of that movie
+     * @return String
+     *             String of movies, reviewer counts and the scores they gave
+     */
+    public String printListAndReviews() {
+        Node n = head.getNext();
+        String s = "";
+        while (!(n.equals(tail))) {
+            s += n.getName() + ": ";
+            MDLList<Integer> list = n.getList();
+            s += list.getCountAndScore();
+            if (n.getNext() != tail) {
+                s += "\n";
+            }
+            n = n.getNext();
+        }
+        //s += "}";
         return s;
     }
 

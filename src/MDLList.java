@@ -1,30 +1,14 @@
 /**
- * WE WILL NEED TO MAKE DIFFERENT LISTS BECAUSE OF DIFFERENCES WITH THE POINTERS
- */
-
-/**
  * This provides implementation for some of the LList methods.
  *
  * 
  * @author Bailey Spell and Adam Tapp
  * @version Milestone 2
  * 
- * @param <Integer>
+ * @param <T>
  *            The type of object the class will store
  */
 public class MDLList<T> {
-
-    /**
-     * This represents a node in a doubly linked list. This node stores data, a
-     * pointer to the node before it in the list, and a pointer to the node
-     * after it in the list
-     *
-     * @param <T>
-     *            This is the type of object that this class will store
-     * @author Adam Tapp and Bailey Spell
-     * @version Milestone 2
-     */
-
     /**
      * How many nodes are in the list
      */
@@ -33,12 +17,16 @@ public class MDLList<T> {
     /**
      * The first node in the list. THIS IS A SENTINEL NODE AND AS SUCH DOES NOT
      * HOLD ANY DATA. REFER TO init()
+     * @param Integer
+     *          the value stored in the node
      */
     private Node<Integer> head;
 
     /**
      * The last node in the list. THIS IS A SENTINEL NODE AND AS SUCH DOES NOT
      * HOLD ANY DATA. REFER TO init()
+     * @param Integer
+     *          the value stored in the node
      */
     private Node<Integer> tail;
 
@@ -47,8 +35,8 @@ public class MDLList<T> {
      * Create a new DLList object.
      */
     public MDLList() {
-        head = new Node<Integer>(-1, tail, null, null, null);
-        tail = new Node<Integer>(-1, null, head, null, null);
+        head = new Node<Integer>(-1, tail, null, null, null, -1, -1);
+        tail = new Node<Integer>(-1, null, head, null, null, -1, -1);
         size = 0;
     }
 
@@ -199,6 +187,29 @@ public class MDLList<T> {
 
         builder.append("}");
         return builder.toString();
+    }
+    
+    /**
+     * Gets the count of the reviwer for the given review and the score in that review
+     * @return String
+     *          the count and the score
+     */
+    public String getCountAndScore() {
+            Node<Integer> currNode = null;
+            StringBuilder builder = new StringBuilder();
+            if (!isEmpty()) {
+                currNode = head.getNextReviewer();
+                while (currNode != tail) {
+                    int count = (Integer)currNode.getRCount();
+                    int score = (Integer)currNode.getValue();
+                    builder.append(count + ":" + score + " ");
+                    if (currNode.getNextReviewer() != tail) {
+                        builder.append(", ");
+                    }
+                    currNode = currNode.getNextReviewer();
+                }
+            }
+            return builder.toString();
     }
 
 }

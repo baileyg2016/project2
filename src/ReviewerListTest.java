@@ -1,10 +1,11 @@
 import student.TestCase;
 
 /**
- * @author {Your Name Here}
- * @version {Put Something Here}
+ * @author Bailey Spell and Adam Tapp
+ * @version Milestone 2
+ * @param <T>
  */
-public class ReviewerListTest extends TestCase {
+public class ReviewerListTest<T> extends TestCase {
     /**
      * Sets up the tests that follow. In general, used for initialization
      */
@@ -19,11 +20,35 @@ public class ReviewerListTest extends TestCase {
     public void testInsert() {
         ReviewerList<String> list = new ReviewerList<String>();
         list.insert("Billy");
+        assertEquals(list.contains("Billy").getCount(), 0);
+        assertNull(list.contains("Joe"));
+
         list.insert("bobby");
         list.insert("sup");
         list.insert("dog");
         list.insert("hey");
+        assertEquals(list.getList("hey").getClass(), (new RDLList<T>()
+            .getClass()));
+        assertEquals(list.contains("hey").getCount(), 4);
+        assertNull(list.contains("Joe"));
         list.printList();
+        list.printListAndCount();
         assertEquals(5, list.getCount());
+
+        list.delete("Billy");
+        list.printList();
+        list.delete("sup");
+        list.delete("dog");
+        list.delete("hey");
+        list.printList();
+        list.delete("bobby");
+        list.printList();
+
+        assertNull(list.getList("Joe"));
+
+        ReviewerList<String> list1 = new ReviewerList<String>("Head");
+
+        list1.delete(null);
+
     }
 }

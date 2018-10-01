@@ -10,11 +10,38 @@
  *            The generic type
  */
 public class Node<T> {
+    /**
+     * The next Reviewer
+     */
     private Node<T> nextReviewer;
+    /**
+     * The prev Reviewer
+     */
     private Node<T> prevReviewer;
+    /**
+     * The next Movie
+     */
     private Node<T> nextMovie;
+    /**
+     * The prev Movie
+     */
     private Node<T> prevMovie;
+    /**
+     * The value in the node
+     */
     private T value;
+    
+    /**
+     * The count of the movie this review was added to
+     * This is the count of movieTable
+     */
+    private T mCount;
+    
+    /**
+     * The count of the review this movie was added to
+     * This is the count of reviewTable
+     */
+    private T rCount;
 
 
     /**
@@ -37,18 +64,23 @@ public class Node<T> {
         Node<T> nextReviewer,
         Node<T> prevReviewer,
         Node<T> nextMovie,
-        Node<T> prevMovie) {
+        Node<T> prevMovie, 
+        T mCount,
+        T rCount) {
         this.value = value;
         this.nextReviewer = nextReviewer;
         this.prevReviewer = prevReviewer;
         this.nextMovie = nextMovie;
         this.prevMovie = prevMovie;
+        this.mCount = mCount;
+        this.rCount = rCount;
     }
 
 
     /**
+     * Gets the next Reviewer
      * 
-     * @return
+     * @return Node<T>
      *         The next reviewer
      */
     public Node<T> getNextReviewer() {
@@ -57,8 +89,9 @@ public class Node<T> {
 
 
     /**
+     * Gets the previous Reviewer
      * 
-     * @return
+     * @return Node<T>
      *         The previous reviewer
      */
     public Node<T> getPrevReviewer() {
@@ -67,8 +100,9 @@ public class Node<T> {
 
 
     /**
+     * Gets the next movie
      * 
-     * @return
+     * @return Node<T>
      *         The next movie
      */
     public Node<T> getNextMovie() {
@@ -77,8 +111,9 @@ public class Node<T> {
 
 
     /**
+     * gets the previous movie
      * 
-     * @return
+     * @return Node<T>
      *         the previous movie
      */
     public Node<T> getPrevMovie() {
@@ -131,8 +166,9 @@ public class Node<T> {
 
 
     /**
+     * Gets the value of this node
      * 
-     * @return
+     * @return T
      *         The value of the node (rating)
      */
     public T getValue() {
@@ -148,5 +184,41 @@ public class Node<T> {
      */
     public void setValue(T value) {
         this.value = value;
+    }
+    
+    /**
+     * Sets the count value
+     * @param mCount
+     *          the count of this reviewer
+     */
+    public void setMCount(T mCount) {
+        this.mCount = mCount;
+    }
+    
+    /**
+     * Gets the count value
+     * @return T
+     *          the count value
+     */
+    public T getMCount() {
+        return mCount;
+    }
+    
+    /**
+     * Sets the count value
+     * @param rCount
+     *          the count of this reviewer
+     */
+    public void setRCount(T rCount) {
+        this.rCount = rCount;
+    }
+    
+    /**
+     * Gets the count value
+     * @return T
+     *          the count value
+     */
+    public T getRCount() {
+        return rCount;
     }
 }
