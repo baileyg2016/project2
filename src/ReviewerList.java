@@ -2,10 +2,11 @@
  * 
  * @author BaileySpell and Adam Tapp
  *
- * @param <T>
- *            Generic type
+ * @param
+ * Generic
+ *            type
  */
-public class ReviewerList<T> {
+public class ReviewerList {
     /**
      * Node class for this reviewer list
      * 
@@ -14,15 +15,15 @@ public class ReviewerList<T> {
      * @param <E>
      *            The generic type for the class
      */
-    static class Node<E> {
+    static class Node {
         /**
          * Next node in the list
          */
-        Node<E> next;
+        Node next;
         /**
          * list object for the ratings
          */
-        public RDLList<E> list;
+        public RDLList<Integer> list;
         /**
          * Name of the reviewer
          */
@@ -38,6 +39,7 @@ public class ReviewerList<T> {
         Node(String name) {
             next = null;
             this.name = name;
+            list = new RDLList<Integer>();
         }
 
 
@@ -48,18 +50,23 @@ public class ReviewerList<T> {
          *            The name of the reviewer for the next node
          */
         void setNext(String name) {
-            this.next = new Node<E>(name);
+            this.next = new Node(name);
+        }
+
+
+        String getName() {
+            return name;
         }
     }
 
     /**
      * head of list
      */
-    private Node<T> head;
+    private Node head;
     /**
      * tail of the list
      */
-    private Node<T> tail;
+    private Node tail;
     /**
      * Total number of nodes in the list
      */
@@ -82,7 +89,7 @@ public class ReviewerList<T> {
      *            Name of the reviewer
      */
     public ReviewerList(String name) {
-        head = new Node<T>(name);
+        head = new Node(name);
         tail = head;
     }
 
@@ -93,19 +100,23 @@ public class ReviewerList<T> {
      * @param name
      *            name of the reviewer to add
      */
-    @SuppressWarnings("unchecked")
-    public Node<String> insert(String name) {
+    // @SuppressWarnings("unchecked")
+    public Node insert(String name) {
         if (head == null) {
-            head = new Node<T>(name);
+            head = new Node(name);
             tail = head;
             numNodes++;
-            return (Node<String>)tail;
+            return (Node)tail;
         }
-        Node<T> prev = tail;
+
+        if (contains(name) != null) {
+            return contains(name);
+        }
+
         tail.setNext(name);
         tail = tail.next;
         numNodes++;
-        return (Node<String>)prev;
+        return (Node)tail;
     }
 
 
@@ -123,8 +134,8 @@ public class ReviewerList<T> {
             return;
         }
 
-        Node<T> curr = head;
-        Node<T> prev = null;
+        Node curr = head;
+        Node prev = null;
 
         while (curr != null && !curr.name.equals(name)) {
             prev = curr;
@@ -143,7 +154,7 @@ public class ReviewerList<T> {
      * Print all the contents in the list
      */
     public void printList() {
-        Node<T> curr = head;
+        Node curr = head;
         while (curr != null) {
             System.out.println(curr.name);
             curr = curr.next;
@@ -159,13 +170,26 @@ public class ReviewerList<T> {
     public int getCount() {
         return numNodes;
     }
-    
+
+
     /**
      * 
      * @return
      *         The tail of the nodes in the list
      */
-    public Node<T> getTail() {
+    public Node getTail() {
         return tail;
+    }
+
+
+    public Node contains(String reviewer) {
+        Node curr = head;
+        while (curr != null) {
+            if (curr.name.equals(reviewer)) {
+                return curr;
+            }
+            curr = curr.next;
+        }
+        return curr;
     }
 }

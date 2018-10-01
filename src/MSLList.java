@@ -1,3 +1,4 @@
+
 /**
  * 
  * @author Adam Tapp and Bailey Spell
@@ -46,6 +47,20 @@ public class MSLList {
             this.name = name;
             this.list = list;
             this.next = next;
+        }
+
+
+        public Node(String name, MDLList<Integer> list) {
+            this.name = name;
+            this.list = list;
+            this.next = null;
+        }
+
+
+        public Node(String name) {
+            next = null;
+            this.name = name;
+            list = new MDLList<Integer>();
         }
 
 
@@ -109,18 +124,12 @@ public class MSLList {
      */
     public int size;
 
-    /**
-     * Count of nodes added
-     */
-    public int count;
-
 
     // Rows
     public MSLList() {
-        head = new Node("", null, tail);
-        tail = new Node("", null, head);
+        head = null;
+        tail = head;
         size = 0;
-        count = 0;
     }
 
 
@@ -128,20 +137,29 @@ public class MSLList {
      * Adding a node to the list
      * This is done when the name does not already exist
      * in the movie list
+     * 
      * @param name
-     *          the name of the movie
+     *            the name of the movie
      */
     public Node add(String name) {
         MDLList<Integer> mList = new MDLList<>();
-        Node node = new Node(name, mList, tail);
-        Node aNode = tail.getNext();
-        Node prev = tail;
-        aNode.setNext(node);
-        tail.setNext(node);
+        if (isEmpty()) {
+            head = new Node(name, mList);
+            tail = head;
+            size++;
+            return (Node)tail;
+        }
 
-        count++;
+        if (contains(name) != null) {
+            return contains(name);
+        }
+
+        Node node = new Node(name, mList);
+        tail.setNext(node);
+        tail = tail.next;
+
         size++;
-        return prev;
+        return tail;
     }
 
 
@@ -171,11 +189,12 @@ public class MSLList {
      *         return true if the name is in the list
      */
     public Node contains(String name) {
-        Node n = head.getNext();
-        while (!(n.equals(tail))) {
+        Node n = head;
+        while (n != null) {
             if (n.getName().equals(name)) {
                 return n;
             }
+            n = n.getNext();
         }
         return null;
 

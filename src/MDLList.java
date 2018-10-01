@@ -47,8 +47,8 @@ public class MDLList<T> {
      * Create a new DLList object.
      */
     public MDLList() {
-        head = new Node<Integer>(-1, tail, null, null, null);
-        tail = new Node<Integer>(-1, null, head, null, null);
+        head = new Node<Integer>(-1, null, null, tail, null);
+        tail = new Node<Integer>(-1, null, null, null, head);
         size = 0;
     }
 
@@ -71,30 +71,53 @@ public class MDLList<T> {
     public int size() {
         return size;
     }
-    
+
+
     /**
-     * Gets the head 
+     * @return
+     *         Gets the head
      */
     public Node<Integer> getHead() {
         return head;
     }
-    
+
+
+    /**
+     * @return
+     *         Gets the tail
+     */
+    public Node<Integer> getTail() {
+        return tail;
+    }
+
 
     /**
      * Adds the object to the end of the list
      * 
      * @param node
-     *          the node being added to this list
+     *            the node being added to this list
      */
-    public void add(Node<Integer> node) {
-        // pNode is the the last node inserted
-        // the head node if size == 0
-        Node<Integer> pNode = tail.getPrevReviewer();
-        node.setPrevReviewer(pNode);
-        node.setNextReviewer(tail);
-        pNode.setNextReviewer(node);
-        tail.setPrevReviewer(node);
+    public void add(Node<Integer> newNode, Node<Integer> reviewerTail) {
+        if (isEmpty()) {
+            head = newNode;
+            tail = head;
+            size++;
+            // connecting the node with the other list
+            newNode.setPrevReviewer(reviewerTail);
+            reviewerTail.setNextMovie(newNode);
+
+            return;
+        }
+        // appending the node to the end of the list
+        // the previous node
+        Node<Integer> pNode = tail.getPrevMovie();
+        newNode.setPrevMovie(pNode);
+        tail = newNode;
         size++;
+
+        // connecting the node with the other list
+        newNode.setPrevReviewer(reviewerTail);
+        reviewerTail.setNextMovie(newNode);
 
     }
 

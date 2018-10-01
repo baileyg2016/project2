@@ -15,9 +15,10 @@ public class Node<T> {
     private Node<T> nextMovie;
     private Node<T> prevMovie;
     private int value;
+    private String movieName;
+    private String reviewerName;
 
 
-    
     /**
      * The constructor
      * 
@@ -33,15 +34,17 @@ public class Node<T> {
      *            The pointer to the previous movie
      * 
      */
-    public Node(int value) {
+    public Node(int value, String reviewer, String movie) {
         this.value = value;
+        this.movieName = movie;
+        this.reviewerName = reviewer;
         this.nextReviewer = null;
         this.prevReviewer = null;
         this.nextMovie = null;
         this.prevMovie = null;
     }
-    
-    
+
+
     /**
      * The constructor
      * 
@@ -173,5 +176,23 @@ public class Node<T> {
      */
     public void setValue(int value) {
         this.value = value;
+    }
+
+
+    /**
+     * @return
+     *         movie name
+     */
+    public String getMovieName() {
+        return movieName;
+    }
+
+
+    /**
+     * @return
+     *         reviewer name
+     */
+    public String getReviewerName() {
+        return reviewerName;
     }
 }

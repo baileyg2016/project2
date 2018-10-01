@@ -46,13 +46,14 @@ public class RDLList<T> {
      */
     private RDLList<Node<T>> list;
 
+
     /**
      * Create a new DLList object.
      * 
      */
     public RDLList() {
-        head = new Node<Integer>(-1, null, null, tail, null);
-        tail = new Node<Integer>(-1, null, null, null, head);
+        head = new Node<Integer>(-1, tail, null, null, null);
+        tail = new Node<Integer>(-1, null, head, null, null);
         size = 0;
     }
 
@@ -91,12 +92,23 @@ public class RDLList<T> {
     public RDLList<Node<T>> getReviewerList() {
         return list;
     }
-    
+
+
     /**
-     * Gets the head 
+     * @return
+     *         Gets the head
      */
     public Node<Integer> getHead() {
         return head;
+    }
+
+
+    /**
+     * @return
+     *         Gets the head
+     */
+    public Node<Integer> getTail() {
+        return tail;
     }
 
 
@@ -112,13 +124,24 @@ public class RDLList<T> {
      * @throws IllegalArgumentException
      *             if obj is null
      */
-    public void add(Node<Integer> node) {
-        Node<Integer> pNode = tail.getPrevMovie();
-        node.setPrevMovie(pNode);
-        node.setNextMovie(tail);
-        pNode.setNextMovie(node);
-        tail.setPrevMovie(node);
+    public void add(Node<Integer> newNode, Node<Integer> movieTail) {
+
+        if (isEmpty()) {
+            head = newNode;
+            tail = head;
+            size++;
+            return;
+        }
+        // Appending the node to the end of the list
+        // the previous node
+        Node<Integer> pNode = tail.getPrevReviewer();
+        newNode.setPrevReviewer(pNode);
+        tail = newNode;
         size++;
+
+        // connecting the node with the other list
+        newNode.setPrevMovie(movieTail);
+        movieTail.setNextReviewer(newNode);
     }
 
 
@@ -219,6 +242,30 @@ public class RDLList<T> {
 
         builder.append("}");
         return builder.toString();
+    }
+
+
+    public Node<Integer> containsMovie(String name) {
+        Node<Integer> curr = head;
+        while (curr != null) {
+            if (curr.getMovieName().equals(name)) {
+                return curr;
+            }
+            curr = curr.getNextMovie();
+        }
+        return null;
+    }
+
+
+    public Node<Integer> containsReviewer(String name) {
+        Node<Integer> curr = head;
+        while (curr != null) {
+            if (curr.getReviewerName().equals(name)) {
+                return curr;
+            }
+            curr = curr.getNextMovie();
+        }
+        return null;
     }
 
 }

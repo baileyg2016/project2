@@ -17,7 +17,7 @@ public class ReviewerListTest extends TestCase {
      * Testing the insert
      */
     public void testInsert() {
-        ReviewerList<String> list = new ReviewerList<String>();
+        ReviewerList list = new ReviewerList();
         list.insert("Billy");
         list.insert("bobby");
         list.insert("sup");
