@@ -10,15 +10,15 @@ public class MSLListTest extends TestCase {
         
     }
     
-    public void testMSLList() {
-        MSLList<Integer> list = new MSLList<>();
-        MDLList<Integer> mList = new MDLList<>();
-        
-        
-        
-        
-        
-    }
+//    public void testMSLList() {
+//        MSLList<Integer> list = new MSLList<>();
+//        MDLList<Integer> mList = new MDLList<>();
+//        
+//        
+//        
+//        
+//        
+//    }
     
     
     

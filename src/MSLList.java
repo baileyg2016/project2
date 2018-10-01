@@ -131,15 +131,17 @@ public class MSLList {
      * @param name
      *          the name of the movie
      */
-    public void add(String name) {
+    public Node add(String name) {
         MDLList<Integer> mList = new MDLList<>();
         Node node = new Node(name, mList, tail);
         Node aNode = tail.getNext();
+        Node prev = tail;
         aNode.setNext(node);
         tail.setNext(node);
 
         count++;
         size++;
+        return prev;
     }
 
 

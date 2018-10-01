@@ -93,17 +93,19 @@ public class ReviewerList<T> {
      * @param name
      *            name of the reviewer to add
      */
-    public void insert(String name) {
+    @SuppressWarnings("unchecked")
+    public Node<String> insert(String name) {
         if (head == null) {
             head = new Node<T>(name);
             tail = head;
             numNodes++;
-            return;
+            return (Node<String>)tail;
         }
-
+        Node<T> prev = tail;
         tail.setNext(name);
         tail = tail.next;
         numNodes++;
+        return (Node<String>)prev;
     }
 
 
@@ -156,5 +158,14 @@ public class ReviewerList<T> {
      */
     public int getCount() {
         return numNodes;
+    }
+    
+    /**
+     * 
+     * @return
+     *         The tail of the nodes in the list
+     */
+    public Node<T> getTail() {
+        return tail;
     }
 }

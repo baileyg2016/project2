@@ -14,9 +14,34 @@ public class Node<T> {
     private Node<T> prevReviewer;
     private Node<T> nextMovie;
     private Node<T> prevMovie;
-    private T value;
+    private int value;
 
 
+    
+    /**
+     * The constructor
+     * 
+     * @param value
+     *            The rating being stored
+     * @param nextReviewer
+     *            The pointer to the next reviewer
+     * @param prevReviewer
+     *            The pointer to the previous reviewer
+     * @param nextMovie
+     *            the pointer to the next movie
+     * @param prevMovie
+     *            The pointer to the previous movie
+     * 
+     */
+    public Node(int value) {
+        this.value = value;
+        this.nextReviewer = null;
+        this.prevReviewer = null;
+        this.nextMovie = null;
+        this.prevMovie = null;
+    }
+    
+    
     /**
      * The constructor
      * 
@@ -33,7 +58,7 @@ public class Node<T> {
      * 
      */
     public Node(
-        T value,
+        int value,
         Node<T> nextReviewer,
         Node<T> prevReviewer,
         Node<T> nextMovie,
@@ -135,7 +160,7 @@ public class Node<T> {
      * @return
      *         The value of the node (rating)
      */
-    public T getValue() {
+    public int getValue() {
         return this.value;
     }
 
@@ -146,7 +171,7 @@ public class Node<T> {
      * @param value
      *            The rating of the node
      */
-    public void setValue(T value) {
+    public void setValue(int value) {
         this.value = value;
     }
 }
