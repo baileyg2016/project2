@@ -55,6 +55,7 @@ public class SparseMatrix {
             reviewerNode = reviewers.contains(reviewer);
             reviewerNode.list.containsMovie(movie).setValue(rating);
             return;
+
         } // reviewer exist but the movie does not
         else if (movies.contains(movie) == null && reviewers.contains(
             reviewer) != null) {

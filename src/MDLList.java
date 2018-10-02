@@ -37,8 +37,8 @@ public class MDLList<T> {
      * Create a new DLList object.
      */
     public MDLList() {
-        head = new Node<Integer>(-1, null, null, tail, null, -1, -1);
-        tail = new Node<Integer>(-1, null, null, null, head, -1, -1);
+        head = new Node<Integer>(-1, null, null, null, null, -1, -1);
+        tail = head;
         size = 0;
     }
 
@@ -86,11 +86,8 @@ public class MDLList<T> {
      * 
      * @param node
      *            the node being added to this list
-     *            <<<<<<< HEAD
      * @param reviewerTail
      *            the tail of the reviewer list
-     *            =======
-     *            >>>>>>> origin/PrintList
      */
     public void add(Node<Integer> newNode, Node<Integer> reviewerTail) {
         if (isEmpty()) {
@@ -98,20 +95,16 @@ public class MDLList<T> {
             tail = head;
             size++;
             // connecting the node with the other list
-            newNode.setPrevReviewer(reviewerTail);
-            reviewerTail.setNextMovie(newNode);
+// newNode.setPrevReviewer(reviewerTail);
+// reviewerTail.setNextMovie(newNode);
             return;
         }
         // appending the node to the end of the list
         // the previous node
-        Node<Integer> pNode;
-        if (head == tail) {
-            pNode = head;
-        }
-        else {
-            pNode = tail.getPrevMovie();
-        }
+        Node<Integer> pNode = tail;
+
         newNode.setPrevMovie(pNode);
+        tail.setNextMovie(newNode);
         tail = newNode;
         size++;
 

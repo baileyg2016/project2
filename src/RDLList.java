@@ -134,8 +134,9 @@ public class RDLList<T> {
         }
         // Appending the node to the end of the list
         // the previous node
-        Node<Integer> pNode = tail.getPrevReviewer();
+        Node<Integer> pNode = tail;
         newNode.setPrevReviewer(pNode);
+        tail.setNextReviewer(newNode);
         tail = newNode;
         size++;
 
