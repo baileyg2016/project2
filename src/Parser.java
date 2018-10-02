@@ -211,7 +211,6 @@ public class Parser {
         ReviewerList rL = matrix.getReviewers();
         if (rL.isEmpty()) {
             System.out.println("There are no ratings in the database");
-            return;
         }
 
         rL.printListAndCount();
@@ -241,10 +240,15 @@ public class Parser {
             else {
                 // We will use the sparse matrix object for this
                 RDLList<Integer> rL = (matrix.getReviewers().getList(name));
-                Node<Integer> n = rL.getHead().getNextMovie();
-                Node<Integer> tail = rL.getTail();
+                
                 String s = "Ratings for reviewer |" + name + "|:";
-                while (!(n.equals(tail))) {
+                if (rL == null) {
+                    return;
+                }
+                Node<Integer> n = rL.getHead();
+                Node<Integer> tail = rL.getTail();
+                
+                while (n != null) {
                     s += " " + n.getValue();
                     if (!(n.getNextMovie().equals(tail))) {
                         s += ",";
@@ -269,10 +273,16 @@ public class Parser {
             else {
                 // We will use the sparse matrix object for this
                 MDLList<Integer> mL = (matrix.getMovies().getList(name));
-                Node<Integer> n = mL.getHead().getNextReviewer();
-                Node<Integer> tail = mL.getTail();
+                
                 String s = "Ratings for movie |" + name + "|:";
-                while (!(n.equals(tail))) {
+                if (mL == null) {
+                    return;
+                }
+                
+                Node<Integer> n = mL.getHead();
+                Node<Integer> tail = mL.getTail();
+                
+                while (n != null) {
                     s += " " + n.getValue();
                     if (!(n.getNextReviewer().equals(tail))) {
                         s += ",";
@@ -295,11 +305,11 @@ public class Parser {
      */
     public void similar(String tableName, String name) {
         if (tableName.equals("reviewer")) {
-            System.out.println("Cannot list, reviewer |" + name
+            System.out.println("Reviewer |" + name
                 + "| not found in the database.");
         }
         else {// then it is the movie
-            System.out.println("Cannot list, reviewer |" + name
+            System.out.println("Movie |" + name
                 + "| not found in the database.");
         }
     }
