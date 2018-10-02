@@ -44,7 +44,14 @@ public class MovieReview {
             Hash<String> reviewers = new Hash<String>(Integer.parseInt(
                 args[0]));
 
-            Parser parser = new Parser(args[1], movies, reviewers);
+            ReviewerList reviewersList = new ReviewerList();
+
+            MSLList moviesList = new MSLList();
+
+            SparseMatrix matrix = new SparseMatrix(reviewersList, moviesList);
+
+            Parser parser = new Parser(args[1], movies, reviewers,
+                reviewersList, moviesList, matrix);
             parser.parseFile();
         }
     }

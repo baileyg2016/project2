@@ -31,9 +31,14 @@ public class Parser {
     private Hash<String> reviewerTable;
 
     /**
-     * 
+     * List for the reviewers (columns)
      */
-    private ReviewerList reviewerList;
+    private ReviewerList reviewersList;
+
+    /**
+     * List for the movies (rows)
+     */
+    private MSLList moviesList;
 
     /**
      * The matrix object for storing the ratings
@@ -54,11 +59,16 @@ public class Parser {
     public Parser(
         String fileName,
         Hash<String> movieTable,
-        Hash<String> reviewerTable) {
+        Hash<String> reviewerTable,
+        ReviewerList reviewersList,
+        MSLList moviesList,
+        SparseMatrix matrix) {
         this.inputFile = fileName;
         this.movieTable = movieTable;
         this.reviewerTable = reviewerTable;
-        matrix = new SparseMatrix(new ReviewerList(), new MSLList());
+        this.reviewersList = reviewersList;
+        this.moviesList = moviesList;
+        this.matrix = matrix;
     }
 
 
@@ -150,6 +160,8 @@ public class Parser {
 
         reviewerTable.insert(fields[0], "Reviwer");
         movieTable.insert(fields[1], "Movie");
+
+        matrix.insert(fields[0], fields[1], Integer.parseInt(fields[2]));
 
         System.out.println("Rating added: |" + fields[0] + "|, |" + fields[1]
             + "|, " + fields[2]);
