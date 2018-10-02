@@ -60,8 +60,6 @@ public class SparseMatrix {
             else {
                 movieNode = movies.contains(movie);
             }
-            
-            
 
         } // reviewer exist but the movie does not
         else if (movies.contains(movie) == null && reviewers.contains(
@@ -92,6 +90,9 @@ public class SparseMatrix {
         // Creating the node to place in the matrix
         Node<Integer> matrixNode = new Node<Integer>(rating, reviewer, movie);
 
+        matrixNode.setRCount(reviewerTail.getRCount() + 1);
+        matrixNode.setMCount(movieTail.getMCount() + 1);
+
         // Adding the matrix node and connecting everything
         reviewerNode.list.add(matrixNode, movieTail);
         movieNode.list.add(matrixNode, reviewerTail);
@@ -121,23 +122,28 @@ public class SparseMatrix {
         }
     }
 
+
     /**
      * Gets the reviewer list
+     * 
      * @return ReviewerList
-     *          the list of reviewers
+     *         the list of reviewers
      */
     public ReviewerList getReviewers() {
         return reviewers;
     }
-    
+
+
     /**
      * Gets the movie list
+     * 
      * @return MSLList
-     *          the list of movies
+     *         the list of movies
      */
     public MSLList getMovies() {
         return movies;
     }
+
 
     /**
      * 
