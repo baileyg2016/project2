@@ -114,6 +114,23 @@ public class SparseMatrix {
         }
     }
 
+    /**
+     * Gets the reviewer list
+     * @return ReviewerList
+     *          the list of reviewers
+     */
+    public ReviewerList getReviewers() {
+        return reviewers;
+    }
+    
+    /**
+     * Gets the movie list
+     * @return MSLList
+     *          the list of movies
+     */
+    public MSLList getMovies() {
+        return movies;
+    }
 
     /**
      * 
