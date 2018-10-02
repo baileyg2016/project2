@@ -158,12 +158,14 @@ public class MDLList<T> {
         return pNode;
     }
 
-    /**    
+
+    /**
      * Determines if the list contains a movie
+     * 
      * @param name
-     *          the name of the movie
+     *            the name of the movie
      * @return Node<Integer>
-     *          the node that is of the name or null
+     *         the node that is of the name or null
      */
 
     public Node<Integer> containsMovie(String name) {
@@ -177,13 +179,14 @@ public class MDLList<T> {
         return null;
     }
 
-    
-    /**    
+
+    /**
      * Determines if the list contains a reviewer
+     * 
      * @param name
-     *          the name of the movie
+     *            the name of the movie
      * @return Node<Integer>
-     *          the node that is of the name or null
+     *         the node that is of the name or null
      */
 
     public Node<Integer> containsReviewer(String name) {
@@ -196,7 +199,8 @@ public class MDLList<T> {
         }
         return null;
     }
-    
+
+
     /**
      * Removes the connections from this list
      */

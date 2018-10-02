@@ -221,13 +221,13 @@ public class Parser {
         // to string on each entry of the lists
         // Print out the reviewers and their count first
         ReviewerList rL = matrix.getReviewers();
-        if (rL.isEmpty()) {
+        MSLList mL = matrix.getMovies();
+        if (rL.isEmpty() || mL.isEmpty()) {
             System.out.println("There are no ratings in the database");
             return;
         }
 
         rL.printListAndCount();
-        MSLList mL = matrix.getMovies();
         System.out.println(mL.printListAndReviews());
     }
 
@@ -317,12 +317,24 @@ public class Parser {
      */
     public void similar(String tableName, String name) {
         if (tableName.equals("reviewer")) {
-            System.out.println("Reviewer |" + name
-                + "| not found in the database.");
+            if (matrix.getReviewers().contains(name) != null) {
+                System.out.println("There is no reviewer similar to |" + name
+                    + "|");
+            }
+            else {
+                System.out.println("Reviewer |" + name
+                    + "| not found in the database.");
+            }
         }
         else {// then it is the movie
-            System.out.println("Movie |" + name
-                + "| not found in the database.");
+            if (matrix.getMovies().contains(name) != null) {
+                System.out.println("There is no movie similar to |" + name
+                    + "|");
+            }
+            else {
+                System.out.println("Movie |" + name
+                    + "| not found in the database.");
+            }
         }
     }
 

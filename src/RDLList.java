@@ -41,11 +41,6 @@ public class RDLList<T> {
      */
     private Node<Integer> tail;
 
-    /**
-     * Reference to the Movie list
-     */
-    private RDLList<Node<T>> list;
-
 
     /**
      * Create a new DLList object.
@@ -75,22 +70,6 @@ public class RDLList<T> {
      */
     public int size() {
         return size;
-    }
-
-
-    /**
-     * Gets the complimentary list to this one
-     */
-    public void setReviewerList(RDLList<Node<T>> list) {
-        this.list = list;
-    }
-
-
-    /**
-     * Gets the complimentary list to this one
-     */
-    public RDLList<Node<T>> getReviewerList() {
-        return list;
     }
 
 
@@ -302,7 +281,6 @@ public class RDLList<T> {
         return builder.toString();
     }
 
-
     /**
      * Gets the count of the reviwer for the given review and the score in that
      * review
@@ -310,22 +288,22 @@ public class RDLList<T> {
      * @return String
      *         the count and the score
      */
-//    public String getCountAndScore() {
-//        Node<Integer> currNode = null;
-//        StringBuilder builder = new StringBuilder();
-//        if (!isEmpty()) {
-//            currNode = head;
-//            while (currNode != tail) {
-//                int count = (Integer)currNode.getRCount();
-//                int score = (Integer)currNode.getValue();
-//                builder.append(count + ":" + score + " ");
-//                if (currNode.getNextMovie() != tail) {
-//                    builder.append(", ");
-//                }
-//                currNode = currNode.getNextMovie();
-//            }
-//        }
-//        return builder.toString();
-//    }
+// public String getCountAndScore() {
+// Node<Integer> currNode = null;
+// StringBuilder builder = new StringBuilder();
+// if (!isEmpty()) {
+// currNode = head;
+// while (currNode != tail) {
+// int count = (Integer)currNode.getRCount();
+// int score = (Integer)currNode.getValue();
+// builder.append(count + ":" + score + " ");
+// if (currNode.getNextMovie() != tail) {
+// builder.append(", ");
+// }
+// currNode = currNode.getNextMovie();
+// }
+// }
+// return builder.toString();
+// }
 
 }
