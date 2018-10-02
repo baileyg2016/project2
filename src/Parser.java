@@ -223,6 +223,7 @@ public class Parser {
         ReviewerList rL = matrix.getReviewers();
         if (rL.isEmpty()) {
             System.out.println("There are no ratings in the database");
+            return;
         }
 
         rL.printListAndCount();
@@ -252,17 +253,17 @@ public class Parser {
             else {
                 // We will use the sparse matrix object for this
                 RDLList<Integer> rL = (matrix.getReviewers().getList(name));
-                
+
                 String s = "Ratings for reviewer |" + name + "|:";
                 if (rL == null) {
                     return;
                 }
                 Node<Integer> n = rL.getHead();
                 Node<Integer> tail = rL.getTail();
-                
+
                 while (n != null) {
                     s += " " + n.getValue();
-                    if (!(n.getNextMovie().equals(tail))) {
+                    if (n != tail) {
                         s += ",";
                     }
                     n = n.getNextMovie();
@@ -285,18 +286,17 @@ public class Parser {
             else {
                 // We will use the sparse matrix object for this
                 MDLList<Integer> mL = (matrix.getMovies().getList(name));
-                
                 String s = "Ratings for movie |" + name + "|:";
                 if (mL == null) {
                     return;
                 }
-                
+
                 Node<Integer> n = mL.getHead();
                 Node<Integer> tail = mL.getTail();
-                
+
                 while (n != null) {
                     s += " " + n.getValue();
-                    if (!(n.getNextReviewer().equals(tail))) {
+                    if (n != tail) {
                         s += ",";
                     }
                     n = n.getNextReviewer();
