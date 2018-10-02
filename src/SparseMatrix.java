@@ -53,8 +53,15 @@ public class SparseMatrix {
             reviewer) != null) {
             // all we need to do is update the node from one of the lists
             reviewerNode = reviewers.contains(reviewer);
-            reviewerNode.list.containsMovie(movie).setValue(rating);
-            return;
+            if (reviewerNode.list.containsMovie(movie) != null) {
+                reviewerNode.list.containsMovie(movie).setValue(rating);
+                return;
+            }
+            else {
+                movieNode = movies.contains(movie);
+            }
+            
+            
 
         } // reviewer exist but the movie does not
         else if (movies.contains(movie) == null && reviewers.contains(

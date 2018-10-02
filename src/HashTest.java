@@ -97,7 +97,7 @@ public class HashTest extends TestCase {
         for (int i = 0; i < 14; i++) {
             hash.delete("Record # " + Integer.toString(i), "Testing");
         }
-        assertEquals(hash.getCount(), 0);
+        assertEquals(hash.getNumEntries(), 0);
     }
 
 
@@ -109,17 +109,17 @@ public class HashTest extends TestCase {
         for (int i = 0; i < 14; i++) {
             hash.insert("Record # " + Integer.toString(i), "Testing");
         }
-        assertEquals(hash.getCount(), 14);
+        assertEquals(hash.getNumEntries(), 14);
 
         for (int i = 0; i < 14; i++) {
             hash.delete("Record # " + Integer.toString(i), "Testing");
         }
-        assertEquals(hash.getCount(), 0);
+        assertEquals(hash.getNumEntries(), 0);
 
         for (int i = 0; i < 14; i++) {
             hash.insert("Record # " + Integer.toString(i), "Testing");
         }
-        assertEquals(hash.getCount(), 14);
+        assertEquals(hash.getNumEntries(), 14);
     }
 
 
@@ -131,7 +131,7 @@ public class HashTest extends TestCase {
         for (int i = 0; i < 4; i++) {
             hash.insert("Record the same", "Testing");
         }
-        assertEquals(hash.getCount(), 1);
+        assertEquals(hash.getNumEntries(), 1);
     }
 
 
@@ -141,7 +141,7 @@ public class HashTest extends TestCase {
     public void testDeleteDoesNotExist() {
         Hash<String> hash = new Hash<String>(10);
         hash.delete("Tombstones", "Testing");
-        assertEquals(hash.getCount(), 0);
+        assertEquals(hash.getNumEntries(), 0);
     }
 
 
@@ -167,7 +167,7 @@ public class HashTest extends TestCase {
         hash.delete("Tombstones", "Testing");
         hash.insert("Tombstones", "Testing");
 
-        assertEquals(hash.getCount(), 1);
+        assertEquals(hash.getNumEntries(), 1);
     }
 
 
@@ -181,7 +181,7 @@ public class HashTest extends TestCase {
         hash.delete("Record # 1", "Testing");
         hash.insert("Record # 6", "Testing");
 
-        assertEquals(hash.getCount(), 1);
+        assertEquals(hash.getNumEntries(), 1);
     }
 
 
@@ -211,7 +211,7 @@ public class HashTest extends TestCase {
         hash.delete("Record # 6", "Testing");
 
         assertEquals(hash.getSize(), 10);
-        assertEquals(hash.getCount(), 0);
+        assertEquals(hash.getNumEntries(), 0);
     }
 
 
@@ -225,6 +225,6 @@ public class HashTest extends TestCase {
         hash.insert("Record # 6", "Testing");
 
         assertEquals(hash.getSize(), 4);
-        assertEquals(hash.getCount(), 1);
+        assertEquals(hash.getNumEntries(), 1);
     }
 }
