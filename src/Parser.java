@@ -221,13 +221,13 @@ public class Parser {
         // to string on each entry of the lists
         // Print out the reviewers and their count first
         ReviewerList rL = matrix.getReviewers();
-        if (rL.isEmpty()) {
+        MSLList mL = matrix.getMovies();
+        if (rL.isEmpty() || mL.isEmpty()) {
             System.out.println("There are no ratings in the database");
             return;
         }
 
         rL.printListAndCount();
-        MSLList mL = matrix.getMovies();
         System.out.println(mL.printListAndReviews());
     }
 
