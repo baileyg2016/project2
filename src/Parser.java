@@ -30,6 +30,16 @@ public class Parser {
      */
     private Hash<String> reviewerTable;
 
+    /**
+     * 
+     */
+    private ReviewerList reviewerList;
+
+    /**
+     * The matrix object for storing the ratings
+     */
+    private SparseMatrix matrix;
+
 
     /**
      * Constructor for the class
@@ -231,19 +241,19 @@ public class Parser {
                 // while (!(n.equals(tail)) {
                 // s += " " + n.getValue()
                 // if (!(n.getNextMovie().equals(tail))) {
-                        //s += ",";
+                // s += ",";
                 // }
                 // n == n.getNextMovie();
                 // }
-                //System.out.println(s);
+                // System.out.println(s);
             }
-        
+
         }
 
 // }
 // else {// then it is the movie
-        // make sure the name exists in the table
-        // if the return is null or a tombstone then it does not exist
+// make sure the name exists in the table
+// if the return is null or a tombstone then it does not exist
         int val = movieTable.search(name);
         if (movieTable.getHashTable()[val] == null || movieTable
             .getHashTable()[val].getTombstone()) {
@@ -259,11 +269,11 @@ public class Parser {
             // while (!(n.equals(tail)) {
             // s += " " + n.getValue()
             // if (!(n.getNextReview().equals(tail))) {
-                    //s += ",";
+            // s += ",";
             // }
             // n == n.getNextReview();
             // }
-            //System.out.println(s);
+            // System.out.println(s);
         }
 // }
     }
