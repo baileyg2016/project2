@@ -52,8 +52,8 @@ public class RDLList<T> {
      * 
      */
     public RDLList() {
-        head = new Node<Integer>(-1, tail, null, null, null);
-        tail = new Node<Integer>(-1, null, head, null, null);
+        head = new Node<Integer>(-1, tail, null, null, null, -1, -1);
+        tail = new Node<Integer>(-1, null, head, null, null, -1, -1);
         size = 0;
     }
 

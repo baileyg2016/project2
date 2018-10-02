@@ -1,3 +1,5 @@
+// import MSLList.Node;
+
 /**
  * 
  * @author BaileySpell and Adam Tapp
@@ -29,6 +31,11 @@ public class ReviewerList {
          */
         String name;
 
+        /**
+         * The number of records added thus far
+         */
+        private int count;
+
 
         /**
          * Constructor for the node
@@ -41,6 +48,22 @@ public class ReviewerList {
             this.name = name;
             list = new RDLList<Integer>();
         }
+        
+        /**
+         * Constructor for the node
+         * 
+         * @param name
+         *            name of the reviewer
+         * @param count
+         *            the number of records added thus far
+         */
+        Node(String name, int count, RDLList<Integer> list) {
+            next = null;
+            this.name = name;
+            list = new RDLList<Integer>();
+            this.count = count;
+            this.list = list;
+        }
 
 
         /**
@@ -48,6 +71,52 @@ public class ReviewerList {
          * 
          * @param name
          *            The name of the reviewer for the next node
+         * @param count
+         *            The number of records added thus far
+         */
+        void setNext(String name, int count, RDLList<Integer> list) {
+            this.next = new Node(name, count, list);
+        }
+
+
+        /**
+         * Gets the next node
+         * 
+         * @return Node
+         *         next node
+         */
+        public Node getNext() {
+            return next;
+        }
+
+
+        /**
+         * Sets the list contained in this
+         * 
+         * @return MDLList<Integer>
+         *         list contained in this node
+         */
+        public RDLList<Integer> getList() {
+            return list;
+        }
+
+
+        /**
+         * Gets count
+         * 
+         * @return int
+         *         count
+         */
+        public int getCount() {
+            return count;
+        }
+
+
+        /**
+         * Sets count
+         * 
+         * @param count
+         *            the count
          */
         void setNext(String name) {
             this.next = new Node(name);
@@ -56,6 +125,11 @@ public class ReviewerList {
 
         String getName() {
             return name;
+        }
+
+
+        public void setCount(int count) {
+            this.count = count;
         }
     }
 
@@ -72,6 +146,11 @@ public class ReviewerList {
      */
     private int numNodes;
 
+    /**
+     * Total number of inserts made on the list
+     */
+    private int count;
+
 
     /**
      * The default constructor for the list
@@ -79,6 +158,7 @@ public class ReviewerList {
     public ReviewerList() {
         head = null;
         tail = head;
+        count = 0;
     }
 
 
@@ -90,7 +170,9 @@ public class ReviewerList {
      */
     public ReviewerList(String name) {
         head = new Node(name);
+        count = 0;
         tail = head;
+
     }
 
 
@@ -105,6 +187,7 @@ public class ReviewerList {
         if (head == null) {
             head = new Node(name);
             tail = head;
+            count++;
             numNodes++;
             return (Node)tail;
         }
@@ -113,8 +196,10 @@ public class ReviewerList {
             return contains(name);
         }
 
-        tail.setNext(name);
+        tail.setNext(name, count, new RDLList<Integer>());
+
         tail = tail.next;
+        count++;
         numNodes++;
         return (Node)tail;
     }
@@ -145,8 +230,53 @@ public class ReviewerList {
         if (curr == null) {
             return;
         }
+        if (prev == null) {
+            head = curr.next;
+            numNodes--;
+            return;
+        }
         prev.next = curr.next;
         numNodes--;
+    }
+
+
+    /**
+     * Contains method
+     * 
+     * @param name
+     *            the name of the node that we are searching for
+     * @return Node<Integer>
+     *         return true if the name is in the list
+     */
+    public Node contains(String name) {
+        if (isEmpty()) {
+            return null;
+        }
+        Node n = head;
+        if (n == tail) {
+            return (n.name.equals(name)) ? n : null;
+        }
+        while (n != null) {
+            if (n.name.equals(name)) {
+                return n;
+            }
+            n = n.next;
+        }
+        return null;
+    }
+
+
+    /**
+     * Finds a list in a node
+     * 
+     * @param name
+     *            the name of the list we need
+     * @return RDLList<Integer>
+     *         the list we need
+     */
+    public RDLList<Integer> getList(String name) {
+        Node n = contains(name);
+        return (n == null) ? null : n.getList();
     }
 
 
@@ -159,6 +289,29 @@ public class ReviewerList {
             System.out.println(curr.name);
             curr = curr.next;
         }
+    }
+
+
+    /**
+     * Print all the contents in the list
+     */
+    public void printListAndCount() {
+        Node curr = head;
+        while (curr != null) {
+            System.out.println(curr.name + ": " + curr.getCount());
+            curr = curr.next;
+        }
+    }
+
+
+    /**
+     * empty method
+     * 
+     * @return boolean
+     *         true if the size is 0
+     */
+    public boolean isEmpty() {
+        return numNodes == 0;
     }
 
 
@@ -182,14 +335,4 @@ public class ReviewerList {
     }
 
 
-    public Node contains(String reviewer) {
-        Node curr = head;
-        while (curr != null) {
-            if (curr.name.equals(reviewer)) {
-                return curr;
-            }
-            curr = curr.next;
-        }
-        return curr;
-    }
 }

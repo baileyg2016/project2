@@ -23,7 +23,13 @@ public class Record<T> {
      * Points to the head of the list
      */
     private Object h;
-    
+
+    /**
+     * The amount of objects added thus far
+     */
+    private int count;
+
+
     /**
      * The constructor for the record objects
      * 
@@ -33,6 +39,7 @@ public class Record<T> {
     public Record(T key) {
         this.key = key;
         this.tombstone = false;
+        count = 0;
     }
 
 
@@ -55,13 +62,14 @@ public class Record<T> {
     public T getKey() {
         return key;
     }
-    
+
+
     /**
      * sets the reference to the head node of the list
      */
-   public void setH(Node<Integer> head) {
-       h = head;
-   }
+    public void setH(Node<Integer> head) {
+        h = head;
+    }
 
 
     /**
@@ -79,5 +87,27 @@ public class Record<T> {
      */
     public boolean getTombstone() {
         return tombstone;
+    }
+
+
+    /**
+     * Gets count
+     * 
+     * @return int
+     *         count
+     */
+    public int getCount() {
+        return count;
+    }
+
+
+    /**
+     * Sets count
+     * 
+     * @param count
+     *            the count
+     */
+    public void setCount(int count) {
+        this.count = count;
     }
 }

@@ -24,6 +24,10 @@ public class Hash<T> {
      */
     private int hashTableCount;
 
+   /**
+    * The amount of entries added thus far
+    */
+    private int count;
 
     /**
      * Create a new Hash object.
@@ -37,13 +41,14 @@ public class Hash<T> {
         this.hashTableCount = 0;
         this.hashTableSize = size;
         this.hashTable = new Record[size];
+        count = 0;
 
     }
 
 
     /**
      * 
-     * @return
+     * @return int
      *         The amount of records in the table
      */
     public int getTableCount() {
@@ -59,7 +64,8 @@ public class Hash<T> {
      *            The string that we are hashing
      * @param m
      *            The size of the hash table
-     * @return The home slot for that string
+     * @return int
+     *         The home slot for that string
      */
     // You can make this private in your project.
     // This is public for distributing the hash function in a way
@@ -94,7 +100,7 @@ public class Hash<T> {
      * 
      * @param i
      *            The current index from the home position
-     * @return
+     * @return int
      *         Returns the new position to add to the home position
      */
     public int probe(int i) {
@@ -132,6 +138,7 @@ public class Hash<T> {
             if (hashTable[pos].getKey().toString().equals(key.toString())) {
                 if (hashTable[pos].getTombstone()) {
                     hashTable[pos] = record;
+                    count++;
                     hashTableCount++;
                     return;
                 }
@@ -146,8 +153,8 @@ public class Hash<T> {
             pos = (home + probe(i)) % hashTableSize;
         }
         hashTable[pos] = record;
+        count++;
         hashTableCount++;
-
     }
 
 
@@ -199,6 +206,34 @@ public class Hash<T> {
     }
 
 
+    // Search function
+    /**
+     * 
+     * @param record
+     *            Being searched for
+     * @return the index of the record or an
+     *         empty spot
+     */
+    public int search(String record) {
+        // k is the start position
+        int hashVal = h(record, hashTable.length);
+        int probe = h(record, hashTable.length);
+        // hash the key and look for the record
+        // retain the name so you can verify that
+        // the record you are removing is the right one
+        // go through the array at the probed positions
+        // to find the right spots
+        for (int i = 1; hashTable[probe] != null && (hashTable[probe].getTombstone()
+            || !hashTable[probe].getKey().equals(record)); i++) {
+            probe = (hashVal + probe(i)) % hashTable.length;
+        }
+        return probe;
+
+    }
+
+    
+    
+    
     /**
      * This function doubles the size of the table
      */
@@ -279,10 +314,38 @@ public class Hash<T> {
      * This returns the number of records
      * in the table
      * 
-     * @return
+     * @return int
      *         Returns the variable hashTableCount
      */
-    public int getCount() {
+    public int getNumEntries() {
         return hashTableCount;
+    }
+    
+    /**
+     * Gets count
+     * @return int
+     *          count
+     */
+    public int getCount() {
+        return count;
+    }
+    
+    /**
+     * Sets count
+     * @param count
+     *          the count
+     */
+    public void setCount(int count) {
+        this.count = count;
+    }
+    
+    /**
+     * This returns the hash table of records
+     * 
+     * @return Record[]
+     *            the hashtable
+     */
+    public Record<T>[] getHashTable() {
+        return hashTable;
     }
 }

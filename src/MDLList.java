@@ -1,30 +1,14 @@
 /**
- * WE WILL NEED TO MAKE DIFFERENT LISTS BECAUSE OF DIFFERENCES WITH THE POINTERS
- */
-
-/**
  * This provides implementation for some of the LList methods.
  *
  * 
  * @author Bailey Spell and Adam Tapp
  * @version Milestone 2
  * 
- * @param <Integer>
+ * @param <T>
  *            The type of object the class will store
  */
 public class MDLList<T> {
-
-    /**
-     * This represents a node in a doubly linked list. This node stores data, a
-     * pointer to the node before it in the list, and a pointer to the node
-     * after it in the list
-     *
-     * @param <T>
-     *            This is the type of object that this class will store
-     * @author Adam Tapp and Bailey Spell
-     * @version Milestone 2
-     */
-
     /**
      * How many nodes are in the list
      */
@@ -33,12 +17,18 @@ public class MDLList<T> {
     /**
      * The first node in the list. THIS IS A SENTINEL NODE AND AS SUCH DOES NOT
      * HOLD ANY DATA. REFER TO init()
+     * 
+     * @param Integer
+     *            the value stored in the node
      */
     private Node<Integer> head;
 
     /**
      * The last node in the list. THIS IS A SENTINEL NODE AND AS SUCH DOES NOT
      * HOLD ANY DATA. REFER TO init()
+     * 
+     * @param Integer
+     *            the value stored in the node
      */
     private Node<Integer> tail;
 
@@ -47,8 +37,8 @@ public class MDLList<T> {
      * Create a new DLList object.
      */
     public MDLList() {
-        head = new Node<Integer>(-1, null, null, tail, null);
-        tail = new Node<Integer>(-1, null, null, null, head);
+        head = new Node<Integer>(-1, null, null, tail, null, -1, -1);
+        tail = new Node<Integer>(-1, null, null, null, head, -1, -1);
         size = 0;
     }
 
@@ -96,8 +86,11 @@ public class MDLList<T> {
      * 
      * @param node
      *            the node being added to this list
+     *            <<<<<<< HEAD
      * @param reviewerTail
      *            the tail of the reviewer list
+     *            =======
+     *            >>>>>>> origin/PrintList
      */
     public void add(Node<Integer> newNode, Node<Integer> reviewerTail) {
         if (isEmpty()) {
@@ -172,16 +165,20 @@ public class MDLList<T> {
     public void nuke() {
 
         Node<Integer> currNode = head.getNextReviewer();
-        while (!(currNode.equals(tail))) {
-            if (currNode.getNextMovie() != null) {
-                currNode.getPrevMovie().setNextMovie(currNode.getNextMovie());
-                currNode.getNextMovie().setPrevMovie(currNode.getPrevMovie());
+        if (currNode != null) {
+            while (!(currNode.equals(tail))) {
+                if (currNode.getNextMovie() != null) {
+                    currNode.getPrevMovie().setNextMovie(currNode
+                        .getNextMovie());
+                    currNode.getNextMovie().setPrevMovie(currNode
+                        .getPrevMovie());
+                }
+                currNode.setNextMovie(null);
+                currNode.setPrevMovie(null);
+                currNode = currNode.getNextReviewer();
             }
-            currNode.setNextMovie(null);
-            currNode.setPrevMovie(null);
-            currNode = currNode.getNextReviewer();
+            size = 0;
         }
-        size = 0;
     }
 
 
@@ -223,6 +220,32 @@ public class MDLList<T> {
         }
 
         builder.append("}");
+        return builder.toString();
+    }
+
+
+    /**
+     * Gets the count of the reviwer for the given review and the score in that
+     * review
+     * 
+     * @return String
+     *         the count and the score
+     */
+    public String getCountAndScore() {
+        Node<Integer> currNode = null;
+        StringBuilder builder = new StringBuilder();
+        if (!isEmpty()) {
+            currNode = head.getNextReviewer();
+            while (currNode != tail) {
+                int count = (Integer)currNode.getRCount();
+                int score = (Integer)currNode.getValue();
+                builder.append(count + ":" + score + " ");
+                if (currNode.getNextReviewer() != tail) {
+                    builder.append(", ");
+                }
+                currNode = currNode.getNextReviewer();
+            }
+        }
         return builder.toString();
     }
 
