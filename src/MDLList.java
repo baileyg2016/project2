@@ -94,17 +94,13 @@ public class MDLList<T> {
             head = newNode;
             tail = head;
             size++;
-            // connecting the node with the other list
-// newNode.setPrevReviewer(reviewerTail);
-// reviewerTail.setNextMovie(newNode);
             return;
         }
         // appending the node to the end of the list
         // the previous node
         Node<Integer> pNode = tail;
-
-        newNode.setPrevMovie(pNode);
-        tail.setNextMovie(newNode);
+        newNode.setPrevReviewer(pNode);
+        tail.setNextReviewer(newNode);
         tail = newNode;
         size++;
 
