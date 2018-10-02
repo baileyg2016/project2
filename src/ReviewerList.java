@@ -159,7 +159,7 @@ public class ReviewerList {
     public ReviewerList() {
         head = null;
         tail = head;
-        count = 0;
+        count = 1;
     }
 
 

@@ -150,6 +150,11 @@ public class MSLList {
      */
     public int size;
 
+    /**
+     * Position in the list
+     */
+    public int count;
+
 
     /**
      * Rows of the singly linked list
@@ -158,6 +163,7 @@ public class MSLList {
         head = null;
         tail = head;
         size = 0;
+        count = 1;
     }
 
 
@@ -177,15 +183,10 @@ public class MSLList {
             size++;
             return (Node)tail;
         }
-
-//        if (contains(name) != null) {
-//            return contains(name);
-//        }
-
+        count++;
         Node node = new Node(name, mList);
         tail.setNext(node);
         tail = tail.next;
-
         size++;
         return tail;
     }
@@ -209,7 +210,7 @@ public class MSLList {
                 if (n == head) {
                     head = next;
                 }
-                prev.setNext(n.getNext());      
+                prev.setNext(n.getNext());
 
                 size--;
                 return n;
