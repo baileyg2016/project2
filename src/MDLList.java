@@ -96,6 +96,8 @@ public class MDLList<T> {
      * 
      * @param node
      *            the node being added to this list
+     * @param reviewerTail
+     *            the tail of the reviewer list
      */
     public void add(Node<Integer> newNode, Node<Integer> reviewerTail) {
         if (isEmpty()) {
@@ -105,12 +107,17 @@ public class MDLList<T> {
             // connecting the node with the other list
             newNode.setPrevReviewer(reviewerTail);
             reviewerTail.setNextMovie(newNode);
-
             return;
         }
         // appending the node to the end of the list
         // the previous node
-        Node<Integer> pNode = tail.getPrevMovie();
+        Node<Integer> pNode;
+        if (head == tail) {
+            pNode = head;
+        }
+        else {
+            pNode = tail.getPrevMovie();
+        }
         newNode.setPrevMovie(pNode);
         tail = newNode;
         size++;

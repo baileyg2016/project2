@@ -92,6 +92,28 @@ public class SparseMatrix {
     }
 
 
+    public void deleteMovies(String name) {
+        MSLList.Node node = movies.contains(name);
+        Node<Integer> movieNode = node.list.getHead();
+        while (movieNode != null) {
+            movieNode.setNextReviewer(movieNode.getNextReviewer());
+            movieNode = movieNode.getNextMovie();
+            count--;
+        }
+    }
+
+
+    public void deleteReviewers(String name) {
+        ReviewerList.Node node = reviewers.contains(name);
+        Node<Integer> reviewerNode = node.list.getHead();
+        while (reviewerNode != null) {
+            reviewerNode.setNextReviewer(reviewerNode.getNextReviewer());
+            reviewerNode = reviewerNode.getNextMovie();
+            count--;
+        }
+    }
+
+
     /**
      * 
      * @return
