@@ -40,7 +40,8 @@ public class MSLListTest extends TestCase {
         assertEquals(list.contains("bobby").getName(), "bobby");
         assertNull(list.contains("a"));
         Node<Integer> node = new Node<Integer>(1, null, null, null, null, -1, -1);
-        list.contains("bobby").getList().add(node, null);
+        Node<Integer> tail = new Node<Integer>(-1, null, null, null, null, -1, -1);
+        list.contains("bobby").getList().add(node, tail);
 
         assertEquals(list.contains("bobby").getList().size(), 1);
         assertFuzzyEquals(list.contains("bobby").getList().toString(), "{1}");
@@ -54,6 +55,7 @@ public class MSLListTest extends TestCase {
         list.add("bobby");
         list.add("Jill");
         list.add("Adam");
+        
         
         System.out.println(list.printListAndReviews());
         

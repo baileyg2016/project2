@@ -125,22 +125,29 @@ public class RDLList<T> {
      *             if obj is null
      */
     public void add(Node<Integer> newNode, Node<Integer> movieTail) {
-
+        if (movieTail == null) {
+            return;
+        }
         if (isEmpty()) {
             head = newNode;
             tail = head;
             size++;
+
+            newNode.setPrevReviewer(movieTail);
+            movieTail.setNextReviewer(newNode);
             return;
         }
         // Appending the node to the end of the list
         // the previous node
-        Node<Integer> pNode = tail.getPrevReviewer();
-        newNode.setPrevReviewer(pNode);
+        Node<Integer> pNode = tail;
+
+        newNode.setPrevMovie(pNode);
+        pNode.setNextMovie(newNode);
         tail = newNode;
         size++;
 
         // connecting the node with the other list
-        newNode.setPrevMovie(movieTail);
+        newNode.setPrevReviewer(movieTail);
         movieTail.setNextReviewer(newNode);
     }
 
@@ -152,13 +159,22 @@ public class RDLList<T> {
      *         the node that is removed
      */
     public Node<Integer> remove() {
-        Node<Integer> pNode = tail.getPrevMovie();
-        pNode.getPrevMovie().setNextMovie(tail);
-        tail.setPrevMovie(pNode.getPrevMovie());
-        pNode.setNextMovie(null);
-        pNode.setPrevMovie(null);
-        size--;
-        return pNode;
+        Node<Integer> t = null;
+        if (!(isEmpty())) {
+            t = tail;
+            if (tail == head) {
+                head = null;
+            }
+            else {
+                Node<Integer> n = tail.getPrevMovie();
+                n.setNextMovie(null);
+                tail.setPrevMovie(null);
+                tail = n;
+            }
+            size--;
+        }
+        return t;
+
     }
 
 
@@ -183,12 +199,55 @@ public class RDLList<T> {
 
 
     /**
+     * Determines if the list contains a reviewer
+     * 
+     * @param name
+     *            the name of the reviewer
+     * @return Node<Integer>
+     *         the node that is of the name or null
+     */
+
+    public Node<Integer> containsReviewer(String name) {
+        Node<Integer> curr = head;
+        while (curr != null) {
+            if (curr.getReviewerName().equals(name)) {
+                return curr;
+            }
+            curr = curr.getNextMovie();
+        }
+        return null;
+    }
+
+
+    /**
+     * Determines if the list contains a movie
+     * 
+     * @param name
+     *            the name of the movie
+     * @return Node<Integer>
+     *         the node that is of the name or null
+     */
+
+    public Node<Integer> containsMovie(String name) {
+        Node<Integer> curr = head;
+        while (curr != null) {
+            if (curr.getMovieName().equals(name)) {
+                return curr;
+            }
+            curr = curr.getNextMovie();
+        }
+        return null;
+    }
+
+
+    /**
      * Removes the connections from this list
      */
     public void nuke() {
 
-        Node<Integer> currNode = head.getNextMovie();
-        while (!(currNode.equals(tail))) {
+        Node<Integer> currNode = head;
+
+        while (currNode != null) {
             if (currNode.getNextReviewer() != null) {
                 currNode.getPrevReviewer().setNextReviewer(currNode
                     .getNextReviewer());
@@ -208,7 +267,7 @@ public class RDLList<T> {
      * Used for the similar call
      */
     public void trav() {
-        Node<Integer> currNode = head.getNextMovie();
+        Node<Integer> currNode = head;
         while (currNode != tail) {
             // Maybe add all the scores in the nodes?
             currNode = currNode.getNextMovie();
@@ -229,11 +288,11 @@ public class RDLList<T> {
         Node<Integer> currNode = null;
         StringBuilder builder = new StringBuilder("{");
         if (!isEmpty()) {
-            currNode = head.getNextMovie();
-            while (currNode != tail) {
+            currNode = head;
+            while (currNode != null) {
                 int element = (Integer)currNode.getValue();
                 builder.append(element + " ");
-                if (currNode.getNextMovie() != tail) {
+                if (currNode != tail) {
                     builder.append(", ");
                 }
                 currNode = currNode.getNextMovie();
@@ -245,27 +304,29 @@ public class RDLList<T> {
     }
 
 
-    public Node<Integer> containsMovie(String name) {
-        Node<Integer> curr = head;
-        while (curr != null) {
-            if (curr.getMovieName().equals(name)) {
-                return curr;
-            }
-            curr = curr.getNextMovie();
-        }
-        return null;
-    }
-
-
-    public Node<Integer> containsReviewer(String name) {
-        Node<Integer> curr = head;
-        while (curr != null) {
-            if (curr.getReviewerName().equals(name)) {
-                return curr;
-            }
-            curr = curr.getNextMovie();
-        }
-        return null;
-    }
+    /**
+     * Gets the count of the reviwer for the given review and the score in that
+     * review
+     * 
+     * @return String
+     *         the count and the score
+     */
+//    public String getCountAndScore() {
+//        Node<Integer> currNode = null;
+//        StringBuilder builder = new StringBuilder();
+//        if (!isEmpty()) {
+//            currNode = head;
+//            while (currNode != tail) {
+//                int count = (Integer)currNode.getRCount();
+//                int score = (Integer)currNode.getValue();
+//                builder.append(count + ":" + score + " ");
+//                if (currNode.getNextMovie() != tail) {
+//                    builder.append(", ");
+//                }
+//                currNode = currNode.getNextMovie();
+//            }
+//        }
+//        return builder.toString();
+//    }
 
 }

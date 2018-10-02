@@ -48,7 +48,8 @@ public class ReviewerList {
             this.name = name;
             list = new RDLList<Integer>();
         }
-        
+
+
         /**
          * Constructor for the node
          * 
@@ -182,7 +183,6 @@ public class ReviewerList {
      * @param name
      *            name of the reviewer to add
      */
-    // @SuppressWarnings("unchecked")
     public Node insert(String name) {
         if (head == null) {
             head = new Node(name);
@@ -192,9 +192,9 @@ public class ReviewerList {
             return (Node)tail;
         }
 
-        if (contains(name) != null) {
-            return contains(name);
-        }
+//        if (contains(name) != null) {
+//            return contains(name);
+//        }
 
         tail.setNext(name, count, new RDLList<Integer>());
 
@@ -333,6 +333,5 @@ public class ReviewerList {
     public Node getTail() {
         return tail;
     }
-
 
 }

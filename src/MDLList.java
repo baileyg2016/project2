@@ -93,30 +93,29 @@ public class MDLList<T> {
      *            >>>>>>> origin/PrintList
      */
     public void add(Node<Integer> newNode, Node<Integer> reviewerTail) {
+        if (reviewerTail == null) {
+            return;
+        }
         if (isEmpty()) {
             head = newNode;
             tail = head;
             size++;
             // connecting the node with the other list
-            newNode.setPrevReviewer(reviewerTail);
+            newNode.setPrevMovie(reviewerTail);
             reviewerTail.setNextMovie(newNode);
             return;
         }
         // appending the node to the end of the list
         // the previous node
-        Node<Integer> pNode;
-        if (head == tail) {
-            pNode = head;
-        }
-        else {
-            pNode = tail.getPrevMovie();
-        }
-        newNode.setPrevMovie(pNode);
+        Node<Integer> pNode = tail;
+
+        newNode.setPrevReviewer(pNode);
+        pNode.setNextReviewer(newNode);
         tail = newNode;
         size++;
 
         // connecting the node with the other list
-        newNode.setPrevReviewer(reviewerTail);
+        newNode.setPrevMovie(reviewerTail);
         reviewerTail.setNextMovie(newNode);
 
     }
@@ -129,13 +128,21 @@ public class MDLList<T> {
      *         the node that is removed
      */
     public Node<Integer> remove() {
-        Node<Integer> pNode = tail.getPrevReviewer();
-        pNode.getPrevReviewer().setNextReviewer(tail);
-        tail.setPrevReviewer(pNode.getPrevReviewer());
-        pNode.setNextReviewer(null);
-        pNode.setPrevReviewer(null);
-        size--;
-        return pNode;
+        Node<Integer> t = null;
+        if (!(isEmpty())) {
+            t = tail;
+            if (tail == head) {
+                head = null;
+            }
+            else {
+                Node<Integer> n = tail.getPrevReviewer();
+                n.setNextReviewer(null);
+                tail.setPrevReviewer(null);
+                tail = n;
+            }
+            size--;
+        }
+        return t;
     }
 
 
@@ -158,27 +165,63 @@ public class MDLList<T> {
         return pNode;
     }
 
+    /**    
+     * Determines if the list contains a movie
+     * @param name
+     *          the name of the movie
+     * @return Node<Integer>
+     *          the node that is of the name or null
+     */
 
+    public Node<Integer> containsMovie(String name) {
+        Node<Integer> curr = head;
+        while (curr != null) {
+            if (curr.getReviewerName().equals(name)) {
+                return curr;
+            }
+            curr = curr.getNextReviewer();
+        }
+        return null;
+    }
+
+    
+    /**    
+     * Determines if the list contains a reviewer
+     * @param name
+     *          the name of the movie
+     * @return Node<Integer>
+     *          the node that is of the name or null
+     */
+
+    public Node<Integer> containsReviewer(String name) {
+        Node<Integer> curr = head;
+        while (curr != null) {
+            if (curr.getReviewerName().equals(name)) {
+                return curr;
+            }
+            curr = curr.getNextReviewer();
+        }
+        return null;
+    }
+    
     /**
      * Removes the connections from this list
      */
     public void nuke() {
 
-        Node<Integer> currNode = head.getNextReviewer();
-        if (currNode != null) {
-            while (!(currNode.equals(tail))) {
-                if (currNode.getNextMovie() != null) {
-                    currNode.getPrevMovie().setNextMovie(currNode
-                        .getNextMovie());
-                    currNode.getNextMovie().setPrevMovie(currNode
-                        .getPrevMovie());
-                }
-                currNode.setNextMovie(null);
-                currNode.setPrevMovie(null);
-                currNode = currNode.getNextReviewer();
+        Node<Integer> currNode = head;
+
+        while (currNode != null) {
+            if (currNode.getNextMovie() != null) {
+                currNode.getPrevMovie().setNextMovie(currNode.getNextMovie());
+                currNode.getNextMovie().setPrevMovie(currNode.getPrevMovie());
             }
-            size = 0;
+            currNode.setNextMovie(null);
+            currNode.setPrevMovie(null);
+            currNode = currNode.getNextReviewer();
         }
+        size = 0;
+
     }
 
 
@@ -187,7 +230,7 @@ public class MDLList<T> {
      * Used for the similar call
      */
     public void trav() {
-        Node<Integer> currNode = head.getNextReviewer();
+        Node<Integer> currNode = head;
         while (currNode != tail) {
             // Maybe add all the scores in the nodes?
             currNode = currNode.getNextReviewer();
@@ -208,11 +251,11 @@ public class MDLList<T> {
         Node<Integer> currNode = null;
         StringBuilder builder = new StringBuilder("{");
         if (!isEmpty()) {
-            currNode = head.getNextReviewer();
-            while (currNode != tail) {
+            currNode = head;
+            while (currNode != null) {
                 int element = (Integer)currNode.getValue();
                 builder.append(element + " ");
-                if (currNode.getNextReviewer() != tail) {
+                if (currNode != tail) {
                     builder.append(", ");
                 }
                 currNode = currNode.getNextReviewer();
@@ -235,7 +278,7 @@ public class MDLList<T> {
         Node<Integer> currNode = null;
         StringBuilder builder = new StringBuilder();
         if (!isEmpty()) {
-            currNode = head.getNextReviewer();
+            currNode = head;
             while (currNode != tail) {
                 int count = (Integer)currNode.getRCount();
                 int score = (Integer)currNode.getValue();

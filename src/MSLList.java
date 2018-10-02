@@ -178,9 +178,9 @@ public class MSLList {
             return (Node)tail;
         }
 
-        if (contains(name) != null) {
-            return contains(name);
-        }
+//        if (contains(name) != null) {
+//            return contains(name);
+//        }
 
         Node node = new Node(name, mList);
         tail.setNext(node);
@@ -201,15 +201,20 @@ public class MSLList {
      */
     public Node remove(String name) {
         Node n = head;
-        while (!(n.getNext().equals(tail))) {
-            if (n.getNext().getName().equals(name)) {
-                Node temp = n.getNext();
-                n.setNext(temp.getNext());
-                temp.getList().nuke();
-                temp.setNext(null);
+        Node prev = head;
+        while (n != null) {
+            if (n.getName().equals(name)) {
+                Node next = n.getNext();
+                n.setNext(null);
+                if (n == head) {
+                    head = next;
+                }
+                prev.setNext(n.getNext());      
+
                 size--;
-                return temp;
+                return n;
             }
+            prev = n;
             n = n.getNext();
         }
         return null;
@@ -269,11 +274,11 @@ public class MSLList {
      *         list
      */
     public String toString() {
-        Node n = head.getNext();
+        Node n = head;
         String s = "{ ";
-        while (!(n.equals(tail))) {
+        while (n != null) {
             s += n.getName() + " ";
-            if (n.getNext() != tail) {
+            if (n != tail) {
                 s += ", ";
             }
             n = n.getNext();
@@ -282,25 +287,27 @@ public class MSLList {
         return s;
     }
 
+
     /**
      * Printing the name of the movie and the reviewer and score for each review
      * of that movie
+     * 
      * @return String
-     *             String of movies, reviewer counts and the scores they gave
+     *         String of movies, reviewer counts and the scores they gave
      */
     public String printListAndReviews() {
-        Node n = head.getNext();
+        Node n = head;
         String s = "";
-        while (!(n.equals(tail))) {
+        while (n != null) {
             s += n.getName() + ": ";
             MDLList<Integer> list = n.getList();
             s += list.getCountAndScore();
-            if (n.getNext() != tail) {
+            if (n != tail) {
                 s += "\n";
             }
             n = n.getNext();
         }
-        //s += "}";
+        // s += "}";
         return s;
     }
 
