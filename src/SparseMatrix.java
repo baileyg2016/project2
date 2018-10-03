@@ -55,13 +55,14 @@ public class SparseMatrix {
             reviewerNode = reviewers.contains(reviewer);
             if (reviewerNode.list.containsMovie(movie) != null) {
                 reviewerNode.list.containsMovie(movie).setValue(rating);
-                reviewerNode.list.containsMovie(movie).setRCount(reviewerNode.getCount());
+                reviewerNode.list.containsMovie(movie).setRCount(reviewerNode
+                    .getCount());
                 return;
             }
             else {
                 movieNode = movies.contains(movie);
             }
-            
+
         } // reviewer exist but the movie does not
         else if (movies.contains(movie) == null && reviewers.contains(
             reviewer) != null) {
@@ -92,7 +93,9 @@ public class SparseMatrix {
         Node<Integer> matrixNode = new Node<Integer>(rating, reviewer, movie);
 
         matrixNode.setRCount(reviewerNode.getCount());
-        matrixNode.setMCount(reviewerNode.getCount()/*movieTail.getMCount() + 1*/);
+        matrixNode.setMCount(reviewerNode.getCount()/*
+                                                     * movieTail.getMCount() + 1
+                                                     */);
 
         // Adding the matrix node and connecting everything
         reviewerNode.list.add(matrixNode, movieTail);
@@ -103,27 +106,28 @@ public class SparseMatrix {
 
 
     public void deleteMovies(String name) {
+
+        MSLList.Node node = movies.contains(name);
+        Node<Integer> movieNode = node.list.getHead();
+        while (movieNode != null) {
+            movieNode.setNextReviewer(movieNode.getNextReviewer());
+            movieNode = movieNode.getNextReviewer();
+            count--;
+        }
         movies.remove(name);
-//        MSLList.Node node = movies.contains(name);
-//        Node<Integer> movieNode = node.list.getHead();
-//        while (movieNode != null) {
-//            movieNode.setNextReviewer(movieNode.getNextReviewer());
-//            movieNode = movieNode.getNextReviewer();
-//            count--;
-//        }
-        
     }
 
 
     public void deleteReviewers(String name) {
+
+        ReviewerList.Node node = reviewers.contains(name);
+        Node<Integer> reviewerNode = node.list.getHead();
+        while (reviewerNode != null) {
+            reviewerNode.setNextMovie(reviewerNode.getNextMovie());
+            reviewerNode = reviewerNode.getNextMovie();
+            count--;
+        }
         reviewers.delete(name);
-//        ReviewerList.Node node = reviewers.contains(name);
-//        Node<Integer> reviewerNode = node.list.getHead();
-//        while (reviewerNode != null) {
-//            reviewerNode.setNextMovie(reviewerNode.getNextMovie());
-//            reviewerNode = reviewerNode.getNextMovie();
-//            count--;
-//        }
     }
 
 

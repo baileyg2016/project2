@@ -41,6 +41,38 @@ public class SparseMatrixTest extends TestCase {
 
 
     /**
+     * Test inserting a movie that exists but the reviewer does not
+     */
+    public void testMovieNoReviewer() {
+        ReviewerList reviewers = new ReviewerList();
+        MSLList movies = new MSLList();
+        SparseMatrix matrix = new SparseMatrix(reviewers, movies);
+
+        matrix.insert("Tim", "Star wars", 6);
+        matrix.insert("Bill", "Star wars", 9);
+        assertEquals(2, matrix.getCount());
+        assertEquals(1, movies.count);
+        assertEquals(2, reviewers.getCount());
+    }
+
+
+    /**
+     * Test inserting a reviewer that exists but not the movie
+     */
+    public void testReviewerNoMovie() {
+        ReviewerList reviewers = new ReviewerList();
+        MSLList movies = new MSLList();
+        SparseMatrix matrix = new SparseMatrix(reviewers, movies);
+
+        matrix.insert("Tim", "Star wars", 6);
+        matrix.insert("Tim", "Return of the Sith", 9);
+        assertEquals(2, matrix.getCount());
+        assertEquals(2, movies.count);
+        assertEquals(1, reviewers.getCount());
+    }
+
+
+    /**
      * Testing if a reviewer updated the rating of a movie
      */
     public void testUpdateRatingWithMovies() {
