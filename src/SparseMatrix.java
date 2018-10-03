@@ -55,6 +55,7 @@ public class SparseMatrix {
             reviewerNode = reviewers.contains(reviewer);
             if (reviewerNode.list.containsMovie(movie) != null) {
                 reviewerNode.list.containsMovie(movie).setValue(rating);
+                reviewerNode.list.containsMovie(movie).setRCount(reviewerNode.getCount());
                 return;
             }
             else {
@@ -90,8 +91,8 @@ public class SparseMatrix {
         // Creating the node to place in the matrix
         Node<Integer> matrixNode = new Node<Integer>(rating, reviewer, movie);
 
-        matrixNode.setRCount(reviewerTail.getRCount() + 1);
-        matrixNode.setMCount(movieTail.getMCount() + 1);
+        matrixNode.setRCount(reviewerNode.getCount());
+        matrixNode.setMCount(reviewerNode.getCount()/*movieTail.getMCount() + 1*/);
 
         // Adding the matrix node and connecting everything
         reviewerNode.list.add(matrixNode, movieTail);
