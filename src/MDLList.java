@@ -280,9 +280,6 @@ public class MDLList<T> {
                 int count = (Integer)currNode.getRCount();
                 int score = (Integer)currNode.getValue();
                 builder.append(count + ":" + score + " ");
-                if (currNode.getNextReviewer() != null) {
-                    //builder.append(", ");
-                }
                 currNode = currNode.getNextReviewer();
             }
         }
