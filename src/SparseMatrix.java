@@ -92,7 +92,7 @@ public class SparseMatrix {
         Node<Integer> matrixNode = new Node<Integer>(rating, reviewer, movie);
 
         matrixNode.setRCount(reviewerNode.getCount());
-        matrixNode.setMCount(reviewerNode.getCount());
+        matrixNode.setMCount(reviewerNode.getCount()/*movieTail.getMCount() + 1*/);
 
         // Adding the matrix node and connecting everything
         reviewerNode.list.add(matrixNode, movieTail);
