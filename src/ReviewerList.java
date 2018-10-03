@@ -187,8 +187,9 @@ public class ReviewerList {
         if (head == null) {
             head = new Node(name);
             tail = head;
-            count++;
+
             head.setCount(count);
+            count++;
             numNodes++;
             return (Node)tail;
         }
@@ -196,8 +197,9 @@ public class ReviewerList {
         tail.setNext(name, count, new RDLList<Integer>());
 
         tail = tail.next;
-        count++;
+
         tail.setCount(count);
+        count++;
         numNodes++;
         return (Node)tail;
     }
@@ -235,16 +237,16 @@ public class ReviewerList {
         }
         prev.next = curr.next;
         numNodes--;
-//        Node<Integer> pNode = head;
-//        while (!(pNode.getValue() == val)) {
-//            pNode = pNode.getNextReviewer();
-//        }
-//        pNode.getPrevReviewer().setNextReviewer(pNode.getNextReviewer());
-//        pNode.getNextReviewer().setPrevReviewer(pNode.getPrevReviewer());
-//        pNode.setNextReviewer(null);
-//        pNode.setPrevReviewer(null);
-//        size--;
-//        return pNode;
+// Node<Integer> pNode = head;
+// while (!(pNode.getValue() == val)) {
+// pNode = pNode.getNextReviewer();
+// }
+// pNode.getPrevReviewer().setNextReviewer(pNode.getNextReviewer());
+// pNode.getNextReviewer().setPrevReviewer(pNode.getPrevReviewer());
+// pNode.setNextReviewer(null);
+// pNode.setPrevReviewer(null);
+// size--;
+// return pNode;
     }
 
 
