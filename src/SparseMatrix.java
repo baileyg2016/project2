@@ -106,7 +106,7 @@ public class SparseMatrix {
         Node<Integer> movieNode = node.list.getHead();
         while (movieNode != null) {
             movieNode.setNextReviewer(movieNode.getNextReviewer());
-            movieNode = movieNode.getNextMovie();
+            movieNode = movieNode.getNextReviewer();
             count--;
         }
     }
@@ -116,7 +116,7 @@ public class SparseMatrix {
         ReviewerList.Node node = reviewers.contains(name);
         Node<Integer> reviewerNode = node.list.getHead();
         while (reviewerNode != null) {
-            reviewerNode.setNextReviewer(reviewerNode.getNextReviewer());
+            reviewerNode.setNextMovie(reviewerNode.getNextMovie());
             reviewerNode = reviewerNode.getNextMovie();
             count--;
         }
