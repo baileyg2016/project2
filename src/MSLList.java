@@ -310,5 +310,14 @@ public class MSLList {
         }
         return s;
     }
+    
+    /**
+     * Gets the head
+     * @return  
+     *      the head node
+     */
+    public Node getHead() {
+        return head;
+    }
 
 }
