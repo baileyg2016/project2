@@ -24,10 +24,11 @@ public class Hash<T> {
      */
     private int hashTableCount;
 
-   /**
-    * The amount of entries added thus far
-    */
+    /**
+     * The amount of entries added thus far
+     */
     private int count;
+
 
     /**
      * Create a new Hash object.
@@ -169,14 +170,14 @@ public class Hash<T> {
      * 
      *
      */
-    public void delete(T key, String tableName) {
+    public boolean delete(T key, String tableName) {
         int home = h(key.toString(), hashTableSize);
         int pos = 0;
 
         if (getTableCount() == 0) {
             System.out.println("|" + key + "| not deleted because "
                 + "it does not exist in the " + tableName + " database.");
-            return;
+            return false;
         }
         int prevCount = hashTableCount;
         // This loop checks to delete the key at
@@ -190,7 +191,7 @@ public class Hash<T> {
             if (hashTable[pos] == null) {
                 System.out.println("|" + key + "| not deleted because it "
                     + "does not exist in the " + tableName + " database.");
-                return;
+                return false;
             }
             // We can delete if the keys are equal and it is
             // not a tombstone
@@ -200,8 +201,10 @@ public class Hash<T> {
                 hashTableCount--;
                 System.out.println("|" + key + "| has been deleted from the "
                     + tableName + " database.");
+                return true;
             }
         }
+        return true;
 
     }
 
@@ -223,17 +226,16 @@ public class Hash<T> {
         // the record you are removing is the right one
         // go through the array at the probed positions
         // to find the right spots
-        for (int i = 1; hashTable[probe] != null && (hashTable[probe].getTombstone()
-            || !hashTable[probe].getKey().equals(record)); i++) {
+        for (int i = 1; hashTable[probe] != null && (hashTable[probe]
+            .getTombstone() || !hashTable[probe].getKey().equals(
+                record)); i++) {
             probe = (hashVal + probe(i)) % hashTable.length;
         }
         return probe;
 
     }
 
-    
-    
-    
+
     /**
      * This function doubles the size of the table
      */
@@ -320,30 +322,35 @@ public class Hash<T> {
     public int getNumEntries() {
         return hashTableCount;
     }
-    
+
+
     /**
      * Gets count
+     * 
      * @return int
-     *          count
+     *         count
      */
     public int getCount() {
         return count;
     }
-    
+
+
     /**
      * Sets count
+     * 
      * @param count
-     *          the count
+     *            the count
      */
     public void setCount(int count) {
         this.count = count;
     }
-    
+
+
     /**
      * This returns the hash table of records
      * 
      * @return Record[]
-     *            the hashtable
+     *         the hashtable
      */
     public Record<T>[] getHashTable() {
         return hashTable;

@@ -178,15 +178,23 @@ public class Parser {
      *            The name of the movie or the reviewer
      */
     public void delete(String tableName, String name) {
+        boolean delete;
         if (tableName.equals("reviewer")) {
             tableName = tableName.substring(0, 1).toUpperCase() + tableName
                 .substring(1);
-            reviewerTable.delete(name, tableName);
+            delete = reviewerTable.delete(name, tableName);
+            if (delete) {
+                matrix.deleteReviewers(name);
+            }
         }
         else { // then it is the movie
             tableName = tableName.substring(0, 1).toUpperCase() + tableName
                 .substring(1);
-            movieTable.delete(name, tableName);
+            delete = movieTable.delete(name, tableName);
+            if (delete) {
+                matrix.deleteMovies(name);
+            }
+            
         }
     }
 
