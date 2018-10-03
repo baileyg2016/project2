@@ -300,15 +300,14 @@ public class MSLList {
         Node n = head;
         String s = "";
         while (n != null) {
-            s += n.getName() + ": ";
             MDLList<Integer> list = n.getList();
-            s += list.getCountAndScore();
-            if (n != tail) {
+            if (!(list.getCountAndScore().equals(""))) {
+                s += n.getName() + ": ";
+                s += list.getCountAndScore();
                 s += "\n";
             }
             n = n.getNext();
         }
-        // s += "}";
         return s;
     }
 

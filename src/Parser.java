@@ -228,7 +228,7 @@ public class Parser {
         }
 
         rL.printListAndCount();
-        System.out.println(mL.printListAndReviews());
+        System.out.print(mL.printListAndReviews());
     }
 
 
