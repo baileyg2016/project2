@@ -227,10 +227,12 @@ public class RDLList<T> {
 
         while (currNode != null) {
             if (currNode.getNextReviewer() != null) {
-                currNode.getPrevReviewer().setNextReviewer(currNode
-                    .getNextReviewer());
                 currNode.getNextReviewer().setPrevReviewer(currNode
                     .getPrevReviewer());
+            }
+            if (currNode.getPrevReviewer() != null) {
+                currNode.getPrevReviewer().setNextReviewer(currNode
+                    .getNextReviewer());
             }
             currNode.setNextReviewer(null);
             currNode.setPrevReviewer(null);

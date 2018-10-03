@@ -29,7 +29,7 @@ public class ReviewerListTest<T> extends TestCase {
         list.insert("hey");
         assertEquals(list.getList("hey").getClass(), (new RDLList<T>()
             .getClass()));
-        assertEquals(list.contains("hey").getCount(), 4);
+        assertEquals(list.contains("hey").getCount(), 5);
         assertNull(list.contains("Joe"));
         list.printList();
         list.printListAndCount();
