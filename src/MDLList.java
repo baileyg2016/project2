@@ -210,8 +210,10 @@ public class MDLList<T> {
 
         while (currNode != null) {
             if (currNode.getNextMovie() != null) {
-                currNode.getPrevMovie().setNextMovie(currNode.getNextMovie());
                 currNode.getNextMovie().setPrevMovie(currNode.getPrevMovie());
+            }
+            if (currNode.getPrevMovie() != null) {
+                currNode.getPrevMovie().setNextMovie(currNode.getNextMovie());
             }
             currNode.setNextMovie(null);
             currNode.setPrevMovie(null);
