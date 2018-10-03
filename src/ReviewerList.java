@@ -222,31 +222,23 @@ public class ReviewerList {
         Node curr = head;
         Node prev = null;
 
+        while (curr != null && curr.name.equals(name)) {
+            head = head.getNext();
+            return;
+        }
+
         while (curr != null && !curr.name.equals(name)) {
             prev = curr;
-            curr = curr.next;
+            curr = curr.getNext();
 
         }
+
         if (curr == null) {
             return;
         }
-        if (prev == null) {
-            head = curr.next;
-            numNodes--;
-            return;
-        }
+
         prev.next = curr.next;
         numNodes--;
-// Node<Integer> pNode = head;
-// while (!(pNode.getValue() == val)) {
-// pNode = pNode.getNextReviewer();
-// }
-// pNode.getPrevReviewer().setNextReviewer(pNode.getNextReviewer());
-// pNode.getNextReviewer().setPrevReviewer(pNode.getPrevReviewer());
-// pNode.setNextReviewer(null);
-// pNode.setPrevReviewer(null);
-// size--;
-// return pNode;
     }
 
 

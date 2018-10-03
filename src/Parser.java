@@ -268,12 +268,10 @@ public class Parser {
                     return;
                 }
                 Node<Integer> n = rL.getHead();
-                Node<Integer> tail = rL.getTail();
 
                 System.out.println(s);
 
                 while (n != null) {
-                    s += " " + n.getValue();
                     System.out.println(n.getMovieName() + ": " + n.getValue());
                     n = n.getNextMovie();
                 }
@@ -301,10 +299,8 @@ public class Parser {
                 }
                 System.out.println(s);
                 Node<Integer> n = mL.getHead();
-                Node<Integer> tail = mL.getTail();
 
                 while (n != null) {
-                    s += " " + n.getValue();
                     System.out.println(n.getReviewerName() + ": " + n
                         .getValue());
                     n = n.getNextReviewer();
