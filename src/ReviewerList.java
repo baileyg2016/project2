@@ -210,31 +210,41 @@ public class ReviewerList {
      *            the name to delete
      */
     public void delete(String name) {
-        if (numNodes == 1) {
-            tail = null;
-            head = null;
-            numNodes--;
-            return;
+//        if (numNodes == 1) {
+//            tail = null;
+//            head = null;
+//            numNodes--;
+//            return;
+//        }
+//
+//        Node curr = head;
+//        Node prev = null;
+//
+//        while (curr != null && !curr.name.equals(name)) {
+//            prev = curr;
+//            curr = curr.next;
+//
+//        }
+//        if (curr == null) {
+//            return;
+//        }
+//        if (prev == null) {
+//            head = curr.next;
+//            numNodes--;
+//            return;
+//        }
+//        prev.next = curr.next;
+//        numNodes--;
+        Node<Integer> pNode = head;
+        while (!(pNode.getValue() == val)) {
+            pNode = pNode.getNextReviewer();
         }
-
-        Node curr = head;
-        Node prev = null;
-
-        while (curr != null && !curr.name.equals(name)) {
-            prev = curr;
-            curr = curr.next;
-
-        }
-        if (curr == null) {
-            return;
-        }
-        if (prev == null) {
-            head = curr.next;
-            numNodes--;
-            return;
-        }
-        prev.next = curr.next;
-        numNodes--;
+        pNode.getPrevReviewer().setNextReviewer(pNode.getNextReviewer());
+        pNode.getNextReviewer().setPrevReviewer(pNode.getPrevReviewer());
+        pNode.setNextReviewer(null);
+        pNode.setPrevReviewer(null);
+        size--;
+        return pNode;
     }
 
 

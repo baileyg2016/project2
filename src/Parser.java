@@ -194,7 +194,7 @@ public class Parser {
             if (delete) {
                 matrix.deleteMovies(name);
             }
-            
+
         }
     }
 
@@ -230,7 +230,8 @@ public class Parser {
         // Print out the reviewers and their count first
         ReviewerList rL = matrix.getReviewers();
         MSLList mL = matrix.getMovies();
-        if (rL.isEmpty() || mL.isEmpty()) {
+        if (movieTable.getNumEntries() == 0 || reviewerTable
+            .getNumEntries() == 0) {
             System.out.println("There are no ratings in the database");
             return;
         }
