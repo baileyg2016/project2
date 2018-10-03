@@ -159,7 +159,7 @@ public class ReviewerList {
     public ReviewerList() {
         head = null;
         tail = head;
-        count = 1;
+        count = 0;
     }
 
 
@@ -171,7 +171,7 @@ public class ReviewerList {
      */
     public ReviewerList(String name) {
         head = new Node(name);
-        count = 1;
+        count = 0;
         tail = head;
 
     }
@@ -188,7 +188,7 @@ public class ReviewerList {
             head = new Node(name);
             tail = head;
             count++;
-
+            head.setCount(count);
             numNodes++;
             return (Node)tail;
         }
@@ -197,7 +197,7 @@ public class ReviewerList {
 
         tail = tail.next;
         count++;
-
+        tail.setCount(count);
         numNodes++;
         return (Node)tail;
     }
