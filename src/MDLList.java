@@ -265,7 +265,7 @@ public class MDLList<T> {
 
 
     /**
-     * Gets the count of the reviwer for the given review and the score in that
+     * Gets the count of the reviewer for the given review and the score in that
      * review
      * 
      * @return String
@@ -276,12 +276,12 @@ public class MDLList<T> {
         StringBuilder builder = new StringBuilder();
         if (!isEmpty()) {
             currNode = head;
-            while (currNode != tail) {
+            while (currNode != null) {
                 int count = (Integer)currNode.getRCount();
                 int score = (Integer)currNode.getValue();
                 builder.append(count + ":" + score + " ");
-                if (currNode.getNextReviewer() != tail) {
-                    builder.append(", ");
+                if (currNode.getNextReviewer() != null) {
+                    //builder.append(", ");
                 }
                 currNode = currNode.getNextReviewer();
             }

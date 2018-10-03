@@ -60,7 +60,7 @@ public class SparseMatrix {
             else {
                 movieNode = movies.contains(movie);
             }
-
+            
         } // reviewer exist but the movie does not
         else if (movies.contains(movie) == null && reviewers.contains(
             reviewer) != null) {
