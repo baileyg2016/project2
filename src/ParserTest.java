@@ -22,7 +22,7 @@ public class ParserTest extends TestCase {
         SparseMatrix matrix = new SparseMatrix(reviewersList, moviesList);
         Parser parser = new Parser("P2SampleInput.txt", movies, reviewers, reviewersList, moviesList, matrix);
         parser.parseFile();
-        assertEquals(2, movies.getCount());
-        assertEquals(2, reviewers.getCount());
+        assertEquals(2, movies.getNumEntries());
+        assertEquals(2, reviewers.getNumEntries());
     }
 }
