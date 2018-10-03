@@ -184,7 +184,7 @@ public class Parser {
                 .substring(1);
             delete = reviewerTable.delete(name, tableName);
             if (delete) {
-                 matrix.deleteReviewers(name);
+                matrix.deleteReviewers(name);
             }
         }
         else { // then it is the movie
@@ -192,7 +192,7 @@ public class Parser {
                 .substring(1);
             delete = movieTable.delete(name, tableName);
             if (delete) {
-                 matrix.deleteMovies(name);
+                matrix.deleteMovies(name);
             }
 
         }
@@ -270,14 +270,14 @@ public class Parser {
                 Node<Integer> n = rL.getHead();
                 Node<Integer> tail = rL.getTail();
 
+                System.out.println(s);
+
                 while (n != null) {
                     s += " " + n.getValue();
-                    if (n != tail) {
-                        // s += ",";
-                    }
+                    System.out.println(n.getMovieName() + ": " + n.getValue());
                     n = n.getNextMovie();
                 }
-                System.out.println(s);
+
             }
 
         }
@@ -299,15 +299,14 @@ public class Parser {
                 if (mL == null) {
                     return;
                 }
-
+                System.out.println(s);
                 Node<Integer> n = mL.getHead();
                 Node<Integer> tail = mL.getTail();
 
                 while (n != null) {
                     s += " " + n.getValue();
-                    if (n != tail) {
-                        // s += ",";
-                    }
+                    System.out.println(n.getReviewerName() + ": " + n
+                        .getValue());
                     n = n.getNextReviewer();
                 }
                 System.out.println(s);
