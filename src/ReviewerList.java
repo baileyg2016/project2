@@ -159,7 +159,7 @@ public class ReviewerList {
     public ReviewerList() {
         head = null;
         tail = head;
-        count = 0;
+        count = 1;
     }
 
 
@@ -171,7 +171,7 @@ public class ReviewerList {
      */
     public ReviewerList(String name) {
         head = new Node(name);
-        count = 0;
+        count = 1;
         tail = head;
 
     }
