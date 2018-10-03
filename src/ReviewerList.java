@@ -188,18 +188,16 @@ public class ReviewerList {
             head = new Node(name);
             tail = head;
             count++;
+
             numNodes++;
             return (Node)tail;
         }
-
-// if (contains(name) != null) {
-// return contains(name);
-// }
 
         tail.setNext(name, count, new RDLList<Integer>());
 
         tail = tail.next;
         count++;
+
         numNodes++;
         return (Node)tail;
     }
@@ -318,7 +316,7 @@ public class ReviewerList {
     /**
      * 
      * @return
-     *         The count of the nodes in the list
+     *         The count for the nodes in the list
      */
     public int getCount() {
         return numNodes;
