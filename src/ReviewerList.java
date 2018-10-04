@@ -329,6 +329,15 @@ public class ReviewerList {
 
 
     /**
+     * Gets the head
+     * @return 
+     *      the head of the nodes
+     */
+    public Node getHead() {
+        return head;
+    }
+    
+    /**
      * 
      * @return
      *         The tail of the nodes in the list
@@ -336,5 +345,7 @@ public class ReviewerList {
     public Node getTail() {
         return tail;
     }
+    
+    
 
 }

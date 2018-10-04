@@ -320,10 +320,69 @@ public class Parser {
      *            The name of the movie or the reviewer
      */
     public void similar(String tableName, String name) {
+        String simName = null;
+        float score = 11;
+
+        int val = 0;
+        int simCount = 0;
+
         if (tableName.equals("reviewer")) {
             if (matrix.getReviewers().contains(name) != null) {
-                System.out.println("There is no reviewer similar to |" + name
-                    + "|");
+                // Node with the reference to the list we are comparing other
+                // lists to
+                ReviewerList.Node n = matrix.getReviewers().contains(name);
+
+                // Gets the head to the DLList that we are comparing other lists
+                // to
+                Node<Integer> node = n.getList().getHead();
+
+                // The first node in the reviewer list
+                ReviewerList.Node n1 = matrix.getReviewers().getHead();
+
+                // Iterates through the lists we are comparing to this list
+                while (n1 != null) {
+                    if (n.equals(n1)) {
+                        n1 = n1.getNext();
+                    }
+                    else {
+                        RDLList<Integer> simList = n1.getList();
+
+                        Node<Integer> simNode = null;
+                        // Going through this list to find matching movies in
+                        // simList
+                        while (node != null) {
+                            simNode = simList.containsMovie(node
+                                .getMovieName());
+                            if (simNode != null) {
+                                simCount++;
+                                // Compute the score
+                                // Add the name and score to the array
+                                val += Math.abs(simNode.getValue() - node
+                                    .getValue());
+                            }
+                            node = node.getNextMovie();
+                        }
+
+                        if (simCount != 0 && (simName == null || (val
+                            / simCount) < score)) {
+                            simName = simNode.getReviewerName();
+                            score = val / simCount;
+                        }
+                        val = 0;
+                        simCount = 0;
+                        n1 = n1.getNext();
+                    }
+
+                }
+
+                if (simName == null) {
+                    System.out.println("There is no reviewer similar to |"
+                        + name + "|");
+                }
+                else {
+                    System.out.println("The reviewer |" + simName
+                        + "| is similar to |" + name + "| with score " + score);
+                }
             }
             else {
                 System.out.println("Reviewer |" + name
@@ -332,13 +391,70 @@ public class Parser {
         }
         else {// then it is the movie
             if (matrix.getMovies().contains(name) != null) {
-                System.out.println("There is no movie similar to |" + name
-                    + "|");
+                // Node with the reference to the list we are comparing
+                // other
+                // lists to
+                MSLList.Node n = matrix.getMovies().contains(name);
+
+                // Gets the head to the DLList that we are comparing other
+                // lists
+                // to
+                Node<Integer> node = n.getList().getHead();
+
+                // The first node in the reviewer list
+                MSLList.Node n1 = matrix.getMovies().getHead();
+
+                // Iterates through the lists we are comparing to this list
+                while (n1 != null) {
+                    if (n.equals(n1)) {
+                        n1 = n1.getNext();
+                    }
+                    else {
+                        MDLList<Integer> simList = n1.getList();
+
+                        Node<Integer> simNode = null;
+                        // Going through this list to find matching movies
+                        // in
+                        // simList
+                        while (node != null) {
+                            simNode = simList.containsMovie(node
+                                .getReviewerName());
+                            if (simNode != null) {
+                                simCount++;
+                                // Compute the score
+                                // Add the name and score to the array
+                                val += Math.abs(simNode.getValue() - node
+                                    .getValue());
+                            }
+                            node = node.getNextReviewer();
+                        }
+
+                        if (simCount != 0 && (simName == null || (val
+                            / simCount) < score)) {
+                            simName = simNode.getMovieName();
+                            score = val / simCount;
+                        }
+                        val = 0;
+                        simCount = 0;
+                        n1 = n1.getNext();
+                    }
+
+                }
+
+                if (simName == null) {
+                    System.out.println("There is no movie similar to |" + name
+                        + "|");
+                }
+                else {
+                    System.out.println("The movie |" + simName
+                        + "| is similar to |" + name + "| with score " + score);
+                }
             }
             else {
                 System.out.println("Movie |" + name
                     + "| not found in the database.");
             }
+
         }
     }
 
