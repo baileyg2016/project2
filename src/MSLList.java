@@ -201,24 +201,38 @@ public class MSLList {
      *         the node that was removed
      */
     public Node remove(String name) {
-        Node n = head;
-        Node prev = head;
-        while (n != null) {
-            if (n.getName().equals(name)) {
-                Node next = n.getNext();
-                n.setNext(null);
-                if (n == head) {
-                    head = next;
-                }
-                prev.setNext(n.getNext());
-
-                size--;
-                return n;
-            }
-            prev = n;
-            n = n.getNext();
+        Node deleted;
+        if (size == 1) {
+            deleted = head;
+            tail = null;
+            head = null;
+            size--;
+            return deleted;
         }
-        return null;
+
+        Node curr = head;
+        Node prev = null;
+
+        while (curr != null && curr.name.equals(name)) {
+            deleted = head;
+            head = head.getNext();
+            size--;
+            return deleted;
+        }
+
+        while (curr != null && !curr.name.equals(name)) {
+            prev = curr;
+            curr = curr.getNext();
+
+        }
+        deleted = curr;
+        if (curr == null) {
+            return null;
+        }
+
+        prev.next = curr.next;
+        size--;
+        return deleted;
     }
 
 
@@ -301,6 +315,9 @@ public class MSLList {
         String s = "";
         while (n != null) {
             MDLList<Integer> list = n.getList();
+            if (list.getHead() == null || list.getHead().getValue() == -1) {
+                System.out.println(n.getName() + ": ");
+            }
             if (!(list.getCountAndScore().equals(""))) {
                 s += n.getName() + ": ";
                 s += list.getCountAndScore();

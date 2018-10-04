@@ -224,6 +224,7 @@ public class ReviewerList {
 
         while (curr != null && curr.name.equals(name)) {
             head = head.getNext();
+            numNodes--;
             return;
         }
 

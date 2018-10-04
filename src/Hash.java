@@ -121,6 +121,10 @@ public class Hash<T> {
     public void insert(T key, String tableName) {
         Record<T> record = new Record<T>(key);
 
+        if (findKey(key) != -1) {
+            return;
+        }
+
         // Grow if we are at half capacity
         if (hashTableCount == hashTableSize / 2) {
             hashTableCount = 0;
@@ -233,6 +237,43 @@ public class Hash<T> {
         }
         return probe;
 
+    }
+
+
+    /**
+     * Finds the location of a specified
+     * key if it exists
+     * 
+     * @param key
+     *            The key we are hoping to find
+     * @return
+     *         The location of the key
+     */
+    public int findKey(T key) {
+        int home = h(key.toString(), hashTableSize);
+        int pos = 0;
+
+        if (hashTable[home] == null) {
+            return -1;
+        }
+
+        for (int i = 0; i < hashTableCount; i++) {
+            pos = (home + probe(i)) % hashTableSize;
+            if (hashTable[pos] == null) {
+                return -1;
+            }
+            if (hashTable[pos].getTombstone()) {
+                if (hashTable[pos].getKey().equals(key)) {
+                    return -1;
+                }
+                continue;
+            }
+            else if (hashTable[pos].getKey().toString().equals(key
+                .toString())) {
+                return pos;
+            }
+        }
+        return -1;
     }
 
 

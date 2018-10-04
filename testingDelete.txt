@@ -1,0 +1,10 @@
+add Sergio Leone<SEP>The Good, the Bad and the Ugly<SEP>10
+  add Darth Vader<SEP>The Good, the Bad and the Ugly<SEP>1
+  add David Lynch<SEP>The Good, the Bad and the Ugly<SEP>1
+
+       add Darth Vader<SEP>Death Note<SEP>1
+       add David Lynch<SEP>Twin Peaks Returns<SEP>10
+print ratings
+list reviewer David Lynch
+delete David Lynch
+list reviewer David Lynch

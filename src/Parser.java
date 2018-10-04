@@ -158,7 +158,7 @@ public class Parser {
             return;
         }
 
-        reviewerTable.insert(fields[0], "Reviwer");
+        reviewerTable.insert(fields[0], "Reviewer");
         movieTable.insert(fields[1], "Movie");
 
         matrix.insert(fields[0], fields[1], Integer.parseInt(fields[2]));

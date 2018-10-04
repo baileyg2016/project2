@@ -74,6 +74,14 @@ public class RDLList<T> {
 
 
     /**
+     * Decrements the size for the list
+     */
+    public void decSize() {
+        size--;
+    }
+
+
+    /**
      * @return
      *         Gets the head
      */
@@ -104,16 +112,15 @@ public class RDLList<T> {
      *             if obj is null
      */
     public void add(Node<Integer> newNode, Node<Integer> movieTail) {
-        if (movieTail == null) {
-            return;
-        }
         if (isEmpty()) {
             head = newNode;
             tail = head;
             size++;
 
             newNode.setPrevReviewer(movieTail);
-            movieTail.setNextReviewer(newNode);
+            if (movieTail != null) {
+                movieTail.setNextReviewer(newNode);
+            }
             return;
         }
         // Appending the node to the end of the list
@@ -283,8 +290,28 @@ public class RDLList<T> {
         return builder.toString();
     }
 
+
     /**
-     * Gets the count of the reviwer for the given review and the score in that
+     * 
+     * @param head
+     *            Sets the head for the list
+     */
+    public void setHead(Node<Integer> head) {
+        this.head = head;
+    }
+
+
+    /**
+     * 
+     * @param tail
+     *            Sets the tail for the list
+     */
+    public void setTail(Node<Integer> tail) {
+        this.tail = tail;
+    }
+
+    /**
+     * Gets the count of the reviewer for the given review and the score in that
      * review
      * 
      * @return String
