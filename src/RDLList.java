@@ -71,6 +71,13 @@ public class RDLList<T> {
     public int size() {
         return size;
     }
+    
+    /**
+     * Decrements the size for the list
+     */
+    public void decSize() {
+        size--;
+    }
 
 
     /**
@@ -283,8 +290,31 @@ public class RDLList<T> {
         return builder.toString();
     }
 
+
     /**
-     * Gets the count of the reviwer for the given review and the score in that
+     * 
+     * @param head
+     *            Sets the head for the list
+     */
+    public void setHead(Node<Integer> head) {
+        this.head = head;
+    }
+
+
+    /**
+     * 
+     * @param tail
+     *            Sets the tail for the list
+     */
+    public void setTail(Node<Integer> tail) {
+        this.tail = tail;
+    }
+
+
+    
+
+    /**
+     * Gets the count of the reviewer for the given review and the score in that
      * review
      * 
      * @return String

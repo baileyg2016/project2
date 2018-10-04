@@ -20,7 +20,59 @@ public class SparseMatrixTest extends TestCase {
         matrix.insert("Tim", "Star wars", 6);
         matrix.insert("Bill", "Bubba Gump", 10);
         matrix.insert("Phil", "Hot rod", 7);
-        assertEquals(3, matrix.getCount());
+        matrix.insert("Hey", "Star wars", 6);
+        matrix.insert("Harry", "New World Order", 9);
+        matrix.insert("Warren", "New World Order", 3);
+        matrix.insert("Bailey", "New World Order", 10);
+        matrix.insert("Geo", "Man on a Ledge", 5);
+        matrix.insert("Frank", "ShaShank", 4);
+        assertEquals(9, matrix.getCount());
+    }
+
+
+    /**
+     * Testing the insert and delete
+     */
+    public void testInsertAndDelete() {
+        ReviewerList reviewers = new ReviewerList();
+        MSLList movies = new MSLList();
+        SparseMatrix matrix = new SparseMatrix(reviewers, movies);
+
+        matrix.insert("Tim", "Star wars", 6);
+        matrix.insert("Bill", "Bubba Gump", 10);
+        matrix.insert("Phil", "Hot rod", 7);
+        matrix.insert("Hey", "Star wars", 6);
+        matrix.insert("Harry", "New World Order", 9);
+        matrix.insert("Warren", "New World Order", 3);
+        matrix.insert("Bailey", "New World Order", 10);
+        matrix.insert("Geo", "Man on a Ledge", 5);
+        matrix.insert("Frank", "ShaShank", 4);
+
+        matrix.deleteReviewers("Warren");
+        matrix.insert("Warren", "New World Order", 5);
+        assertEquals(9, matrix.getCount());
+    }
+
+
+    /**
+     * Testing insert with a lot of stuff
+     */
+    public void testCrazyInsert() {
+        ReviewerList reviewers = new ReviewerList();
+        MSLList movies = new MSLList();
+        SparseMatrix matrix = new SparseMatrix(reviewers, movies);
+
+        matrix.insert("Tim", "Star wars", 6);
+        matrix.insert("Bill", "Bubba Gump", 10);
+        matrix.insert("Phil", "Hot rod", 7);
+        matrix.insert("Hey", "Star wars", 6);
+        matrix.insert("Harry", "New World Order", 9);
+        matrix.insert("Warren", "New World Order", 3);
+        matrix.insert("Bailey", "New World Order", 10);
+        matrix.insert("Geo", "Man on a Ledge", 5);
+        matrix.insert("Frank", "ShaShank", 4);
+
+        assertEquals(9, matrix.getCount());
     }
 
 
@@ -91,41 +143,41 @@ public class SparseMatrixTest extends TestCase {
     /**
      * Testing the delete function for a movie node
      */
-    public void testDeleteWithMovies() {
-        ReviewerList reviewers = new ReviewerList();
-        MSLList movies = new MSLList();
-        SparseMatrix matrix = new SparseMatrix(reviewers, movies);
-
-        matrix.insert("Bill", "Star wars", 6);
-        matrix.insert("Harry", "New World Order", 9);
-        matrix.insert("Warren", "New World Order", 3);
-        matrix.insert("Bailey", "New World Order", 10);
-        matrix.insert("Geo", "Man on a Ledge", 5);
-        matrix.insert("Frank", "ShaShank", 4);
-        assertEquals(6, matrix.getCount());
-
-        matrix.deleteMovies("New World Order");
-        assertEquals(3, matrix.getCount());
-    }
-
-
-    /**
-     * Testing the delete function for a movie node
-     */
-    public void testDeleteWithReviewers() {
-        ReviewerList reviewers = new ReviewerList();
-        MSLList movies = new MSLList();
-        SparseMatrix matrix = new SparseMatrix(reviewers, movies);
-
-        matrix.insert("Bill", "Star wars", 6);
-        matrix.insert("Harry", "New World Order", 9);
-        matrix.insert("Harry", "Star wars", 3);
-        matrix.insert("Harry", "Man on a Ledge", 10);
-        matrix.insert("Geo", "Man on a Ledge", 5);
-        matrix.insert("Frank", "ShaShank", 4);
-        assertEquals(6, matrix.getCount());
-
-        matrix.deleteReviewers("Harry");
-        assertEquals(3, matrix.getCount());
-    }
+//    public void testDeleteWithMovies() {
+//        ReviewerList reviewers = new ReviewerList();
+//        MSLList movies = new MSLList();
+//        SparseMatrix matrix = new SparseMatrix(reviewers, movies);
+//
+//        matrix.insert("Bill", "Star wars", 6);
+//        matrix.insert("Harry", "New World Order", 9);
+//        matrix.insert("Warren", "New World Order", 3);
+//        matrix.insert("Bailey", "New World Order", 10);
+//        matrix.insert("Geo", "Man on a Ledge", 5);
+//        matrix.insert("Frank", "ShaShank", 4);
+//        assertEquals(6, matrix.getCount());
+//
+//        matrix.deleteMovies("New World Order");
+//        assertEquals(3, matrix.getCount());
+//    }
+//
+//
+//    /**
+//     * Testing the delete function for a movie node
+//     */
+//    public void testDeleteWithReviewers() {
+//        ReviewerList reviewers = new ReviewerList();
+//        MSLList movies = new MSLList();
+//        SparseMatrix matrix = new SparseMatrix(reviewers, movies);
+//
+//        matrix.insert("Bill", "Star wars", 6);
+//        matrix.insert("Harry", "New World Order", 9);
+//        matrix.insert("Harry", "Star wars", 3);
+//        matrix.insert("Harry", "Man on a Ledge", 10);
+//        matrix.insert("Geo", "Man on a Ledge", 5);
+//        matrix.insert("Frank", "ShaShank", 4);
+//        assertEquals(6, matrix.getCount());
+//
+//        matrix.deleteReviewers("Harry");
+//        assertEquals(3, matrix.getCount());
+//    }
 }

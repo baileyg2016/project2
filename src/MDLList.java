@@ -64,11 +64,30 @@ public class MDLList<T> {
 
 
     /**
+     * Decrements the size for the list
+     */
+    public void decSize() {
+        size--;
+    }
+
+
+    /**
      * @return
      *         Gets the head
      */
     public Node<Integer> getHead() {
         return head;
+    }
+
+
+    /**
+     * Sets the head of the list
+     * 
+     * @param head
+     *            New head of the list
+     */
+    public void setHead(Node<Integer> head) {
+        this.head = head;
     }
 
 
@@ -286,6 +305,11 @@ public class MDLList<T> {
             }
         }
         return builder.toString();
+    }
+
+
+    public void setTail(Node<Integer> tail) {
+        this.tail = tail;
     }
 
 }
