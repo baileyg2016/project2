@@ -108,70 +108,69 @@ public class SparseMatrix {
 
 
     public void deleteMovies(String name) {
-
-// MSLList.Node node = movies.contains(name);
-// Node<Integer> movieNode = node.list.getHead();
-// Node<Integer> next;
-// while (movieNode != null) {
-// next = movieNode.getNextReviewer();
-// if (movieNode.getPrevMovie() == null || movieNode.getPrevMovie()
-// .getValue() == -1) {
-// if (reviewers.contains(movieNode.getReviewerName()).list
-// .getHead() == reviewers.contains(movieNode
-// .getReviewerName()).list.getTail()) {
-// reviewers.contains(movieNode.getReviewerName()).list
-// .setHead(null);
-// reviewers.contains(movieNode.getReviewerName()).list
-// .setTail(null);
-// }
-// else {
-// reviewers.contains(movieNode.getReviewerName()).list
-// .setHead(movieNode.getNextMovie());
-// }
-// }
-// else {
-// movieNode.getPrevMovie().setNextMovie(movieNode.getNextMovie());
-// }
-// reviewers.contains(movieNode.getReviewerName()).list.decSize();
-// movieNode.setNextMovie(movieNode.getNextMovie());
-// movieNode = next;
-// count--;
-// }
-// movies.remove(name);
+        MSLList.Node node = movies.contains(name);
+        Node<Integer> movieNode = node.list.getHead();
+        Node<Integer> next;
+        while (movieNode != null) {
+            next = movieNode.getNextReviewer();
+            if (movieNode.getPrevMovie() == null || movieNode.getPrevMovie()
+                .getValue() == -1) {
+                if (reviewers.contains(movieNode.getReviewerName()).list
+                    .getHead() == reviewers.contains(movieNode
+                        .getReviewerName()).list.getTail()) {
+                    reviewers.contains(movieNode.getReviewerName()).list
+                        .setHead(null);
+                    reviewers.contains(movieNode.getReviewerName()).list
+                        .setTail(null);
+                }
+                else {
+                    reviewers.contains(movieNode.getReviewerName()).list
+                        .setHead(movieNode.getNextMovie());
+                }
+            }
+            else {
+                movieNode.getPrevMovie().setNextMovie(movieNode.getNextMovie());
+            }
+            reviewers.contains(movieNode.getReviewerName()).list.decSize();
+            movieNode.setNextMovie(movieNode.getNextMovie());
+            movieNode = next;
+            count--;
+        }
+        movies.remove(name);
     }
 
 
     public void deleteReviewers(String name) {
-// ReviewerList.Node node = reviewers.contains(name);
-// Node<Integer> reviewerNode = node.list.getHead();
-// Node<Integer> next;
-// while (reviewerNode != null) {
-// next = reviewerNode.getNextMovie();
-// if (reviewerNode.getPrevReviewer() == null || reviewerNode
-// .getPrevReviewer().getValue() == -1) {
-// if (movies.contains(reviewerNode.getMovieName()).list
-// .getHead() == movies.contains(reviewerNode
-// .getMovieName()).list.getTail()) {
-// movies.contains(reviewerNode.getMovieName()).list.setHead(
-// null);
-// movies.contains(reviewerNode.getMovieName()).list.setTail(
-// null);
-// }
-// else {
-// movies.contains(reviewerNode.getMovieName()).list.setHead(
-// reviewerNode.getNextMovie());
-// }
-// }
-// else {
-// reviewerNode.getPrevReviewer().setNextReviewer(reviewerNode
-// .getNextReviewer());
-// }
-// movies.contains(reviewerNode.getMovieName()).list.decSize();
-// reviewerNode.setNextMovie(reviewerNode.getNextMovie());
-// reviewerNode = next;
-// count--;
-// }
-// reviewers.delete(name);
+        ReviewerList.Node node = reviewers.contains(name);
+        Node<Integer> reviewerNode = node.list.getHead();
+        Node<Integer> next;
+        while (reviewerNode != null) {
+            next = reviewerNode.getNextMovie();
+            if (reviewerNode.getPrevReviewer() == null || reviewerNode
+                .getPrevReviewer().getValue() == -1) {
+                if (movies.contains(reviewerNode.getMovieName()).list
+                    .getHead() == movies.contains(reviewerNode
+                        .getMovieName()).list.getTail()) {
+                    movies.contains(reviewerNode.getMovieName()).list.setHead(
+                        null);
+                    movies.contains(reviewerNode.getMovieName()).list.setTail(
+                        null);
+                }
+                else {
+                    movies.contains(reviewerNode.getMovieName()).list.setHead(
+                        reviewerNode.getNextMovie());
+                }
+            }
+            else {
+                reviewerNode.getPrevReviewer().setNextReviewer(reviewerNode
+                    .getNextReviewer());
+            }
+            movies.contains(reviewerNode.getMovieName()).list.decSize();
+            reviewerNode.setNextMovie(reviewerNode.getNextMovie());
+            reviewerNode = next;
+            count--;
+        }
+        reviewers.delete(name);
     }
 
 

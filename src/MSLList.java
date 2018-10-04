@@ -315,6 +315,9 @@ public class MSLList {
         String s = "";
         while (n != null) {
             MDLList<Integer> list = n.getList();
+            if (list.getHead() == null || list.getHead().getValue() == -1) {
+                System.out.println(n.getName() + ": ");
+            }
             if (!(list.getCountAndScore().equals(""))) {
                 s += n.getName() + ": ";
                 s += list.getCountAndScore();

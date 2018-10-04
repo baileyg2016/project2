@@ -37,8 +37,9 @@ public class MDLList<T> {
      * Create a new DLList object.
      */
     public MDLList() {
-        head = new Node<Integer>(-1, null, null, null, null, -1, -1);
-        tail = head;
+        head = new Node<Integer>(-1, null, null, tail, null, -1, -1);
+        tail = new Node<Integer>(-1, null, null, null, head, -1, -1);
+        ;
         size = 0;
     }
 
@@ -109,13 +110,18 @@ public class MDLList<T> {
      *            the tail of the reviewer list
      */
     public void add(Node<Integer> newNode, Node<Integer> reviewerTail) {
-        if (reviewerTail == null) {
-            return;
-        }
+
         if (isEmpty()) {
             head = newNode;
             tail = head;
             size++;
+            newNode.setPrevMovie(reviewerTail);
+            if (reviewerTail == null) {
+                return;
+            }
+            else {
+                reviewerTail.setNextMovie(newNode);
+            }
             return;
         }
         // appending the node to the end of the list
