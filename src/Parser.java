@@ -387,7 +387,8 @@ public class Parser {
                     DecimalFormat df = new DecimalFormat("#.##");
                     df.setRoundingMode(RoundingMode.FLOOR);
                     System.out.println("The reviewer |" + simName
-                        + "| is similar to |" + name + "| with score " + df.format(score));
+                        + "| is similar to |" + name + "| with score " + df
+                            .format(score));
                 }
             }
             else {
@@ -420,8 +421,7 @@ public class Parser {
 
                         Node<Integer> simNode = null;
                         // Going through this list to find matching movies
-                        // in
-                        // simList
+                        // in simList
                         node = n.getList().getHead();
 
                         while (node != null) {
@@ -457,7 +457,8 @@ public class Parser {
                     DecimalFormat df = new DecimalFormat("#.##");
                     df.setRoundingMode(RoundingMode.FLOOR);
                     System.out.println("The movie |" + simName
-                        + "| is similar to |" + name + "| with score " + df.format(score));
+                        + "| is similar to |" + name + "| with score " + df
+                            .format(score));
                 }
             }
             else {
