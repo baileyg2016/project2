@@ -277,12 +277,12 @@ public class MDLList<T> {
         Node<Integer> currNode = null;
         StringBuilder builder = new StringBuilder();
         if (!isEmpty()) {
-            currNode = head;
-            while (currNode != null) {
+            currNode = tail;
+            while (currNode != head) {
                 int count = (Integer)currNode.getRCount();
                 int score = (Integer)currNode.getValue();
                 builder.append(count + ":" + score + " ");
-                currNode = currNode.getNextReviewer();
+                currNode = currNode.getPrevReviewer();
             }
         }
         return builder.toString();

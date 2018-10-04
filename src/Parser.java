@@ -323,7 +323,7 @@ public class Parser {
         String simName = null;
         float score = 11;
 
-        int val = 0;
+        float val = 0;
         int simCount = 0;
 
         if (tableName.equals("reviewer")) {
@@ -348,6 +348,8 @@ public class Parser {
                         RDLList<Integer> simList = n1.getList();
 
                         Node<Integer> simNode = null;
+
+                        node = n.getList().getHead();
                         // Going through this list to find matching movies in
                         // simList
                         while (node != null) {
@@ -363,8 +365,8 @@ public class Parser {
                             node = node.getNextMovie();
                         }
 
-                        if (simCount != 0 && (simName == null || (val
-                            / simCount) < score)) {
+                        if (simCount != 0 && simNode != null && (simName == null
+                            || (val / simCount) < score)) {
                             simName = simNode.getReviewerName();
                             score = val / simCount;
                         }
@@ -416,6 +418,8 @@ public class Parser {
                         // Going through this list to find matching movies
                         // in
                         // simList
+                        node = n.getList().getHead();
+
                         while (node != null) {
                             simNode = simList.containsMovie(node
                                 .getReviewerName());
@@ -429,8 +433,8 @@ public class Parser {
                             node = node.getNextReviewer();
                         }
 
-                        if (simCount != 0 && (simName == null || (val
-                            / simCount) < score)) {
+                        if (simCount != 0 && simNode != null && (simName == null
+                            || (val / simCount) < score)) {
                             simName = simNode.getMovieName();
                             score = val / simCount;
                         }
