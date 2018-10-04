@@ -23,7 +23,7 @@ public class RDLListTest extends TestCase {
         Node<Integer> n1 = new Node<Integer>(2, null, null, null, null, -1, -1);
         Node<Integer> n2 = new Node<Integer>(3, null, null, null, null, -1, -1);
         Node<Integer> tail = new Node<Integer>(-1, null, null, null, null, -1, -1);
-        list.add(n, null);
+        //list.add(n, null);
         assertTrue(list.isEmpty());
         
         list.add(n, tail);        
