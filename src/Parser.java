@@ -1,6 +1,8 @@
 import java.util.Scanner;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 
 /**
  * The class that parses the command file and stores the information in the
@@ -382,8 +384,10 @@ public class Parser {
                         + name + "|");
                 }
                 else {
+                    DecimalFormat df = new DecimalFormat("#.##");
+                    df.setRoundingMode(RoundingMode.FLOOR);
                     System.out.println("The reviewer |" + simName
-                        + "| is similar to |" + name + "| with score " + score);
+                        + "| is similar to |" + name + "| with score " + df.format(score));
                 }
             }
             else {
@@ -450,8 +454,10 @@ public class Parser {
                         + "|");
                 }
                 else {
+                    DecimalFormat df = new DecimalFormat("#.##");
+                    df.setRoundingMode(RoundingMode.FLOOR);
                     System.out.println("The movie |" + simName
-                        + "| is similar to |" + name + "| with score " + score);
+                        + "| is similar to |" + name + "| with score " + df.format(score));
                 }
             }
             else {
