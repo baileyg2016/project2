@@ -236,15 +236,12 @@ public class Parser {
             .getNumEntries() == 0) {
             System.out.println("There are no ratings in the database");
             return;
-        }        
+        }
         rL.printListAndCount();
         System.out.print(mL.printListAndReviews());
     }
-    
-    
-    
 
-    
+
     /**
      * This chooses which table to list the movies or reviews from
      * 
@@ -369,9 +366,8 @@ public class Parser {
                             node = node.getNextMovie();
                         }
 
-                        if (simCount != 0 && simNode != null && (simName == null
-                            || (val / simCount) < score)) {
-                            simName = simNode.getReviewerName();
+                        if (simCount != 0 && (val / simCount) < score) {
+                            simName = simList.getHead().getReviewerName();
                             score = val / simCount;
                         }
                         val = 0;
@@ -386,11 +382,10 @@ public class Parser {
                         + name + "|");
                 }
                 else {
-                    DecimalFormat df = new DecimalFormat("#.##");
-                    df.setRoundingMode(RoundingMode.FLOOR);
+                    String formattedString = String.format("%.02f", score);
                     System.out.println("The reviewer |" + simName
-                        + "| is similar to |" + name + "| with score " + df
-                            .format(score));
+                        + "| is similar to |" + name + "| with score "
+                        + formattedString);
                 }
             }
             else {
@@ -439,9 +434,8 @@ public class Parser {
                             node = node.getNextReviewer();
                         }
 
-                        if (simCount != 0 && simNode != null && (simName == null
-                            || (val / simCount) < score)) {
-                            simName = simNode.getMovieName();
+                        if (simCount != 0 && (val / simCount) < score) {
+                            simName = simList.getHead().getMovieName();
                             score = val / simCount;
                         }
                         val = 0;
@@ -456,11 +450,11 @@ public class Parser {
                         + "|");
                 }
                 else {
-                    DecimalFormat df = new DecimalFormat("#.##");
-                    df.setRoundingMode(RoundingMode.FLOOR);
+                    String formattedString = String.format("%.02f", score);
                     System.out.println("The movie |" + simName
-                        + "| is similar to |" + name + "| with score " + df
-                            .format(score));
+                        + "| is similar to |" + name + "| with score "
+                        + formattedString);
+
                 }
             }
             else {
@@ -496,7 +490,5 @@ public class Parser {
 
         return fields;
     }
-    
-    
-    
+
 }
