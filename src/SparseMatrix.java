@@ -95,8 +95,8 @@ public class SparseMatrix {
 
         matrixNode.setRCount(reviewerNode.getCount());
         matrixNode.setMCount(movieNode.getCount()/*
-                                                     * movieTail.getMCount() + 1
-                                                     */);
+                                                  * movieTail.getMCount() + 1
+                                                  */);
 
         // Adding the matrix node and connecting everything
 
@@ -138,6 +138,7 @@ public class SparseMatrix {
             }
             reviewers.contains(movieNode.getReviewerName()).list.decSize();
 
+            movieNode.setNextReviewer(movieNode.getNextReviewer());
             movieNode = next;
             count--;
         }
@@ -178,6 +179,7 @@ public class SparseMatrix {
                 }
             }
             movies.contains(reviewerNode.getMovieName()).list.decSize();
+
             reviewerNode.setNextMovie(reviewerNode.getNextMovie());
             reviewerNode = next;
             count--;
