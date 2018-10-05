@@ -128,7 +128,7 @@ public class RDLList<T> {
         int val = newNode.getMCount();
         Node<Integer> n = head;
 
-        while (val > n.getMCount() && n != null) {
+        while (n != null && val > n.getMCount()) {
             n = n.getNextMovie();
         }
         //tail edge case
@@ -143,6 +143,7 @@ public class RDLList<T> {
             Node<Integer> pNode = n.getPrevMovie();
             newNode.setPrevMovie(pNode);
             newNode.setNextMovie(n);
+            n.setPrevMovie(newNode);
             //head edge case
             if (pNode != null) {
                 pNode.setNextMovie(newNode);
@@ -267,6 +268,10 @@ public class RDLList<T> {
             currNode.setPrevReviewer(null);
             currNode = currNode.getNextMovie();
         }
+        head = new Node<Integer>(-1, null, null, null, null, -1, -1);
+        tail = new Node<Integer>(-1, null, null, null, null, -1, -1);
+        head.setNextMovie(tail);
+        tail.setPrevMovie(head);
         size = 0;
     }
 
@@ -275,15 +280,15 @@ public class RDLList<T> {
      * Traverses the list
      * Used for the similar call
      */
-    public void trav() {
-        Node<Integer> currNode = head;
-        while (currNode != tail) {
-            // Maybe add all the scores in the nodes?
-            currNode = currNode.getNextMovie();
-        }
-
-        // Return the scores added and then divided by the number of nodes?
-    }
+//    public void trav() {
+//        Node<Integer> currNode = head;
+//        while (currNode != tail) {
+//            // Maybe add all the scores in the nodes?
+//            currNode = currNode.getNextMovie();
+//        }
+//
+//        // Return the scores added and then divided by the number of nodes?
+//    }
 
 
     /**
