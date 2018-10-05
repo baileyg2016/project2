@@ -171,7 +171,8 @@ public class Hash<T> {
      *            The key that is trying to be deleted
      * @param tableName
      *            the name of the table that we are deleting from
-     * 
+     * @return boolean
+     *          true if the delete was successful
      *
      */
     public boolean delete(T key, String tableName) {
