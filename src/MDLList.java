@@ -141,7 +141,7 @@ public class MDLList<T> {
             Node<Integer> pNode = n.getPrevReviewer();
             newNode.setPrevReviewer(pNode);
             newNode.setNextReviewer(n);
-            n.setPrevMovie(newNode);
+            n.setPrevReviewer(newNode);
             //head edge case
             if (pNode != null) {
                 pNode.setNextReviewer(newNode);

@@ -309,7 +309,7 @@ public class Parser {
                         .getValue());
                     n = n.getNextReviewer();
                 }
-                System.out.println(s);
+                //System.out.println(s);
             }
         }
     }
