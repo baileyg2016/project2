@@ -165,7 +165,7 @@ public class MDLList<T> {
         if (!(isEmpty())) {
             t = tail;
             if (tail == head) {
-                head = null;
+                // head = null;
             }
             else {
                 Node<Integer> n = tail.getPrevReviewer();
@@ -184,11 +184,14 @@ public class MDLList<T> {
      * 
      * @param val
      *            the position of the record in the list
-     * @return
-     *         the node deleted
+     * @return Node<Integer>
+     *         the node removed
      */
     public Node<Integer> remove(int val) {
         Node<Integer> pNode = head;
+        if (head.getValue() == val) {
+            head = head.getNextReviewer();
+        }
         while (pNode.getValue() != val) {
             pNode = pNode.getNextReviewer();
         }
@@ -198,27 +201,6 @@ public class MDLList<T> {
         pNode.setPrevReviewer(null);
         size--;
         return pNode;
-    }
-
-
-    /**
-     * Determines if the list contains a movie
-     * 
-     * @param name
-     *            the name of the movie
-     * @return Node<Integer>
-     *         the node that is of the name or null
-     */
-
-    public Node<Integer> containsMovie(String name) {
-        Node<Integer> curr = head;
-        while (curr != null) {
-            if (curr.getReviewerName().equals(name)) {
-                return curr;
-            }
-            curr = curr.getNextReviewer();
-        }
-        return null;
     }
 
 
@@ -272,7 +254,7 @@ public class MDLList<T> {
      */
     public void trav() {
         Node<Integer> currNode = head;
-        while (currNode != tail) {
+        while (currNode != null) {
             // Maybe add all the scores in the nodes?
             currNode = currNode.getNextReviewer();
         }
@@ -330,6 +312,13 @@ public class MDLList<T> {
         return builder.toString();
     }
 
+
+    /**
+     * Sets the tail
+     * 
+     * @param tail
+     *            the new tail
+     */
 
     public void setTail(Node<Integer> tail) {
         this.tail = tail;

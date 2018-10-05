@@ -7,7 +7,19 @@ import student.TestCase;
  */
 public class RDLListTest extends TestCase {
     /**
+<<<<<<< HEAD
      * Tests the class
+=======
+     * Set up
+     */
+    public void setUp() {
+        // Nothing here
+    }
+
+
+    /**
+     * Testing the RDLList
+>>>>>>> 820f3a4b0b5707947983fc7768dea1083287bf08
      */
     public void testMovieList() {
         // testing that the list is empty
@@ -21,7 +33,6 @@ public class RDLListTest extends TestCase {
         Node<Integer> n2 = new Node<Integer>(3, null, null, null, null, 3, 3);
         Node<Integer> tail = new Node<Integer>(-1, null, null, null, null, -1,
             -1);
-        // list.add(n, null);
         assertTrue(list.isEmpty());
 
         list.add(n, tail);
@@ -39,7 +50,7 @@ public class RDLListTest extends TestCase {
         assertFuzzyEquals(list.toString(), "{1, 3}");
 
         list.nuke();
-        // list.trav();
+
         assertFuzzyEquals(list.toString(), "{}");
         assertTrue(list.isEmpty());
 

@@ -20,11 +20,6 @@ public class Record<T> {
     private boolean tombstone;
 
     /**
-     * Points to the head of the list
-     */
-    private Object h;
-
-    /**
      * The amount of objects added thus far
      */
     private int count;
@@ -61,14 +56,6 @@ public class Record<T> {
      */
     public T getKey() {
         return key;
-    }
-
-
-    /**
-     * sets the reference to the head node of the list
-     */
-    public void setH(Node<Integer> head) {
-        h = head;
     }
 
 

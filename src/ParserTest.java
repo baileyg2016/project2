@@ -58,6 +58,7 @@ public class ParserTest extends TestCase {
         parser.add(r0);
         parser.add(r1);
         parser.add(r2);
+        assertEquals(3, movies.getNumEntries());
         parser.list("reviewer", "Hayao Miyazaki");
         parser.similar("reviewer", "Hayao Miyazaki");
 
@@ -116,6 +117,7 @@ public class ParserTest extends TestCase {
         parser.add(r0);
         parser.add(r1);
         parser.add(r2);
+        assertEquals(3, movies.getNumEntries());
 
         // parser.add(r5);
         // parser.add(r4);

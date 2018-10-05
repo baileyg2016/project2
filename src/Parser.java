@@ -411,7 +411,7 @@ public class Parser {
                         // in simList
                         node = n.getList().getHead();
                         while (node != null) {
-                            simNode = simList.containsMovie(node
+                            simNode = simList.containsReviewer(node
                                 .getReviewerName());
                             if (simNode != null) {
                                 simCount++;
