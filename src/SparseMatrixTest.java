@@ -184,9 +184,9 @@ public class SparseMatrixTest extends TestCase {
         matrix.deleteReviewers("Harry");
 
         // there is a delete issue
-        assertEquals(matrix.reviewers.contains("Bill").list.getHead()
+        assertEquals(matrix.reviewers.contains("Bill").getList().getHead()
             .getValue(), 6);
-        assertEquals(matrix.reviewers.contains("Bill").list.getTail()
+        assertEquals(matrix.reviewers.contains("Bill").getList().getTail()
             .getValue(), 3);
         // assertEquals(matrix.movies.contains("Star
         // wars").list.getTail().getValue(), 6);
