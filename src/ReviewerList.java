@@ -197,9 +197,9 @@ public class ReviewerList {
         tail.setNext(name, count, new RDLList<Integer>());
 
         tail = tail.next;
-        count++;
+        
         tail.setCount(count);
-
+        count++;
         numNodes++;
         return (Node)tail;
     }
