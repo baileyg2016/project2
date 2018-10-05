@@ -233,11 +233,11 @@ public class Node<T> {
     /**
      * Sets the count value
      * 
-     * @param mCount
+     * @param count
      *            the count of this reviewer
      */
-    public void setMCount(T mCount) {
-        this.mCount = mCount;
+    public void setMCount(T count) {
+        this.mCount = count;
     }
 
 
@@ -255,11 +255,11 @@ public class Node<T> {
     /**
      * Sets the count value
      * 
-     * @param rCount
+     * @param count
      *            the count of this reviewer
      */
-    public void setRCount(T rCount) {
-        this.rCount = rCount;
+    public void setRCount(T count) {
+        this.rCount = count;
     }
 
 

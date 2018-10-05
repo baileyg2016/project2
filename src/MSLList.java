@@ -374,6 +374,11 @@ public class MSLList {
     }
 
 
+    /**
+     * 
+     * @return
+     *         The count of the list
+     */
     public int getCount() {
         return count;
     }

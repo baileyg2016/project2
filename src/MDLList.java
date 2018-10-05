@@ -164,10 +164,7 @@ public class MDLList<T> {
         Node<Integer> t = null;
         if (!(isEmpty())) {
             t = tail;
-            if (tail == head) {
-                // head = null;
-            }
-            else {
+            if (tail != head) {
                 Node<Integer> n = tail.getPrevReviewer();
                 n.setNextReviewer(null);
                 tail.setPrevReviewer(null);

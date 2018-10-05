@@ -8,11 +8,17 @@
  */
 public class SparseMatrix {
 
-    // the global reviewers list
-    public ReviewerList reviewers;
-    // the global movies list
-    public MSLList movies;
-    // the total count of nodes that are in the matrix
+    /**
+     * the global reviewers list
+     */
+    private ReviewerList reviewers;
+    /**
+     * the global movies list
+     */
+    private MSLList movies;
+    /**
+     * the total count of nodes that are in the matrix
+     */
     private int count;
 
 
@@ -58,8 +64,8 @@ public class SparseMatrix {
             }
             else {
                 reviewerNode.getList().containsMovie(movie).setValue(rating);
-                reviewerNode.getList().containsMovie(movie).setRCount(reviewerNode
-                    .getCount());
+                reviewerNode.getList().containsMovie(movie).setRCount(
+                    reviewerNode.getCount());
                 return;
             }
 
@@ -107,6 +113,12 @@ public class SparseMatrix {
     }
 
 
+    /**
+     * Deletes all the movies from a reviewer
+     * 
+     * @param name
+     *            Name of the reviewer
+     */
     public void deleteMovies(String name) {
         MSLList.Node node = movies.contains(name);
         Node<Integer> movieNode = node.getList().getHead();
@@ -130,11 +142,10 @@ public class SparseMatrix {
             }
             else {
                 movieNode.getPrevMovie().setNextMovie(movieNode.getNextMovie());
-                if (movieNode.getNextMovie() != null)
-                    if (movieNode.getNextMovie().getValue() == -1) {
-                        break;
-                    }
-                movieNode.getNextMovie().setPrevMovie(movieNode.getPrevMovie());
+                if (movieNode.getNextMovie() != null) {
+                    movieNode.getNextMovie().setPrevMovie(movieNode
+                        .getPrevMovie());
+                }
             }
             reviewers.contains(movieNode.getReviewerName()).getList().decSize();
 
@@ -146,6 +157,12 @@ public class SparseMatrix {
     }
 
 
+    /**
+     * Deletes all the reviews from a reviewer
+     * 
+     * @param name
+     *            The name of the reviewer
+     */
     public void deleteReviewers(String name) {
         ReviewerList.Node node = reviewers.contains(name);
         Node<Integer> reviewerNode = node.getList().getHead();
@@ -155,25 +172,22 @@ public class SparseMatrix {
             if (reviewerNode.getPrevReviewer() == null || reviewerNode
                 .getPrevReviewer().getValue() == -1) {
                 if (movies.contains(reviewerNode.getMovieName()).getList()
-                    .getHead() == movies.contains(reviewerNode
-                        .getMovieName()).getList().getTail()) {
-                    movies.contains(reviewerNode.getMovieName()).getList().setHead(
-                        null);
-                    movies.contains(reviewerNode.getMovieName()).getList().setTail(
-                        null);
+                    .getHead() == movies.contains(reviewerNode.getMovieName())
+                        .getList().getTail()) {
+                    movies.contains(reviewerNode.getMovieName()).getList()
+                        .setHead(null);
+                    movies.contains(reviewerNode.getMovieName()).getList()
+                        .setTail(null);
                 }
                 else {
-                    movies.contains(reviewerNode.getMovieName()).getList().setHead(
-                        reviewerNode.getNextMovie());
+                    movies.contains(reviewerNode.getMovieName()).getList()
+                        .setHead(reviewerNode.getNextMovie());
                 }
             }
             else {
                 reviewerNode.getPrevReviewer().setNextReviewer(reviewerNode
                     .getNextReviewer());
                 if (reviewerNode.getNextReviewer() != null) {
-                    if (reviewerNode.getNextReviewer().getValue() == -1) {
-                        break;
-                    }
                     reviewerNode.getNextReviewer().setPrevReviewer(reviewerNode
                         .getPrevReviewer());
                 }

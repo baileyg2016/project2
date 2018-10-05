@@ -31,16 +31,6 @@ public class Parser {
     private Hash<String> reviewerTable;
 
     /**
-     * List for the reviewers (columns)
-     */
-    private ReviewerList reviewersList;
-
-    /**
-     * List for the movies (rows)
-     */
-    private MSLList moviesList;
-
-    /**
      * The matrix object for storing the ratings
      */
     private SparseMatrix matrix;
@@ -56,10 +46,6 @@ public class Parser {
      *            Sets global hash table object for the movies
      * @param reviewerTable
      *            Sets global hash table object for the reviewers
-     * @param reviewersList
-     *            Sets the reviewers list for the method
-     * @param moviesList
-     *            Sets the movies list for the method
      * @param matrix
      *            Sets the matrix object for the class
      */
@@ -67,14 +53,10 @@ public class Parser {
         String fileName,
         Hash<String> movieTable,
         Hash<String> reviewerTable,
-        ReviewerList reviewersList,
-        MSLList moviesList,
         SparseMatrix matrix) {
         this.inputFile = fileName;
         this.movieTable = movieTable;
         this.reviewerTable = reviewerTable;
-        this.reviewersList = reviewersList;
-        this.moviesList = moviesList;
         this.matrix = matrix;
     }
 
@@ -387,7 +369,7 @@ public class Parser {
                     + "| not found in the database.");
             }
         }
-        else {// then it is the movie
+        else {
             if (matrix.getMovies().contains(name) != null) {
                 // Node with the reference to the list we are comparing
                 // other

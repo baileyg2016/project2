@@ -21,7 +21,7 @@ public class ParserTest extends TestCase {
         MSLList moviesList = new MSLList();
         SparseMatrix matrix = new SparseMatrix(reviewersList, moviesList);
         Parser parser = new Parser("P2SampleInput.txt", movies, reviewers,
-            reviewersList, moviesList, matrix);
+            matrix);
         parser.parseFile();
         assertEquals(4, movies.getNumEntries());
         assertEquals(4, reviewers.getNumEntries());
@@ -38,7 +38,7 @@ public class ParserTest extends TestCase {
         MSLList moviesList = new MSLList();
         SparseMatrix matrix = new SparseMatrix(reviewersList, moviesList);
         Parser parser = new Parser("P2SampleInput.txt", movies, reviewers,
-            reviewersList, moviesList, matrix);
+            matrix);
 
         String[] r0 = { "Hayao Miyazaki", "Spirited Away", "10" };
         String[] r1 = { "Hayao Miyazaki", "Joker", "3" };
@@ -101,7 +101,7 @@ public class ParserTest extends TestCase {
         MSLList moviesList = new MSLList();
         SparseMatrix matrix = new SparseMatrix(reviewersList, moviesList);
         Parser parser = new Parser("P2SampleInput.txt", movies, reviewers,
-            reviewersList, moviesList, matrix);
+            matrix);
 
         String[] r0 = { "Hayao Miyazaki", "Spirited Away", "10" };
         String[] r1 = { "Hayao Miyazaki", "Joker", "3" };

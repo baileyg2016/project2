@@ -73,7 +73,7 @@ public class ReviewerList {
          * 
          * @param nodeName
          *            The name of the reviewer for the next node
-         * @param count
+         * @param nodeCount
          *            The number of records added thus far
          * @param rlist
          *            sets the list for the node
@@ -119,11 +119,11 @@ public class ReviewerList {
         /**
          * Sets count
          * 
-         * @param name
+         * @param nextName
          *            sets the next name
          */
-        void setNext(String name) {
-            this.next = new Node(name);
+        void setNext(String nextName) {
+            this.next = new Node(nextName);
         }
 
 

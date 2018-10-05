@@ -50,8 +50,7 @@ public class MovieReview {
 
             SparseMatrix matrix = new SparseMatrix(reviewersList, moviesList);
 
-            Parser parser = new Parser(args[1], movies, reviewers,
-                reviewersList, moviesList, matrix);
+            Parser parser = new Parser(args[1], movies, reviewers, matrix);
             parser.parseFile();
         }
     }

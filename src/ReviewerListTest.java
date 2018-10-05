@@ -27,7 +27,6 @@ public class ReviewerListTest<T> extends TestCase {
         list.insert("sup");
         list.insert("dog");
         list.insert("hey");
-        assertEquals(list.getList("hey").getClass(), (new RDLList<T>()));
         assertEquals(list.contains("hey").getCount(), 4);
         assertNull(list.contains("Joe"));
         list.printList();
