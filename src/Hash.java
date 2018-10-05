@@ -171,6 +171,8 @@ public class Hash<T> {
      *            The key that is trying to be deleted
      * @param tableName
      *            the name of the table that we are deleting from
+     * @return
+     *         Whether something was deleted or not
      * 
      *
      */

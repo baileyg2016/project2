@@ -14,24 +14,24 @@ public class MSLList {
         /**
          * Name of this node
          */
-        public String name;
+        private String name;
         /**
          * list of movies
          * 
          * @param Integer
          *            holds an integer value
          */
-        public MDLList<Integer> list;
+        private MDLList<Integer> list;
 
         /**
          * the next node in the list
          */
-        public Node next;
+        private Node next;
 
         /**
          * The number of entries added thus far
          */
-        public int count;
+        private int count;
 
 
         /**
@@ -54,12 +54,31 @@ public class MSLList {
         }
 
 
+        /**
+         * Create a node with params name and list
+         * 
+         * @param name
+         *            The name of the node
+         * @param list
+         *            The list for the node
+         */
         public Node(String name, MDLList<Integer> list) {
             this.name = name;
             this.list = list;
             this.next = null;
         }
-        
+
+
+        /**
+         * Create a node with params name and list
+         * 
+         * @param name
+         *            The name of the node
+         * @param list
+         *            The list for the node
+         * @param count
+         *            The count for the node
+         */
         public Node(String name, MDLList<Integer> list, int count) {
             this.name = name;
             this.list = list;
@@ -68,6 +87,12 @@ public class MSLList {
         }
 
 
+        /**
+         * Create a node with the param name
+         * 
+         * @param name
+         *            Sets the name for the node
+         */
         public Node(String name) {
             next = null;
             this.name = name;
@@ -145,22 +170,22 @@ public class MSLList {
     /**
      * Head of the list
      */
-    public Node head;
+    private Node head;
 
     /**
      * Tail of the list
      */
-    public Node tail;
+    private Node tail;
 
     /**
      * Size of the list
      */
-    public int size;
+    private int size;
 
     /**
      * Position in the list
      */
-    public int count;
+    private int count;
 
 
     /**
@@ -181,6 +206,8 @@ public class MSLList {
      * 
      * @param name
      *            the name of the movie
+     * @return
+     *         The tail of list
      */
     public Node add(String name) {
         MDLList<Integer> mList = new MDLList<>();
@@ -220,7 +247,7 @@ public class MSLList {
         Node curr = head;
         Node prev = null;
 
-        while (curr != null && curr.name.equals(name)) {
+        if (curr != null && curr.name.equals(name)) {
             deleted = head;
             head = head.getNext();
             size--;
@@ -334,14 +361,21 @@ public class MSLList {
         }
         return s;
     }
-    
+
+
     /**
      * Gets the head
-     * @return  
-     *      the head node
+     * 
+     * @return
+     *         the head node
      */
     public Node getHead() {
         return head;
+    }
+
+
+    public int getCount() {
+        return count;
     }
 
 }

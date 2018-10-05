@@ -1,5 +1,12 @@
 import student.TestCase;
 
+/**
+ * 
+ * Tests the sparse matrix class
+ * 
+ * @author BaileySpell and Adam Tapp
+ *
+ */
 public class SparseMatrixTest extends TestCase {
     /**
      * Sets up the tests that follow. In general, used for initialization
@@ -103,7 +110,7 @@ public class SparseMatrixTest extends TestCase {
         matrix.insert("Tim", "Star wars", 6);
         matrix.insert("Bill", "Star wars", 9);
         assertEquals(2, matrix.getCount());
-        assertEquals(1, movies.count);
+        assertEquals(1, movies.getCount());
         assertEquals(2, reviewers.getCount());
     }
 
@@ -119,7 +126,7 @@ public class SparseMatrixTest extends TestCase {
         matrix.insert("Tim", "Star wars", 6);
         matrix.insert("Tim", "Return of the Sith", 9);
         assertEquals(2, matrix.getCount());
-        assertEquals(2, movies.count);
+        assertEquals(2, movies.getCount());
         assertEquals(1, reviewers.getCount());
     }
 
@@ -181,12 +188,14 @@ public class SparseMatrixTest extends TestCase {
             .getValue(), 6);
         assertEquals(matrix.reviewers.contains("Bill").list.getTail()
             .getValue(), 3);
-        //assertEquals(matrix.movies.contains("Star wars").list.getTail().getValue(), 6);
-        //assertEquals(matrix.movies.contains("MOL").list.getTail().getValue(), 3);
-        //assertEquals(matrix.movies.contains("Star wars").list.getHead()
-          //  .getValue(), 6);
-       // assertEquals(matrix.movies.contains("MOL").list.getHead().getValue(),
-         //   7);
+        // assertEquals(matrix.movies.contains("Star
+        // wars").list.getTail().getValue(), 6);
+        // assertEquals(matrix.movies.contains("MOL").list.getTail().getValue(),
+        // 3);
+        // assertEquals(matrix.movies.contains("Star wars").list.getHead()
+        // .getValue(), 6);
+        // assertEquals(matrix.movies.contains("MOL").list.getHead().getValue(),
+        // 7);
     }
 
     /**

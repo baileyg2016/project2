@@ -36,14 +36,10 @@ public class Node<T> {
      * 
      * @param value
      *            The rating being stored
-     * @param nextReviewer
-     *            The pointer to the next reviewer
-     * @param prevReviewer
-     *            The pointer to the previous reviewer
-     * @param nextMovie
-     *            the pointer to the next movie
-     * @param prevMovie
-     *            The pointer to the previous movie
+     * @param reviewer
+     *            The name of the reviewer
+     * @param movie
+     *            The name of the movie
      * 
      */
     public Node(int value, String reviewer, String movie) {
@@ -56,14 +52,12 @@ public class Node<T> {
         this.prevMovie = null;
     }
 
-    
-    
     /**
      * The count of the movie this review was added to
      * This is the count of movieTable
      */
     private T mCount;
-    
+
     /**
      * The count of the review this movie was added to
      * This is the count of reviewTable
@@ -84,6 +78,10 @@ public class Node<T> {
      *            the pointer to the next movie
      * @param prevMovie
      *            The pointer to the previous movie
+     * @param mCount
+     *            The y coord for the node
+     * @param rCount
+     *            the x coord for the node
      * 
      */
     public Node(
@@ -91,7 +89,7 @@ public class Node<T> {
         Node<T> nextReviewer,
         Node<T> prevReviewer,
         Node<T> nextMovie,
-        Node<T> prevMovie, 
+        Node<T> prevMovie,
         T mCount,
         T rCount) {
         this.value = value;
@@ -230,37 +228,46 @@ public class Node<T> {
     public String getReviewerName() {
         return reviewerName;
     }
+
+
     /**
      * Sets the count value
+     * 
      * @param mCount
-     *          the count of this reviewer
+     *            the count of this reviewer
      */
     public void setMCount(T mCount) {
         this.mCount = mCount;
     }
-    
+
+
     /**
      * Gets the count value
+     * 
      * @return T
-     *          the count value
+     *         the count value
      */
     public T getMCount() {
         return mCount;
     }
-    
+
+
     /**
      * Sets the count value
+     * 
      * @param rCount
-     *          the count of this reviewer
+     *            the count of this reviewer
      */
     public void setRCount(T rCount) {
         this.rCount = rCount;
     }
-    
+
+
     /**
      * Gets the count value
+     * 
      * @return T
-     *          the count value
+     *         the count value
      */
     public T getRCount() {
         return rCount;

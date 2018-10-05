@@ -3,6 +3,7 @@
 /**
  * 
  * @author BaileySpell and Adam Tapp
+ * @version Milestone 2
  *
  * @param
  * Generic
@@ -14,22 +15,20 @@ public class ReviewerList {
      * 
      * @author BaileySpell & Adam Tapp
      *
-     * @param <E>
-     *            The generic type for the class
      */
     static class Node {
         /**
          * Next node in the list
          */
-        Node next;
+        private Node next;
         /**
          * list object for the ratings
          */
-        public RDLList<Integer> list;
+        private RDLList<Integer> list;
         /**
          * Name of the reviewer
          */
-        String name;
+        private String name;
 
         /**
          * The number of records added thus far
@@ -53,30 +52,34 @@ public class ReviewerList {
         /**
          * Constructor for the node
          * 
-         * @param name
+         * @param nodeName
          *            name of the reviewer
-         * @param count
+         * @param nodeCount
          *            the number of records added thus far
+         * @param rlist
+         *            sets the double linked list for the node
          */
-        Node(String name, int count, RDLList<Integer> list) {
+        Node(String nodeName, int nodeCount, RDLList<Integer> rlist) {
             next = null;
-            this.name = name;
+            this.name = nodeName;
             list = new RDLList<Integer>();
-            this.count = count;
-            this.list = list;
+            this.count = nodeCount;
+            this.list = rlist;
         }
 
 
         /**
          * Sets the next node in the list
          * 
-         * @param name
+         * @param nodeName
          *            The name of the reviewer for the next node
          * @param count
          *            The number of records added thus far
+         * @param rlist
+         *            sets the list for the node
          */
-        void setNext(String name, int count, RDLList<Integer> list) {
-            this.next = new Node(name, count, list);
+        void setNext(String nodeName, int nodeCount, RDLList<Integer> rlist) {
+            this.next = new Node(nodeName, nodeCount, rlist);
         }
 
 
@@ -116,19 +119,30 @@ public class ReviewerList {
         /**
          * Sets count
          * 
-         * @param count
-         *            the count
+         * @param name
+         *            sets the next name
          */
         void setNext(String name) {
             this.next = new Node(name);
         }
 
 
+        /**
+         * 
+         * @return
+         *         the name of the node
+         */
         String getName() {
             return name;
         }
 
 
+        /**
+         * Sets the count for the node
+         * 
+         * @param count
+         *            The count for the node
+         */
         public void setCount(int count) {
             this.count = count;
         }
@@ -182,6 +196,8 @@ public class ReviewerList {
      * 
      * @param name
      *            name of the reviewer to add
+     * @return
+     *         the tail of the list
      */
     public Node insert(String name) {
         if (head == null) {
@@ -197,7 +213,7 @@ public class ReviewerList {
         tail.setNext(name, count, new RDLList<Integer>());
 
         tail = tail.next;
-        
+
         tail.setCount(count);
         count++;
         numNodes++;
@@ -222,7 +238,7 @@ public class ReviewerList {
         Node curr = head;
         Node prev = null;
 
-        while (curr != null && curr.name.equals(name)) {
+        if (curr != null && curr.name.equals(name)) {
             head = head.getNext();
             numNodes--;
             return;

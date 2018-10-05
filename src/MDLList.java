@@ -103,7 +103,7 @@ public class MDLList<T> {
     /**
      * Adds the object to the end of the list
      * 
-     * @param node
+     * @param newNode
      *            the node being added to this list
      * @param reviewerTail
      *            the tail of the reviewer list
@@ -115,10 +115,6 @@ public class MDLList<T> {
             tail = head;
             size++;
 
-            //newNode.setPrevReviewer(movieTail);
-            if (reviewerTail != null) {
-                //reviewerTail.setNextReviewer(newNode);
-            }
             return;
         }
         // Appending the node to the end of the list
@@ -129,20 +125,20 @@ public class MDLList<T> {
         while (n != null && val > n.getRCount()) {
             n = n.getNextReviewer();
         }
-        //tail edge case
+        // tail edge case
         if (n == null) {
             newNode.setNextReviewer(null);
             newNode.setPrevReviewer(tail);
             tail.setNextReviewer(newNode);
             tail = newNode;
         }
-        
+
         else {
             Node<Integer> pNode = n.getPrevReviewer();
             newNode.setPrevReviewer(pNode);
             newNode.setNextReviewer(n);
             n.setPrevReviewer(newNode);
-            //head edge case
+            // head edge case
             if (pNode != null) {
                 pNode.setNextReviewer(newNode);
             }
@@ -152,8 +148,8 @@ public class MDLList<T> {
         }
         size++;
         // connecting the node with the other list
-        //newNode.setPrevMovie(reviewerTail);
-        //reviewerTail.setNextMovie(newNode);
+        // newNode.setPrevMovie(reviewerTail);
+        // reviewerTail.setNextMovie(newNode);
 
     }
 
@@ -188,10 +184,12 @@ public class MDLList<T> {
      * 
      * @param val
      *            the position of the record in the list
+     * @return
+     *         the node deleted
      */
     public Node<Integer> remove(int val) {
         Node<Integer> pNode = head;
-        while (!(pNode.getValue() == val)) {
+        while (pNode.getValue() != val) {
             pNode = pNode.getNextReviewer();
         }
         pNode.getPrevReviewer().setNextReviewer(pNode.getNextReviewer());

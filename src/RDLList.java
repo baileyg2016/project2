@@ -102,9 +102,10 @@ public class RDLList<T> {
     /**
      * Adds the object to the end of the list
      * 
-     * @param <T>
+     * @param newNode
+     *            The newNode being added
      * 
-     * @param val
+     * @param movieTail
      *            the score to add
      * @throws IndexOutOfBoundsException
      *             if index is less than zero or greater than size
@@ -116,11 +117,6 @@ public class RDLList<T> {
             head = newNode;
             tail = head;
             size++;
-
-            //newNode.setPrevReviewer(movieTail);
-            if (movieTail != null) {
-                //movieTail.setNextReviewer(newNode);
-            }
             return;
         }
         // Appending the node to the end of the list
@@ -131,20 +127,20 @@ public class RDLList<T> {
         while (n != null && val > n.getMCount()) {
             n = n.getNextMovie();
         }
-        //tail edge case
+        // tail edge case
         if (n == null) {
             newNode.setNextMovie(null);
             newNode.setPrevMovie(tail);
             tail.setNextMovie(newNode);
             tail = newNode;
         }
-        
+
         else {
             Node<Integer> pNode = n.getPrevMovie();
             newNode.setPrevMovie(pNode);
             newNode.setNextMovie(n);
             n.setPrevMovie(newNode);
-            //head edge case
+            // head edge case
             if (pNode != null) {
                 pNode.setNextMovie(newNode);
             }
@@ -155,8 +151,8 @@ public class RDLList<T> {
         size++;
 
         // connecting the node with the other list
-        //newNode.setPrevReviewer(movieTail);
-       // movieTail.setNextReviewer(newNode);
+        // newNode.setPrevReviewer(movieTail);
+        // movieTail.setNextReviewer(newNode);
     }
 
 
@@ -191,10 +187,12 @@ public class RDLList<T> {
      * 
      * @param val
      *            the position of the record in the list
+     * @return
+     *         The node removed from the list
      */
     public Node<Integer> remove(int val) {
         Node<Integer> pNode = head;
-        while (!(pNode.getValue() == val)) {
+        while ((pNode.getValue() != val)) {
             pNode = pNode.getNextMovie();
         }
         pNode.getPrevMovie().setNextMovie(pNode.getNextMovie());
@@ -280,16 +278,15 @@ public class RDLList<T> {
      * Traverses the list
      * Used for the similar call
      */
-//    public void trav() {
-//        Node<Integer> currNode = head;
-//        while (currNode != tail) {
-//            // Maybe add all the scores in the nodes?
-//            currNode = currNode.getNextMovie();
-//        }
+// public void trav() {
+// Node<Integer> currNode = head;
+// while (currNode != tail) {
+// // Maybe add all the scores in the nodes?
+// currNode = currNode.getNextMovie();
+// }
 //
-//        // Return the scores added and then divided by the number of nodes?
-//    }
-
+// // Return the scores added and then divided by the number of nodes?
+// }
 
     /**
      * Returns a string representation of the list If a list contains A, B, and
@@ -336,30 +333,5 @@ public class RDLList<T> {
     public void setTail(Node<Integer> tail) {
         this.tail = tail;
     }
-
-    /**
-     * Gets the count of the reviewer for the given review and the score in that
-     * review
-     * 
-     * @return String
-     *         the count and the score
-     */
-// public String getCountAndScore() {
-// Node<Integer> currNode = null;
-// StringBuilder builder = new StringBuilder();
-// if (!isEmpty()) {
-// currNode = head;
-// while (currNode != tail) {
-// int count = (Integer)currNode.getRCount();
-// int score = (Integer)currNode.getValue();
-// builder.append(count + ":" + score + " ");
-// if (currNode.getNextMovie() != tail) {
-// builder.append(", ");
-// }
-// currNode = currNode.getNextMovie();
-// }
-// }
-// return builder.toString();
-// }
 
 }

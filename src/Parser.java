@@ -1,8 +1,6 @@
 import java.util.Scanner;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.math.RoundingMode;
-import java.text.DecimalFormat;
 
 /**
  * The class that parses the command file and stores the information in the
@@ -49,6 +47,7 @@ public class Parser {
 
 
     /**
+     * 
      * Constructor for the class
      * 
      * @param fileName
@@ -57,6 +56,12 @@ public class Parser {
      *            Sets global hash table object for the movies
      * @param reviewerTable
      *            Sets global hash table object for the reviewers
+     * @param reviewersList
+     *            Sets the reviewers list for the method
+     * @param moviesList
+     *            Sets the movies list for the method
+     * @param matrix
+     *            Sets the matrix object for the class
      */
     public Parser(
         String fileName,
@@ -322,23 +327,18 @@ public class Parser {
     public void similar(String tableName, String name) {
         String simName = null;
         float score = 11;
-
         float val = 0;
         int simCount = 0;
-
         if (tableName.equals("reviewer")) {
             if (matrix.getReviewers().contains(name) != null) {
                 // Node with the reference to the list we are comparing other
                 // lists to
                 ReviewerList.Node n = matrix.getReviewers().contains(name);
-
                 // Gets the head to the DLList that we are comparing other lists
                 // to
                 Node<Integer> node = n.getList().getHead();
-
                 // The first node in the reviewer list
                 ReviewerList.Node n1 = matrix.getReviewers().getHead();
-
                 // Iterates through the lists we are comparing to this list
                 while (n1 != null) {
                     if (n.equals(n1)) {
@@ -346,9 +346,7 @@ public class Parser {
                     }
                     else {
                         RDLList<Integer> simList = n1.getList();
-
                         Node<Integer> simNode = null;
-
                         node = n.getList().getHead();
                         // Going through this list to find matching movies in
                         // simList
@@ -364,7 +362,6 @@ public class Parser {
                             }
                             node = node.getNextMovie();
                         }
-
                         if (simCount != 0 && (val / simCount) < score) {
                             simName = simList.getHead().getReviewerName();
                             score = val / simCount;
@@ -373,9 +370,7 @@ public class Parser {
                         simCount = 0;
                         n1 = n1.getNext();
                     }
-
                 }
-
                 if (simName == null) {
                     System.out.println("There is no reviewer similar to |"
                         + name + "|");
@@ -398,15 +393,12 @@ public class Parser {
                 // other
                 // lists to
                 MSLList.Node n = matrix.getMovies().contains(name);
-
                 // Gets the head to the DLList that we are comparing other
                 // lists
                 // to
                 Node<Integer> node = n.getList().getHead();
-
                 // The first node in the reviewer list
                 MSLList.Node n1 = matrix.getMovies().getHead();
-
                 // Iterates through the lists we are comparing to this list
                 while (n1 != null) {
                     if (n.equals(n1)) {
@@ -414,12 +406,10 @@ public class Parser {
                     }
                     else {
                         MDLList<Integer> simList = n1.getList();
-
                         Node<Integer> simNode = null;
                         // Going through this list to find matching movies
                         // in simList
                         node = n.getList().getHead();
-
                         while (node != null) {
                             simNode = simList.containsMovie(node
                                 .getReviewerName());
@@ -432,7 +422,6 @@ public class Parser {
                             }
                             node = node.getNextReviewer();
                         }
-
                         if (simCount != 0 && (val / simCount) < score) {
                             simName = simList.getHead().getMovieName();
                             score = val / simCount;
@@ -441,9 +430,7 @@ public class Parser {
                         simCount = 0;
                         n1 = n1.getNext();
                     }
-
                 }
-
                 if (simName == null) {
                     System.out.println("There is no movie similar to |" + name
                         + "|");
@@ -453,14 +440,12 @@ public class Parser {
                     System.out.println("The movie |" + simName
                         + "| is similar to |" + name + "| with score "
                         + formattedString);
-
                 }
             }
             else {
                 System.out.println("Movie |" + name
                     + "| not found in the database.");
             }
-
         }
     }
 
