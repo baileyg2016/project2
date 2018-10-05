@@ -39,7 +39,6 @@ public class MDLList<T> {
     public MDLList() {
         head = new Node<Integer>(-1, null, null, tail, null, -1, -1);
         tail = new Node<Integer>(-1, null, null, null, head, -1, -1);
-        ;
         size = 0;
     }
 
@@ -115,26 +114,45 @@ public class MDLList<T> {
             head = newNode;
             tail = head;
             size++;
-            newNode.setPrevMovie(reviewerTail);
-            if (reviewerTail == null) {
-                return;
-            }
-            else {
-                reviewerTail.setNextMovie(newNode);
+
+            //newNode.setPrevReviewer(movieTail);
+            if (reviewerTail != null) {
+                //reviewerTail.setNextReviewer(newNode);
             }
             return;
         }
-        // appending the node to the end of the list
+        // Appending the node to the end of the list
         // the previous node
-        Node<Integer> pNode = tail;
-        newNode.setPrevReviewer(pNode);
-        tail.setNextReviewer(newNode);
-        tail = newNode;
-        size++;
+        int val = newNode.getRCount();
+        Node<Integer> n = head;
 
+        while (n != null && val > n.getRCount()) {
+            n = n.getNextReviewer();
+        }
+        //tail edge case
+        if (n == null) {
+            newNode.setNextReviewer(null);
+            newNode.setPrevReviewer(tail);
+            tail.setNextReviewer(newNode);
+            tail = newNode;
+        }
+        
+        else {
+            Node<Integer> pNode = n.getPrevReviewer();
+            newNode.setPrevReviewer(pNode);
+            newNode.setNextReviewer(n);
+            //head edge case
+            if (pNode != null) {
+                pNode.setNextReviewer(newNode);
+            }
+            else {
+                head = newNode;
+            }
+        }
+        size++;
         // connecting the node with the other list
-        newNode.setPrevMovie(reviewerTail);
-        reviewerTail.setNextMovie(newNode);
+        //newNode.setPrevMovie(reviewerTail);
+        //reviewerTail.setNextMovie(newNode);
 
     }
 

@@ -236,13 +236,15 @@ public class Parser {
             .getNumEntries() == 0) {
             System.out.println("There are no ratings in the database");
             return;
-        }
-
+        }        
         rL.printListAndCount();
         System.out.print(mL.printListAndReviews());
     }
+    
+    
+    
 
-
+    
     /**
      * This chooses which table to list the movies or reviews from
      * 
@@ -494,4 +496,7 @@ public class Parser {
 
         return fields;
     }
+    
+    
+    
 }

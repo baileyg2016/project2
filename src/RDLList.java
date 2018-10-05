@@ -117,23 +117,45 @@ public class RDLList<T> {
             tail = head;
             size++;
 
-            newNode.setPrevReviewer(movieTail);
+            //newNode.setPrevReviewer(movieTail);
             if (movieTail != null) {
-                movieTail.setNextReviewer(newNode);
+                //movieTail.setNextReviewer(newNode);
             }
             return;
         }
         // Appending the node to the end of the list
         // the previous node
-        Node<Integer> pNode = tail;
-        newNode.setPrevMovie(pNode);
-        tail.setNextMovie(newNode);
-        tail = newNode;
+        int val = newNode.getMCount();
+        Node<Integer> n = head;
+
+        while (val > n.getMCount() && n != null) {
+            n = n.getNextMovie();
+        }
+        //tail edge case
+        if (n == null) {
+            newNode.setNextMovie(null);
+            newNode.setPrevMovie(tail);
+            tail.setNextMovie(newNode);
+            tail = newNode;
+        }
+        
+        else {
+            Node<Integer> pNode = n.getPrevMovie();
+            newNode.setPrevMovie(pNode);
+            newNode.setNextMovie(n);
+            //head edge case
+            if (pNode != null) {
+                pNode.setNextMovie(newNode);
+            }
+            else {
+                head = newNode;
+            }
+        }
         size++;
 
         // connecting the node with the other list
-        newNode.setPrevReviewer(movieTail);
-        movieTail.setNextReviewer(newNode);
+        //newNode.setPrevReviewer(movieTail);
+       // movieTail.setNextReviewer(newNode);
     }
 
 
