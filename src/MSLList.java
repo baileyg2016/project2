@@ -59,6 +59,13 @@ public class MSLList {
             this.list = list;
             this.next = null;
         }
+        
+        public Node(String name, MDLList<Integer> list, int count) {
+            this.name = name;
+            this.list = list;
+            this.count = count;
+            this.next = null;
+        }
 
 
         public Node(String name) {
@@ -184,7 +191,7 @@ public class MSLList {
             return (Node)tail;
         }
         count++;
-        Node node = new Node(name, mList);
+        Node node = new Node(name, mList, count);
         tail.setNext(node);
         tail = tail.next;
         size++;

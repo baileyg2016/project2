@@ -309,8 +309,11 @@ public class Parser {
                         .getValue());
                     n = n.getNextReviewer();
                 }
+<<<<<<< HEAD
                 //System.out.println(s);
-            }
+=======
+>>>>>>> 897b3ace82495ac5d1ff2c2d31676eb8de10dc99
+
         }
     }
 
