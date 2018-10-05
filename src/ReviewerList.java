@@ -197,9 +197,9 @@ public class ReviewerList {
         tail.setNext(name, count, new RDLList<Integer>());
 
         tail = tail.next;
-
-        tail.setCount(count);
         count++;
+        tail.setCount(count);
+
         numNodes++;
         return (Node)tail;
     }
@@ -330,13 +330,15 @@ public class ReviewerList {
 
     /**
      * Gets the head
-     * @return 
-     *      the head of the nodes
+     * 
+     * @return
+     *         the head of the nodes
      */
     public Node getHead() {
         return head;
     }
-    
+
+
     /**
      * 
      * @return
@@ -345,7 +347,5 @@ public class ReviewerList {
     public Node getTail() {
         return tail;
     }
-    
-    
 
 }
