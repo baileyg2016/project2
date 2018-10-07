@@ -25,6 +25,17 @@ public class HashTest extends TestCase {
         assertEquals(myHash.h("aaaabbbb", 101), 75);
         assertEquals(myHash.h("aaaabbb", 101), 1640219587 % 101);
     }
+    
+    /**
+     * testing the hashing
+     */
+    public void testHash() {
+        Hash<String> myHash = new Hash<String>(10);
+        assertEquals(myHash.h("aaaabbbb", 101), 75);
+        assertEquals(myHash.h("Darth Vader", 6), 0);
+        assertEquals(myHash.h("David Lynch", 6), 4);
+        
+    }
 
 
     /**

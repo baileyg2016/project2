@@ -139,22 +139,12 @@ public class Hash<T> {
         int home = h(record.getKey().toString(), hashTableSize);
         pos = home;
         for (int i = 1; hashTable[pos] != null; i++) {
-
-            if (hashTable[pos].getKey().toString().equals(key.toString())) {
-                if (hashTable[pos].getTombstone()) {
-                    hashTable[pos] = record;
-                    count++;
-                    hashTableCount++;
-                    return;
-                }
-                else {
-                    // already in here
-
-                    return;
-                }
-
+            if (hashTable[pos].getTombstone()) {
+                hashTable[pos] = record;
+                count++;
+                hashTableCount++;
+                return;
             }
-
             pos = (home + probe(i)) % hashTableSize;
         }
         hashTable[pos] = record;
