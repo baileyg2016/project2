@@ -337,6 +337,7 @@ public class SparseMatrixTest extends TestCase {
         movies.contains("Twin Peaks Returns");
         reviewers.contains("Sergio Leone");
 
+        matrix.deleteReviewers("david lynch");
         matrix.deleteReviewers("David Lynch");
         matrix.deleteReviewers("Sergio Leone");
         matrix.deleteReviewers("Darth Vader");
@@ -347,5 +348,49 @@ public class SparseMatrixTest extends TestCase {
         matrix.deleteMovies("Death Note");
         matrix.deleteMovies("Twin Peaks Returns");
         assertEquals(matrix.isEmpty(), true);
+        
+        
+
     }
+    
+    /**
+     * Tests lines 155 and 156
+     */
+    public void testAddsAndDeleteMovies() {
+        ReviewerList reviewers = new ReviewerList();
+        MSLList movies = new MSLList();
+        SparseMatrix matrix = new SparseMatrix(reviewers, movies);
+
+        matrix.insert("Sergio Leone", "The Good, the Bad and the Ugly", 6);
+        matrix.insert("Darth Vader", "The Good, the Bad and the Ugly", 9);
+        matrix.insert("David Lynch", "The Good, the Bad and the Ugly", 3);
+        matrix.insert("Darth Vader", "Death Note", 10);
+        matrix.insert("David Lynch", "Twin Peaks Returns", 5);
+        matrix.insert("Sergio Leone", "Death Note", 6);
+        matrix.insert("Sergio Leone", "Twin Peaks Returns", 4);
+        assertEquals(7, matrix.getCount());
+        
+        assertEquals(matrix.getMovies().getCount(), 3);
+        assertEquals(matrix.getReviewers().getCount(), 3);
+        movies.contains("Twin Peaks Returns");
+        reviewers.contains("Sergio Leone");
+
+        //matrix.deleteReviewers("david lynch");
+        //matrix.deleteReviewers("David Lynch");
+        //matrix.deleteReviewers("Sergio Leone");
+        //matrix.deleteReviewers("Darth Vader");
+
+        assertEquals(matrix.isEmpty(), false);
+
+       
+        matrix.deleteMovies("Death Note");
+        matrix.deleteMovies("Twin Peaks Returns");
+        matrix.deleteMovies("The Good, the Bad and the Ugly");
+        assertEquals(matrix.isEmpty(), true);
+        
+        matrix.insert("Sergio Leone", "The Good, the Bad and the Ugly", 6);
+    }
+    
+    
+   
 }
