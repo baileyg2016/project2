@@ -212,7 +212,7 @@ public class ReviewerList {
 
         tail.setNext(name, count, new RDLList<Integer>());
 
-        tail = tail.next;
+        tail = tail.getNext();
 
         tail.setCount(count);
         count++;
@@ -255,6 +255,7 @@ public class ReviewerList {
         }
 
         prev.next = curr.next;
+        curr.next = null;
         numNodes--;
     }
 

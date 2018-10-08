@@ -147,10 +147,6 @@ public class MDLList<T> {
             }
         }
         size++;
-        // connecting the node with the other list
-        // newNode.setPrevMovie(reviewerTail);
-        // reviewerTail.setNextMovie(newNode);
-
     }
 
 
@@ -221,43 +217,6 @@ public class MDLList<T> {
         return null;
     }
 
-
-    /**
-     * Removes the connections from this list
-     */
-    public void nuke() {
-
-        Node<Integer> currNode = head;
-
-        while (currNode != null) {
-            if (currNode.getNextMovie() != null) {
-                currNode.getNextMovie().setPrevMovie(currNode.getPrevMovie());
-            }
-            if (currNode.getPrevMovie() != null) {
-                currNode.getPrevMovie().setNextMovie(currNode.getNextMovie());
-            }
-            currNode.setNextMovie(null);
-            currNode.setPrevMovie(null);
-            currNode = currNode.getNextReviewer();
-        }
-        size = 0;
-
-    }
-
-
-    /**
-     * Traverses the list
-     * Used for the similar call
-     */
-    public void trav() {
-        Node<Integer> currNode = head;
-        while (currNode != null) {
-            // Maybe add all the scores in the nodes?
-            currNode = currNode.getNextReviewer();
-        }
-
-        // Return the scores added and then divided by the number of nodes?
-    }
 
 
     /**

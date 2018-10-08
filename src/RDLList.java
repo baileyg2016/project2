@@ -150,9 +150,7 @@ public class RDLList<T> {
         }
         size++;
 
-        // connecting the node with the other list
-        // newNode.setPrevReviewer(movieTail);
-        // movieTail.setNextReviewer(newNode);
+ 
     }
 
 
