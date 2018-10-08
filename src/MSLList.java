@@ -33,27 +33,6 @@ public class MSLList {
          */
         private int count;
 
-//
-//        /**
-//         * Node constructor
-//         * 
-//         * @param name
-//         *            name of the node
-//         * @param list
-//         *            list stored in the node
-//         * @param next
-//         *            the next node in the list
-//         * @param count
-//         *            the number of entries added thus far
-//         */
-//        public Node(String name, MDLList<Integer> list, Node next, int count) {
-//            this.name = name;
-//            this.list = list;
-//            this.next = next;
-//            this.count = count;
-//        }
-
-
         /**
          * Create a node with params name and list
          * 
@@ -85,20 +64,6 @@ public class MSLList {
             this.count = count;
             this.next = null;
         }
-
-
-        /**
-         * Create a node with the param name
-         * 
-         * @param name
-         *            Sets the name for the node
-         */
-        public Node(String name) {
-            next = null;
-            this.name = name;
-            list = new MDLList<Integer>();
-        }
-
 
         /**
          * gets the name
