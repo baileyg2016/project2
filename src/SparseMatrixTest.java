@@ -348,4 +348,14 @@ public class SparseMatrixTest extends TestCase {
         matrix.deleteMovies("Twin Peaks Returns");
         assertEquals(matrix.isEmpty(), true);
     }
+
+
+    /**
+     * Testing deleting
+     */
+    public void testDeleting() {
+        ReviewerList reviewers = new ReviewerList();
+        MSLList movies = new MSLList();
+        SparseMatrix matrix = new SparseMatrix(reviewers, movies);
+    }
 }

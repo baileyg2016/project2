@@ -128,8 +128,7 @@ public class SparseMatrix {
         Node<Integer> next;
         while (movieNode != null) {
             next = movieNode.getNextReviewer();
-            if (movieNode.getPrevMovie() == null || movieNode.getPrevMovie()
-                .getValue() == -1) {
+            if (movieNode.getPrevMovie() == null) {
                 if (reviewers.contains(movieNode.getReviewerName()).getList()
                     .getHead() == reviewers.contains(movieNode
                         .getReviewerName()).getList().getTail()) {
@@ -188,8 +187,7 @@ public class SparseMatrix {
         Node<Integer> next;
         while (reviewerNode != null) {
             next = reviewerNode.getNextMovie();
-            if (reviewerNode.getPrevReviewer() == null || reviewerNode
-                .getPrevReviewer().getValue() == -1) {
+            if (reviewerNode.getPrevReviewer() == null) {
                 if (movies.contains(reviewerNode.getMovieName()).getList()
                     .getSize() == 1) {
                     movies.contains(reviewerNode.getMovieName()).getList()
