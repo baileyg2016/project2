@@ -15,8 +15,8 @@
    print ratings
    delete reviewer Dr. Shaffer
    print ratings
-   delete reviewer Hayao Miyazaki
    delete movie Spirited Away
+print ratings
    add John Doe<SEP>Spirited Away<SEP>9
    delete movie John Doe
    delete reviewer  John Doe
