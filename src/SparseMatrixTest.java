@@ -301,15 +301,51 @@ public class SparseMatrixTest extends TestCase {
         matrix.insert("Sergio Leone", "Twin Peaks Returns", 4);
         assertEquals(7, matrix.getCount());
 
+        movies.contains("Twin Peaks Returns");
+        reviewers.contains("Sergio Leone");
+
         matrix.deleteMovies("The Good, the Bad and the Ugly");
         matrix.deleteMovies("Death Note");
         matrix.deleteMovies("Twin Peaks Returns");
-        assertEquals(matrix.getCount(), 0);
+        assertEquals(matrix.isEmpty(), true);
 
         matrix.deleteReviewers("David Lynch");
         matrix.deleteReviewers("Sergio Leone");
         matrix.deleteReviewers("Darth Vader");
 
-        assertEquals(matrix.getCount(), 0);
+        assertEquals(matrix.isEmpty(), true);
+    }
+
+
+    /**
+     * tests deletes and adds
+     */
+    public void testAddsAndDeletesWithReviewers() {
+        ReviewerList reviewers = new ReviewerList();
+        MSLList movies = new MSLList();
+        SparseMatrix matrix = new SparseMatrix(reviewers, movies);
+
+        matrix.insert("Sergio Leone", "The Good, the Bad and the Ugly", 6);
+        matrix.insert("Darth Vader", "The Good, the Bad and the Ugly", 9);
+        matrix.insert("David Lynch", "The Good, the Bad and the Ugly", 3);
+        matrix.insert("Darth Vader", "Death Note", 10);
+        matrix.insert("David Lynch", "Twin Peaks Returns", 5);
+        matrix.insert("Sergio Leone", "Death Note", 6);
+        matrix.insert("Sergio Leone", "Twin Peaks Returns", 4);
+        assertEquals(7, matrix.getCount());
+
+        movies.contains("Twin Peaks Returns");
+        reviewers.contains("Sergio Leone");
+
+        matrix.deleteReviewers("David Lynch");
+        matrix.deleteReviewers("Sergio Leone");
+        matrix.deleteReviewers("Darth Vader");
+
+        assertEquals(matrix.isEmpty(), true);
+
+        matrix.deleteMovies("The Good, the Bad and the Ugly");
+        matrix.deleteMovies("Death Note");
+        matrix.deleteMovies("Twin Peaks Returns");
+        assertEquals(matrix.isEmpty(), true);
     }
 }

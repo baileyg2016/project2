@@ -151,6 +151,11 @@ public class SparseMatrix {
                     movieNode.getNextMovie().setPrevMovie(movieNode
                         .getPrevMovie());
                 }
+                else {
+                    reviewers.contains(movieNode.getReviewerName()).getList()
+                        .setTail(reviewers.contains(movieNode.getReviewerName())
+                            .getList().getTail().getPrevMovie());
+                }
             }
             reviewers.contains(movieNode.getReviewerName()).getList().decSize();
             if (reviewers.contains(movieNode.getReviewerName()).getList()
@@ -205,6 +210,11 @@ public class SparseMatrix {
                 if (reviewerNode.getNextReviewer() != null) {
                     reviewerNode.getNextReviewer().setPrevReviewer(reviewerNode
                         .getPrevReviewer());
+                }
+                else {
+                    movies.contains(reviewerNode.getMovieName()).getList()
+                        .setTail(movies.contains(reviewerNode.getMovieName())
+                            .getList().getTail().getPrevReviewer());
                 }
             }
             movies.contains(reviewerNode.getMovieName()).getList().decSize();
