@@ -187,6 +187,7 @@ public class ParserTest extends TestCase {
         parser.parseFile();
         assertEquals(0, movies.getNumEntries());
         assertEquals(0, reviewers.getNumEntries());
+        assertEquals(true, matrix.isEmpty());
     }
 
 
@@ -206,4 +207,21 @@ public class ParserTest extends TestCase {
         assertEquals(3, reviewers.getNumEntries());
     }
 
+
+    /**
+     * Testing the delete with movies first
+     */
+    public void testDeleteMoviesFirst() {
+        Hash<String> movies = new Hash<String>(6);
+        Hash<String> reviewers = new Hash<String>(6);
+        ReviewerList reviewersList = new ReviewerList();
+        MSLList moviesList = new MSLList();
+        SparseMatrix matrix = new SparseMatrix(reviewersList, moviesList);
+        Parser parser = new Parser("deleteMovieFirst.txt", movies, reviewers,
+            matrix);
+        parser.parseFile();
+        assertEquals(4, movies.getNumEntries());
+        assertEquals(3, reviewers.getNumEntries());
+
+    }
 }
