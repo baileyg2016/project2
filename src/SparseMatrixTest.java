@@ -372,6 +372,10 @@ public class SparseMatrixTest extends TestCase {
         movies.contains("Twin Peaks Returns");
         reviewers.contains("Sergio Leone");
 
+        assertEquals(matrix.getMovies().getCount(), 3);
+        assertEquals(matrix.getReviewers().getCount(), 3);
+        
+        assertEquals(matrix.isEmpty(), false);
         matrix.deleteMovies("Death Note");
         matrix.deleteMovies("The Good, the Bad and the Ugly");       
         matrix.deleteMovies("Twin Peaks Returns");
