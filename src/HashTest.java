@@ -76,6 +76,7 @@ public class HashTest extends TestCase {
 
         assertEquals(hash.getCount(), 6);
         assertEquals(hash.getSize(), 20);
+        hash.insert("Recrod # 5" , "Testing");       
 
     }
 
@@ -109,6 +110,8 @@ public class HashTest extends TestCase {
             hash.delete("Record # " + Integer.toString(i), "Testing");
         }
         assertEquals(hash.getNumEntries(), 0);
+        
+        
     }
 
 
