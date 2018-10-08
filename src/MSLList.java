@@ -185,7 +185,7 @@ public class MSLList {
         count++;
         Node node = new Node(name, mList, count);
         tail.setNext(node);
-        tail = tail.next;
+        tail = tail.getNext();
         size++;
         return tail;
     }
