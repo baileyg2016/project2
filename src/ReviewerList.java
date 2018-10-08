@@ -255,6 +255,7 @@ public class ReviewerList {
         }
 
         prev.next = curr.next;
+        curr.next = null;
         numNodes--;
     }
 

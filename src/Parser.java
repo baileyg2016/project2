@@ -353,16 +353,8 @@ public class Parser {
                         n1 = n1.getNext();
                     }
                 }
-                if (simName == null) {
-                    System.out.println("There is no reviewer similar to |"
-                        + name + "|");
-                }
-                else {
-                    String formattedString = String.format("%.02f", score);
-                    System.out.println("The reviewer |" + simName
-                        + "| is similar to |" + name + "| with score "
-                        + formattedString);
-                }
+
+                printSimilar("reviewer", name, simName, score);
             }
             else {
                 System.out.println("Reviewer |" + name
@@ -372,8 +364,7 @@ public class Parser {
         else {
             if (matrix.getMovies().contains(name) != null) {
                 // Node with the reference to the list we are comparing
-                // other
-                // lists to
+                // other lists to
                 MSLList.Node n = matrix.getMovies().contains(name);
                 // Gets the head to the DLList that we are comparing other
                 // lists
@@ -413,21 +404,34 @@ public class Parser {
                         n1 = n1.getNext();
                     }
                 }
-                if (simName == null) {
-                    System.out.println("There is no movie similar to |" + name
-                        + "|");
-                }
-                else {
-                    String formattedString = String.format("%.02f", score);
-                    System.out.println("The movie |" + simName
-                        + "| is similar to |" + name + "| with score "
-                        + formattedString);
-                }
+                printSimilar("movie", name, simName, score);
             }
             else {
                 System.out.println("Movie |" + name
                     + "| not found in the database.");
             }
+        }
+    }
+
+
+    /**
+     * Print similar
+     */
+    private void printSimilar(
+        String type,
+        String name,
+        String simName,
+        float score) {
+
+        if (simName == null) {
+            System.out.println("There is no " + type + " similar to |" + name
+                + "|");
+        }
+        else {
+            String formattedString = String.format("%.02f", score);
+            System.out.println("The " + type + " |" + simName
+                + "| is similar to |" + name + "| with score "
+                + formattedString);
         }
     }
 
