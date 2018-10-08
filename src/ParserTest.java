@@ -138,4 +138,55 @@ public class ParserTest extends TestCase {
 
     }
 
+
+    /**
+     * Testing the parser
+     */
+    public void testDelete() {
+        Hash<String> movies = new Hash<String>(6);
+        Hash<String> reviewers = new Hash<String>(6);
+        ReviewerList reviewersList = new ReviewerList();
+        MSLList moviesList = new MSLList();
+        SparseMatrix matrix = new SparseMatrix(reviewersList, moviesList);
+        Parser parser = new Parser("testingDelete.txt", movies, reviewers,
+            matrix);
+        parser.parseFile();
+        assertEquals(0, movies.getNumEntries());
+        assertEquals(0, reviewers.getNumEntries());
+    }
+
+
+    /**
+     * Testing the parser
+     */
+    public void testDeleteWithNewFile() {
+        Hash<String> movies = new Hash<String>(6);
+        Hash<String> reviewers = new Hash<String>(6);
+        ReviewerList reviewersList = new ReviewerList();
+        MSLList moviesList = new MSLList();
+        SparseMatrix matrix = new SparseMatrix(reviewersList, moviesList);
+        Parser parser = new Parser("testingDeleteDiff.txt", movies, reviewers,
+            matrix);
+        parser.parseFile();
+        assertEquals(0, movies.getNumEntries());
+        assertEquals(0, reviewers.getNumEntries());
+    }
+
+
+    /**
+     * Testing the delete with parser
+     */
+    public void testDeleteWithDifferentFile() {
+        Hash<String> movies = new Hash<String>(6);
+        Hash<String> reviewers = new Hash<String>(6);
+        ReviewerList reviewersList = new ReviewerList();
+        MSLList moviesList = new MSLList();
+        SparseMatrix matrix = new SparseMatrix(reviewersList, moviesList);
+        Parser parser = new Parser("deleteWithExtraReviewerAndMovie.txt",
+            movies, reviewers, matrix);
+        parser.parseFile();
+        assertEquals(0, movies.getNumEntries());
+        assertEquals(0, reviewers.getNumEntries());
+    }
+
 }

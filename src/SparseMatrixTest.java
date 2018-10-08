@@ -200,23 +200,116 @@ public class SparseMatrixTest extends TestCase {
 // 7);
     }
 
+
     /**
      * Testing the delete function for a movie node
      */
-// public void testDeleteWithReviewers() {
-// ReviewerList reviewers = new ReviewerList();
-// MSLList movies = new MSLList();
-// SparseMatrix matrix = new SparseMatrix(reviewers, movies);
-//
-// matrix.insert("Bill", "Star wars", 6);
-// matrix.insert("Harry", "New World Order", 9);
-// matrix.insert("Harry", "Star wars", 3);
-// matrix.insert("Harry", "Man on a Ledge", 10);
-// matrix.insert("Geo", "Man on a Ledge", 5);
-// matrix.insert("Frank", "ShaShank", 4);
-// assertEquals(6, matrix.getCount());
-//
-// matrix.deleteReviewers("Harry");
-// assertEquals(3, matrix.getCount());
-// }
+    public void testDeleteWithReviewers() {
+        ReviewerList reviewers = new ReviewerList();
+        MSLList movies = new MSLList();
+        SparseMatrix matrix = new SparseMatrix(reviewers, movies);
+
+        matrix.insert("Bill", "Star wars", 6);
+        matrix.insert("Harry", "New World Order", 9);
+        matrix.insert("Harry", "Star wars", 3);
+        matrix.insert("Harry", "Man on a Ledge", 10);
+        matrix.insert("Geo", "Man on a Ledge", 5);
+        matrix.insert("Frank", "ShaShank", 4);
+        assertEquals(6, matrix.getCount());
+
+        matrix.deleteReviewers("Harry");
+        assertEquals(3, matrix.getCount());
+    }
+
+
+    /**
+     * Testing for the empty matrix test
+     */
+    public void testEmptyMatrix() {
+        ReviewerList reviewers = new ReviewerList();
+        MSLList movies = new MSLList();
+        SparseMatrix matrix = new SparseMatrix(reviewers, movies);
+
+        matrix.insert("Bill", "Star wars", 6);
+        matrix.insert("Harry", "New World Order", 9);
+        matrix.insert("Harry", "Star wars", 3);
+        matrix.insert("Harry", "Man on a Ledge", 10);
+        matrix.insert("Geo", "Man on a Ledge", 5);
+        matrix.insert("Frank", "ShaShank", 4);
+        assertEquals(6, matrix.getCount());
+
+        matrix.deleteReviewers("Bill");
+        matrix.deleteReviewers("Harry");
+        matrix.deleteReviewers("Geo");
+        matrix.deleteReviewers("Frank");
+
+        matrix.deleteMovies("Star wars");
+        matrix.deleteMovies("New World Order");
+        matrix.deleteMovies("Man on a Ledge");
+        matrix.deleteMovies("ShaShank");
+
+        matrix.deleteMovies("ShaShank");
+        matrix.deleteReviewers("Bill");
+
+        assertEquals(0, matrix.getCount());
+
+    }
+
+
+    /**
+     * Testing adds and deletes
+     */
+    public void testAddsAndDeletes() {
+        ReviewerList reviewers = new ReviewerList();
+        MSLList movies = new MSLList();
+        SparseMatrix matrix = new SparseMatrix(reviewers, movies);
+
+        matrix.insert("Sergio Leone", "The Good, the Bad and the Ugly", 6);
+        matrix.insert("Darth Vader", "The Good, the Bad and the Ugly", 9);
+        matrix.insert("David Lynch", "The Good, the Bad and the Ugly", 3);
+        matrix.insert("Darth Vader", "Death Note", 10);
+        matrix.insert("David Lynch", "Twin Peaks Returns", 5);
+        matrix.insert("Sergio Leone", "Death Note", 6);
+        matrix.insert("Sergio Leone", "Twin Peaks Returns", 4);
+        assertEquals(7, matrix.getCount());
+
+        matrix.deleteReviewers("David Lynch");
+        matrix.insert("Sergio Leone", "Twin Peaks Returns", 4);
+        matrix.deleteReviewers("Sergio Leone");
+        matrix.deleteReviewers("Darth Vader");
+        matrix.deleteMovies("The Good, the Bad and the Ugly");
+        matrix.deleteMovies("Death Note");
+        matrix.deleteMovies("Twin Peaks Returns");
+        assertEquals(matrix.getCount(), 0);
+    }
+
+
+    /**
+     * tests deletes and adds
+     */
+    public void testAddsAndDeletesWithMovies() {
+        ReviewerList reviewers = new ReviewerList();
+        MSLList movies = new MSLList();
+        SparseMatrix matrix = new SparseMatrix(reviewers, movies);
+
+        matrix.insert("Sergio Leone", "The Good, the Bad and the Ugly", 6);
+        matrix.insert("Darth Vader", "The Good, the Bad and the Ugly", 9);
+        matrix.insert("David Lynch", "The Good, the Bad and the Ugly", 3);
+        matrix.insert("Darth Vader", "Death Note", 10);
+        matrix.insert("David Lynch", "Twin Peaks Returns", 5);
+        matrix.insert("Sergio Leone", "Death Note", 6);
+        matrix.insert("Sergio Leone", "Twin Peaks Returns", 4);
+        assertEquals(7, matrix.getCount());
+
+        matrix.deleteMovies("The Good, the Bad and the Ugly");
+        matrix.deleteMovies("Death Note");
+        matrix.deleteMovies("Twin Peaks Returns");
+        assertEquals(matrix.getCount(), 0);
+
+        matrix.deleteReviewers("David Lynch");
+        matrix.deleteReviewers("Sergio Leone");
+        matrix.deleteReviewers("Darth Vader");
+
+        assertEquals(matrix.getCount(), 0);
+    }
 }

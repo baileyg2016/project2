@@ -7,18 +7,36 @@ add Sergio Leone<SEP>The Good, the Bad and the Ugly<SEP>10
 
 add Sergio Leone<SEP>Death Note<SEP>9
 add Sergio Leone<SEP>Twin Peaks Returns<SEP>8
+add Filip<SEP>Man On a Ledge<SEP>7
+add David Lynch<SEP>The Good, the Bad and the Ugly<SEP>4
+add Darth Vader<SEP> Man On a Ledge<SEP>2
 print ratings
 list reviewer David Lynch
 delete reviewer David Lynch
 list reviewer David Lynch
-add Sergio Leone<SEP>Twin Peaks Returns<SEP>9
+add Sergio Leone<SEP>Man On a Ledge<SEP>9
 delete reviewer Sergio Leone
 list movie The Good, the Bad and the Ugly
 list movie Twin Peaks Returns
 list movie Death Note
 delete reviewer Darth Vader
 list movie The Good, the Bad and the Ugly
-delete movie The Good, the Bad and the Ugly
-delete movie Death Note
 delete movie Twin Peaks Returns
 print ratings
+add Sergio Leone<SEP>Death Note<SEP>9
+add Sergio Leone<SEP>Twin Peaks Returns<SEP>8
+add Filip<SEP>The Good, the Bad and the Ugly<SEP>7
+add Darth Vader<SEP>Death Note<SEP>7
+add Filip<SEP>Death Note<SEP>6
+print ratings
+delete movie The Good, the Bad and the Ugly
+delete movie Man On a Ledge
+delete reviewer Filip
+delete movie Death Note
+delete reviewer Sergio Leone
+delete movie Twin Peaks Returns
+delete reviewer Darth Vader
+delete reviewer Sergio Leone
+delete reviewer Filip
+print ratings
+list reviewer Filip

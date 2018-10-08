@@ -321,4 +321,14 @@ public class MDLList<T> {
         this.tail = tail;
     }
 
+
+    /**
+     * 
+     * @return
+     *         Size of the list
+     */
+    public int getSize() {
+        return size;
+    }
+
 }

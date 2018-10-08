@@ -383,4 +383,13 @@ public class MSLList {
         return count;
     }
 
+
+    /**
+     * 
+     * @return
+     *         The size of the list
+     */
+    public int getSize() {
+        return size;
+    }
 }

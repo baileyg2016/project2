@@ -121,6 +121,9 @@ public class SparseMatrix {
      */
     public void deleteMovies(String name) {
         MSLList.Node node = movies.contains(name);
+        if (node == null) {
+            return;
+        }
         Node<Integer> movieNode = node.getList().getHead();
         Node<Integer> next;
         while (movieNode != null) {
@@ -138,6 +141,8 @@ public class SparseMatrix {
                 else {
                     reviewers.contains(movieNode.getReviewerName()).getList()
                         .setHead(movieNode.getNextMovie());
+                    reviewers.contains(movieNode.getReviewerName()).getList()
+                        .getHead().setPrevMovie(null);
                 }
             }
             else {
@@ -148,7 +153,13 @@ public class SparseMatrix {
                 }
             }
             reviewers.contains(movieNode.getReviewerName()).getList().decSize();
-
+            if (reviewers.contains(movieNode.getReviewerName()).getList()
+                .isEmpty()) {
+                reviewers.contains(movieNode.getReviewerName()).getList()
+                    .setHead(null);
+                reviewers.contains(movieNode.getReviewerName()).getList()
+                    .setTail(null);
+            }
             movieNode.setNextReviewer(movieNode.getNextReviewer());
             movieNode = next;
             count--;
@@ -165,6 +176,9 @@ public class SparseMatrix {
      */
     public void deleteReviewers(String name) {
         ReviewerList.Node node = reviewers.contains(name);
+        if (node == null) {
+            return;
+        }
         Node<Integer> reviewerNode = node.getList().getHead();
         Node<Integer> next;
         while (reviewerNode != null) {
@@ -172,8 +186,7 @@ public class SparseMatrix {
             if (reviewerNode.getPrevReviewer() == null || reviewerNode
                 .getPrevReviewer().getValue() == -1) {
                 if (movies.contains(reviewerNode.getMovieName()).getList()
-                    .getHead() == movies.contains(reviewerNode.getMovieName())
-                        .getList().getTail()) {
+                    .getSize() == 1) {
                     movies.contains(reviewerNode.getMovieName()).getList()
                         .setHead(null);
                     movies.contains(reviewerNode.getMovieName()).getList()
@@ -181,7 +194,9 @@ public class SparseMatrix {
                 }
                 else {
                     movies.contains(reviewerNode.getMovieName()).getList()
-                        .setHead(reviewerNode.getNextMovie());
+                        .setHead(reviewerNode.getNextReviewer());
+                    movies.contains(reviewerNode.getMovieName()).getList()
+                        .getHead().setPrevReviewer(null);
                 }
             }
             else {
@@ -193,7 +208,13 @@ public class SparseMatrix {
                 }
             }
             movies.contains(reviewerNode.getMovieName()).getList().decSize();
-
+            if (movies.contains(reviewerNode.getMovieName()).getList()
+                .isEmpty()) {
+                movies.contains(reviewerNode.getMovieName()).getList().setHead(
+                    null);
+                movies.contains(reviewerNode.getMovieName()).getList().setTail(
+                    null);
+            }
             reviewerNode.setNextMovie(reviewerNode.getNextMovie());
             reviewerNode = next;
             count--;

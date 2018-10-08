@@ -334,4 +334,14 @@ public class RDLList<T> {
         this.tail = tail;
     }
 
+
+    /**
+     * 
+     * @return
+     *         the size of the list
+     */
+    public int getSize() {
+        return size;
+    }
+
 }
