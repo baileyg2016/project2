@@ -297,7 +297,7 @@ public class SparseMatrixTest extends TestCase {
         matrix.insert("David Lynch", "The Good, the Bad and the Ugly", 3);
         matrix.insert("Darth Vader", "Death Note", 10);
         matrix.insert("David Lynch", "Twin Peaks Returns", 5);
-        matrix.insert("Sergio Leone", "Death Note", 6);
+        matrix.insert("Sergio Leone", "Death Note", 5);
         matrix.insert("Sergio Leone", "Twin Peaks Returns", 4);
         assertEquals(7, matrix.getCount());
 
@@ -305,6 +305,32 @@ public class SparseMatrixTest extends TestCase {
         reviewers.contains("Sergio Leone");
 
         matrix.deleteMovies("The Good, the Bad and the Ugly");
+        assertEquals(movies.getList("Death Note").getHead().getValue(), 5);
+        assertEquals(movies.getList("Death Note").getHead().getNextReviewer()
+            .getValue(), 10);
+        assertEquals(movies.getList("Death Note").getTail().getValue(), 10);
+        assertEquals(movies.getList("Twin Peaks Returns").getHead().getValue(),
+            4);
+        assertEquals(movies.getList("Twin Peaks Returns").getHead()
+            .getNextReviewer().getValue(), 5);
+        assertEquals(movies.getList("Twin Peaks Returns").getTail().getValue(),
+            5);
+        // by reviewers
+        assertEquals(reviewers.getList("Sergio Leone").getHead().getValue(), 5);
+        assertEquals(reviewers.getList("Sergio Leone").getHead().getNextMovie()
+            .getValue(), 4);
+        assertEquals(reviewers.getList("Sergio Leone").getTail().getValue(), 4);
+        assertEquals(reviewers.getList("David Lynch").getHead().getValue(), 5);
+        assertEquals(reviewers.getList("David Lynch").getHead().getNextMovie(),
+            null);
+        assertEquals(reviewers.getList("David Lynch").getTail().getValue(), 5);
+
+        assertEquals(reviewers.getList("Darth Vader").getHead().getValue(), 10);
+        assertEquals(reviewers.getList("Darth Vader").getHead().getPrevMovie(),
+            null);
+        assertEquals(reviewers.getList("Darth Vader").getHead().getNextMovie(),
+            null);
+        assertEquals(reviewers.getList("Darth Vader").getTail().getValue(), 10);
         matrix.deleteMovies("Death Note");
         matrix.deleteMovies("Twin Peaks Returns");
         assertEquals(matrix.isEmpty(), true);
@@ -330,18 +356,79 @@ public class SparseMatrixTest extends TestCase {
         matrix.insert("David Lynch", "The Good, the Bad and the Ugly", 3);
         matrix.insert("Darth Vader", "Death Note", 10);
         matrix.insert("David Lynch", "Twin Peaks Returns", 5);
-        matrix.insert("Sergio Leone", "Death Note", 6);
+        matrix.insert("Sergio Leone", "Death Note", 5);
         matrix.insert("Sergio Leone", "Twin Peaks Returns", 4);
         assertEquals(7, matrix.getCount());
 
         movies.contains("Twin Peaks Returns");
         reviewers.contains("Sergio Leone");
 
-        matrix.deleteReviewers("David Lynch");
-        matrix.deleteReviewers("Sergio Leone");
         matrix.deleteReviewers("Darth Vader");
+        // by movies
+        assertEquals(movies.getList("The Good, the Bad and the Ugly").getHead()
+            .getValue(), 6);
+        assertEquals(movies.getList("The Good, the Bad and the Ugly").getHead()
+            .getNextReviewer().getValue(), 3);
+        assertEquals(movies.getList("Death Note").getHead().getValue(), 5);
+        assertEquals(movies.getList("Death Note").getTail().getValue(), 5);
+        // by reviewers
+        assertEquals(reviewers.getList("Sergio Leone").getHead().getValue(), 6);
+        assertEquals(reviewers.getList("Sergio Leone").getHead().getNextMovie()
+            .getValue(), 5);
+        assertEquals(reviewers.getList("Sergio Leone").getHead().getNextMovie()
+            .getNextMovie().getValue(), 4);
+        assertEquals(reviewers.getList("Sergio Leone").getTail().getValue(), 4);
+        assertEquals(reviewers.getList("David Lynch").getHead().getValue(), 3);
+        assertEquals(reviewers.getList("David Lynch").getHead().getNextMovie()
+            .getValue(), 5);
+        assertEquals(reviewers.getList("David Lynch").getTail().getValue(), 5);
 
-        assertEquals(matrix.isEmpty(), true);
+        matrix.insert("Darth Vader", "Twin Peaks Returns", 10);
+        matrix.insert("Darth Vader", "Death Note", 9);
+        matrix.insert("Darth Vader", "The Good, the Bad and the Ugly", 2);
+        // by movies
+        assertEquals(movies.getList("The Good, the Bad and the Ugly").getHead()
+            .getValue(), 6);
+        assertEquals(movies.getList("The Good, the Bad and the Ugly").getHead()
+            .getNextReviewer().getValue(), 3);
+        assertEquals(movies.getList("The Good, the Bad and the Ugly").getHead()
+            .getNextReviewer().getNextReviewer().getValue(), 2);
+        assertEquals(movies.getList("The Good, the Bad and the Ugly").getTail()
+            .getValue(), 2);
+        assertEquals(movies.getList("Death Note").getHead().getValue(), 5);
+        assertEquals(movies.getList("Death Note").getHead().getNextReviewer()
+            .getValue(), 9);
+        assertEquals(movies.getList("Death Note").getTail().getValue(), 9);
+        assertEquals(movies.getList("Twin Peaks Returns").getHead().getValue(),
+            4);
+        assertEquals(movies.getList("Twin Peaks Returns").getHead()
+            .getNextReviewer().getValue(), 5);
+        assertEquals(movies.getList("Twin Peaks Returns").getTail().getValue(),
+            10);
+        // by reviewers
+        assertEquals(reviewers.getList("Sergio Leone").getHead().getValue(), 6);
+        assertEquals(reviewers.getList("Sergio Leone").getHead().getNextMovie()
+            .getValue(), 5);
+        assertEquals(reviewers.getList("Sergio Leone").getHead().getNextMovie()
+            .getNextMovie().getValue(), 4);
+        assertEquals(reviewers.getList("Sergio Leone").getTail().getValue(), 4);
+        assertEquals(reviewers.getList("David Lynch").getHead().getValue(), 3);
+        assertEquals(reviewers.getList("David Lynch").getHead().getNextMovie()
+            .getValue(), 5);
+        assertEquals(reviewers.getList("David Lynch").getTail().getValue(), 5);
+
+        assertEquals(reviewers.getList("Darth Vader").getHead().getValue(), 2);
+        assertEquals(reviewers.getList("Darth Vader").getHead().getNextMovie()
+            .getValue(), 9);
+        assertEquals(reviewers.getList("Darth Vader").getHead().getNextMovie()
+            .getNextMovie().getValue(), 10);
+        assertEquals(reviewers.getList("Darth Vader").getTail().getValue(), 10);
+
+        matrix.deleteReviewers("David Lynch");
+
+        matrix.deleteReviewers("Sergio Leone");
+
+        assertTrue(!matrix.isEmpty());
 
         matrix.deleteMovies("The Good, the Bad and the Ugly");
         matrix.deleteMovies("Death Note");
@@ -357,5 +444,49 @@ public class SparseMatrixTest extends TestCase {
         ReviewerList reviewers = new ReviewerList();
         MSLList movies = new MSLList();
         SparseMatrix matrix = new SparseMatrix(reviewers, movies);
+
+        matrix.insert("0", "0", 5);
+        matrix.insert("0", "1", 4);
+        matrix.insert("0", "2", 5);
+        matrix.insert("1", "0", 3);
+        matrix.insert("1", "1", 2);
+        matrix.insert("1", "2", 10);
+        matrix.deleteMovies("1");
+
+        assertEquals(movies.getList("0").getHead().getValue(), 5);
+        assertEquals(movies.getList("0").getHead().getNextReviewer().getValue(),
+            3);
+        assertEquals(movies.getList("1"), null);
+        assertEquals(movies.getList("2").getHead().getValue(), 5);
+        assertEquals(movies.getList("2").getHead().getNextReviewer().getValue(),
+            10);
+        assertEquals(movies.getList("0").getHead().getValue(), 5);
+        assertEquals(movies.getList("0").getHead().getNextReviewer().getValue(),
+            3);
+        assertEquals(reviewers.getList("0").getHead().getValue(), 5);
+        assertEquals(reviewers.getList("0").getHead().getNextMovie().getValue(),
+            5);
+        assertEquals(reviewers.getList("1").getHead().getValue(), 3);
+        assertEquals(reviewers.getList("1").getHead().getNextMovie().getValue(),
+            10);
     }
+
+
+    /**
+     * testing deleting once again
+     */
+    public void testDeleteAgain() {
+        ReviewerList reviewers = new ReviewerList();
+        MSLList movies = new MSLList();
+        SparseMatrix matrix = new SparseMatrix(reviewers, movies);
+
+        matrix.insert("0", "0", 5);
+        matrix.insert("0", "1", 4);
+        matrix.insert("1", "0", 3);
+        matrix.insert("1", "1", 2);
+        matrix.deleteMovies("1");
+
+        assertNull(movies.getList("1"));
+    }
+
 }
