@@ -230,6 +230,7 @@ public class MSLList {
         }
 
         prev.next = curr.next;
+        curr.next = null;
         size--;
         return deleted;
     }

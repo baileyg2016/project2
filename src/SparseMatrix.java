@@ -164,7 +164,6 @@ public class SparseMatrix {
                 reviewers.contains(movieNode.getReviewerName()).getList()
                     .setTail(null);
             }
-            movieNode.setNextReviewer(movieNode.getNextReviewer());
             movieNode = next;
             count--;
         }
@@ -223,7 +222,7 @@ public class SparseMatrix {
                 movies.contains(reviewerNode.getMovieName()).getList().setTail(
                     null);
             }
-            reviewerNode.setNextMovie(reviewerNode.getNextMovie());
+
             reviewerNode = next;
             count--;
         }
