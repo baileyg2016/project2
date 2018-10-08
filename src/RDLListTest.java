@@ -34,7 +34,7 @@ public class RDLListTest extends TestCase {
         Node<Integer> tail = new Node<Integer>(-1, null, null, null, null, -1,
             -1);
         assertTrue(list.isEmpty());
-
+        assertFuzzyEquals(list.toString(), "{}");
         list.add(n, tail);
         assertFuzzyEquals(list.toString(), "{1}");
 
@@ -49,10 +49,8 @@ public class RDLListTest extends TestCase {
 
         assertFuzzyEquals(list.toString(), "{1, 3}");
 
-        list.nuke();
-
-        assertFuzzyEquals(list.toString(), "{}");
-        assertTrue(list.isEmpty());
+        list.remove();
+        list.remove();
 
         n = new Node<Integer>(1, null, null, null, null, 1, 1);
         n1 = new Node<Integer>(3, null, null, null, null, 3, 3);

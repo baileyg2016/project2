@@ -132,7 +132,6 @@ public class SparseMatrix {
 
 
                 if (reviewers.contains(movieNode.getReviewerName()).getList()
-
                     .getSize() == 1) {
                     reviewers.contains(movieNode.getReviewerName()).getList()
                         .setHead(null);
