@@ -18,9 +18,9 @@ public class MDLListTest extends TestCase {
         assertEquals(list.size(), 0);
         assertNull(list.remove());
 
-        Node<Integer> n = new Node<Integer>(1, null, null, null, null, -1, -1);
-        Node<Integer> n1 = new Node<Integer>(2, null, null, null, null, -1, -1);
-        Node<Integer> n2 = new Node<Integer>(3, null, null, null, null, -1, -1);
+        Node<Integer> n = new Node<Integer>(1, null, null, null, null, 1, 1);
+        Node<Integer> n1 = new Node<Integer>(2, null, null, null, null, 2, 2);
+        Node<Integer> n2 = new Node<Integer>(3, null, null, null, null, 3, 3);
         Node<Integer> tail = new Node<Integer>(-1, null, null, null, null, -1,
             -1);
 
@@ -31,10 +31,10 @@ public class MDLListTest extends TestCase {
         System.out.println(list.getCountAndScore());
         assertEquals((int)list.remove(2).getValue(), 2);
 
-        assertFuzzyEquals(list.toString(), "{3, 1}");
-
-        list.nuke();
-        list.trav();
+        assertFuzzyEquals(list.toString(), "{1, 3}");
+        
+        list.remove();
+        list.remove();
         assertFuzzyEquals(list.toString(), "{}");
         assertTrue(list.isEmpty());
 
@@ -45,16 +45,7 @@ public class MDLListTest extends TestCase {
         list.add(n, tail);
         list.add(n1, n);
         list.add(n2, n1);
-        list.nuke();
-
-        n = new Node<Integer>(1, null, null, null, null, -1, -1);
-        n1 = new Node<Integer>(2, null, null, null, null, -1, -1);
-        n2 = new Node<Integer>(3, null, null, null, null, -1, -1);
-        tail = new Node<Integer>(-1, null, null, null, null, -1, -1);
-        list.add(n, tail);
-        list.add(n1, n);
-        list.add(n2, n1);
-        list.trav();
+ 
         assertEquals((int)list.remove().getValue(), 1);
         assertEquals((int)list.remove().getValue(), 2);
         assertEquals((int)list.remove().getValue(), 3);

@@ -247,48 +247,6 @@ public class RDLList<T> {
 
 
     /**
-     * Removes the connections from this list
-     */
-    public void nuke() {
-
-        Node<Integer> currNode = head;
-
-        while (currNode != null) {
-            if (currNode.getNextReviewer() != null) {
-                currNode.getNextReviewer().setPrevReviewer(currNode
-                    .getPrevReviewer());
-            }
-            if (currNode.getPrevReviewer() != null) {
-                currNode.getPrevReviewer().setNextReviewer(currNode
-                    .getNextReviewer());
-            }
-            currNode.setNextReviewer(null);
-            currNode.setPrevReviewer(null);
-            currNode = currNode.getNextMovie();
-        }
-        head = new Node<Integer>(-1, null, null, null, null, -1, -1);
-        tail = new Node<Integer>(-1, null, null, null, null, -1, -1);
-        head.setNextMovie(tail);
-        tail.setPrevMovie(head);
-        size = 0;
-    }
-
-
-    /**
-     * Traverses the list
-     * Used for the similar call
-     */
-// public void trav() {
-// Node<Integer> currNode = head;
-// while (currNode != tail) {
-// // Maybe add all the scores in the nodes?
-// currNode = currNode.getNextMovie();
-// }
-//
-// // Return the scores added and then divided by the number of nodes?
-// }
-
-    /**
      * Returns a string representation of the list If a list contains A, B, and
      * C, the following should be returned "{A, B, C}" (Without the quotations)
      *
