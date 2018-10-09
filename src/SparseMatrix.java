@@ -100,9 +100,7 @@ public class SparseMatrix {
         Node<Integer> matrixNode = new Node<Integer>(rating, reviewer, movie);
 
         matrixNode.setRCount(reviewerNode.getCount());
-        matrixNode.setMCount(movieNode.getCount()/*
-                                                  * movieTail.getMCount() + 1
-                                                  */);
+        matrixNode.setMCount(movieNode.getCount());
 
         // Adding the matrix node and connecting everything
 
@@ -114,22 +112,24 @@ public class SparseMatrix {
 
 
     /**
-     * Deletes all the movies from a reviewer
+     * Deletes all the reviews from a movie going reviewer by reviewer
      * 
      * @param name
      *            Name of the reviewer
      */
     public void deleteMovies(String name) {
+        // the node in the linked list that contains the movie
         MSLList.Node node = movies.contains(name);
         if (node == null) {
             return;
         }
-
+        // the head of the reviewer list
         ReviewerList.Node head = reviewers.getHead();
         if (head == null) {
             movies.remove(name);
             return;
         }
+        // the current node that is in the matrix
         Node<Integer> curr = head.getList().containsMovie(name);
 
         while (head != null) {
@@ -176,23 +176,24 @@ public class SparseMatrix {
 
 
     /**
-     * Deletes all the reviews from a reviewer
+     * Deletes all the reviews from a reviewer going movie by movie
      * 
      * @param name
      *            The name of the reviewer
      */
     public void deleteReviewers(String name) {
+        // the node in the linked list that contains the reviewer
         ReviewerList.Node node = reviewers.contains(name);
         if (node == null) {
             return;
         }
-
+        // the head of the reviewer list
         MSLList.Node head = movies.getHead();
         if (head == null) {
             reviewers.delete(name);
             return;
         }
-
+        // the current node that is in the matrix
         Node<Integer> curr = head.getList().containsReviewer(name);
 
         while (head != null) {
