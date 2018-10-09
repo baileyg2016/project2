@@ -62,6 +62,9 @@ public class HashTest extends TestCase {
 
         assertEquals(hash.getCount(), 5);
         assertEquals(hash.getSize(), 11);
+        assertEquals(hash.getHashTable().getClass(), Record[].class);
+        hash.setCount(5);
+        assertEquals(hash.getCount(), 5);
     }
 
 
@@ -76,7 +79,9 @@ public class HashTest extends TestCase {
 
         assertEquals(hash.getCount(), 6);
         assertEquals(hash.getSize(), 20);
-        hash.insert("Recrod # 5" , "Testing");       
+        hash.insert("Recrod # 5" , "Testing");   
+        hash.delete("Record # 5", "Testing");
+        hash.delete("Record # 5", "Testing");
 
     }
 
@@ -110,7 +115,8 @@ public class HashTest extends TestCase {
             hash.delete("Record # " + Integer.toString(i), "Testing");
         }
         assertEquals(hash.getNumEntries(), 0);
-        
+        assertEquals(hash.getSize(), 40);
+        assertEquals(hash.getCount(), 14);
         
     }
 

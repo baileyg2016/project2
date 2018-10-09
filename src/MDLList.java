@@ -184,6 +184,10 @@ public class MDLList<T> {
         Node<Integer> pNode = head;
         if (head.getValue() == val) {
             head = head.getNextReviewer();
+            head.setPrevReviewer(null);
+            pNode.setNextReviewer(null);
+            size--;
+            return pNode;
         }
         while (pNode.getValue() != val) {
             pNode = pNode.getNextReviewer();
