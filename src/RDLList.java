@@ -217,7 +217,7 @@ public class RDLList<T> {
             if (curr.getReviewerName().equals(name)) {
                 return curr;
             }
-            curr = curr.getNextMovie();
+            curr = curr.getNextReviewer();
         }
         return null;
     }

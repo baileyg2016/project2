@@ -186,18 +186,16 @@ public class SparseMatrixTest extends TestCase {
 
         // there is a delete issue
         assertEquals(matrix.getCount(), 2);
-// assertEquals(matrix.reviewers.contains("Bill").getList().getHead()
-// .getValue(), 6);
-// assertEquals(matrix.reviewers.contains("Bill").getList().getTail()
-// .getValue(), 3);
-// assertEquals(matrix.movies.contains("Star
-// wars").list.getTail().getValue(), 6);
-// assertEquals(matrix.movies.contains("MOL").list.getTail().getValue(),
-// 3);
-// assertEquals(matrix.movies.contains("Star wars").list.getHead()
-// .getValue(), 6);
-// assertEquals(matrix.movies.contains("MOL").list.getHead().getValue(),
-// 7);
+        assertEquals(reviewers.contains("Bill").getList().getHead().getValue(),
+            6);
+        assertEquals(reviewers.contains("Bill").getList().getTail().getValue(),
+            3);
+        assertEquals(movies.contains("Star wars").getList().getTail()
+            .getValue(), 6);
+        assertEquals(movies.contains("MOL").getList().getTail().getValue(), 3);
+        assertEquals(movies.contains("Star wars").getList().getHead()
+            .getValue(), 6);
+        assertEquals(movies.contains("MOL").getList().getHead().getValue(), 3);
     }
 
 
@@ -257,7 +255,7 @@ public class SparseMatrixTest extends TestCase {
 
 
     /**
-     * Testing adds and deletes
+     * THE PROBLEM IS SOMEWHERE IN THIS TEST
      */
     public void testAddsAndDeletes() {
         ReviewerList reviewers = new ReviewerList();
@@ -269,18 +267,89 @@ public class SparseMatrixTest extends TestCase {
         matrix.insert("David Lynch", "The Good, the Bad and the Ugly", 3);
         matrix.insert("Darth Vader", "Death Note", 10);
         matrix.insert("David Lynch", "Twin Peaks Returns", 5);
-        matrix.insert("Sergio Leone", "Death Note", 6);
+        matrix.insert("Sergio Leone", "Death Note", 5);
         matrix.insert("Sergio Leone", "Twin Peaks Returns", 4);
-        assertEquals(7, matrix.getCount());
+        matrix.insert("Sergio Leone", "MOL", 6);
+        matrix.insert("Darth Vader", "MOL", 9);
+        matrix.insert("David Lynch", "MOL", 3);
+        matrix.insert("Sergio Leone", "new", 1);
+        matrix.insert("Darth Vader", "new", 9);
+        matrix.insert("David Lynch", "new", 3);
+        assertEquals(13, matrix.getCount());
 
+        System.out.println("Deleted David Lynch\n");
         matrix.deleteReviewers("David Lynch");
+
+        assertEquals(movies.getList("The Good, the Bad and the Ugly").getHead()
+            .getValue(), 6);
+        assertEquals(movies.getList("The Good, the Bad and the Ugly").getHead()
+            .getNextReviewer().getValue(), 9);
+        assertEquals(movies.getList("The Good, the Bad and the Ugly").getTail()
+            .getValue(), 9);
+        assertEquals(movies.getList("Death Note").getHead().getValue(), 5);
+        assertEquals(movies.getList("Death Note").getHead().getNextReviewer()
+            .getValue(), 10);
+        assertEquals(movies.getList("Death Note").getTail().getValue(), 10);
+        assertEquals(movies.getList("Twin Peaks Returns").getHead().getValue(),
+            4);
+        assertEquals(movies.getList("Twin Peaks Returns").getHead()
+            .getNextReviewer(), null);
+        assertEquals(movies.getList("Twin Peaks Returns").getTail().getValue(),
+            4);
+        // by reviewers
+        assertEquals(reviewers.getList("Sergio Leone").getHead().getValue(), 6);
+        assertEquals(reviewers.getList("Sergio Leone").getHead().getNextMovie()
+            .getValue(), 5);
+        assertEquals(reviewers.getList("Sergio Leone").getHead().getNextMovie()
+            .getNextMovie().getValue(), 4);
+        assertEquals(reviewers.getList("Sergio Leone").getHead().getNextMovie()
+            .getNextMovie().getNextMovie().getValue(), 6);
+        assertEquals(reviewers.getList("Sergio Leone").getTail().getValue(), 1);
+
+        assertEquals(reviewers.getList("Darth Vader").getHead().getValue(), 9);
+        assertEquals(reviewers.getList("Darth Vader").getHead().getPrevMovie(),
+            null);
+        assertEquals(reviewers.getList("Darth Vader").getTail().getValue(), 9);
+
+        matrix.print();
+
         matrix.insert("Sergio Leone", "Twin Peaks Returns", 4);
+        System.out.println();
+        System.out.println("Added another Sergio Leone");
+        matrix.print();
+
         matrix.deleteReviewers("Sergio Leone");
+        System.out.println();
+        System.out.println("Deleted Sergio Leone");
+        matrix.print();
+
+        matrix.insert("Sergio Leone", "Twin Peaks Returns", 4);
+        matrix.insert("Sergio Leone", "The Good, the Bad and the Ugly", 10);
+        System.out.println();
+        System.out.println("Added back Sergio Leone");
+        matrix.print();
+
         matrix.deleteReviewers("Darth Vader");
+        System.out.println();
+        System.out.println("Deleted Darth Vader");
+        matrix.print();
+
         matrix.deleteMovies("The Good, the Bad and the Ugly");
+        System.out.println();
+        System.out.println("Deleted Good Bad and Ugly");
+        matrix.print();
+
         matrix.deleteMovies("Death Note");
+        System.out.println();
+        System.out.println("Deleted Death Note");
+        matrix.print();
+
         matrix.deleteMovies("Twin Peaks Returns");
-        assertEquals(matrix.getCount(), 0);
+        System.out.println();
+        System.out.println("Deleted Twin Peaks Returns");
+        matrix.print();
+
+        assertEquals(matrix.getCount(), 2);
     }
 
 
@@ -428,13 +497,14 @@ public class SparseMatrixTest extends TestCase {
 
         matrix.deleteReviewers("Sergio Leone");
 
-        assertTrue(!matrix.isEmpty());
+        assertFalse(matrix.isEmpty());
 
         matrix.deleteMovies("The Good, the Bad and the Ugly");
         matrix.deleteMovies("Death Note");
         matrix.deleteMovies("Twin Peaks Returns");
         assertEquals(matrix.isEmpty(), true);
     }
+
 
     /**
      * Deleting when there is a next movie in the SLList
@@ -461,13 +531,14 @@ public class SparseMatrixTest extends TestCase {
 
         assertEquals(matrix.getMovies().getCount(), 3);
         assertEquals(matrix.getReviewers().getCount(), 3);
-        
+
         assertEquals(matrix.isEmpty(), false);
         matrix.deleteMovies("Death Note");
-        matrix.deleteMovies("The Good, the Bad and the Ugly");       
+        matrix.deleteMovies("The Good, the Bad and the Ugly");
         matrix.deleteMovies("Twin Peaks Returns");
         assertEquals(matrix.isEmpty(), true);
     }
+
 
     /**
      * Testing deleting

@@ -316,7 +316,7 @@ public class MSLList {
         while (n != null) {
             MDLList<Integer> list = n.getList();
             if (list.getHead() == null || list.getHead().getValue() == -1) {
-                System.out.println(n.getName() + ": ");
+                s += (n.getName() + ": \n");
             }
             if (!(list.getCountAndScore().equals(""))) {
                 s += n.getName() + ": ";

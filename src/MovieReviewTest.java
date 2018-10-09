@@ -12,6 +12,7 @@ public class MovieReviewTest extends TestCase {
         // Nothing Here
     }
 
+
     /**
      * Get code coverage of the class declaration.
      */
@@ -19,5 +20,18 @@ public class MovieReviewTest extends TestCase {
         MovieReview recstore = new MovieReview();
         assertNotNull(recstore);
         MovieReview.main(null);
+    }
+
+
+    /**
+     * Testing the main function
+     */
+    public void testMain() {
+        String[] args = new String[3];
+        args[0] = "6";
+        args[1] = "P2SampleInput.txt";
+        MovieReview.main(args);
+        
+        assertEquals(args[0], "6");
     }
 }
